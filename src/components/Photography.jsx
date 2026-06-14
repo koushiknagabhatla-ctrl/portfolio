@@ -3,31 +3,29 @@ import { useParams, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Photography.css';
-import { imageCategories } from './imageCategories';
+import photoDatabase from './photoDatabase.json';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const images = import.meta.glob('../assets/pfp/*.{webp,jpg,jpeg,png,JPG}', { eager: true, import: 'default' });
-
-const imageEntries = Object.entries(images).map(([path, src]) => {
-  const fileName = path.split('/').pop();
-  return { fileName, src };
-});
-
 const Photography = () => {
   const { category } = useParams();
-  // If no category in URL, default to 'recents' (though routing should catch this)
-  const activeCategory = category || 'recents';
+  const activeCategory = category || 'all';
   
   const containerRef = useRef(null);
   const imagesRef = useRef([]);
   const titleRef = useRef(null);
 
-  // Filter images strictly based on URL category
-  const filteredImages = imageEntries.filter(entry => {
-    const categories = imageCategories[entry.fileName] || ['recents'];
-    return categories.includes(activeCategory);
-  });
+  // Filter images based on the photoDatabase
+  let filteredImages = [];
+  if (activeCategory === 'all') {
+    filteredImages = [
+      ...(photoDatabase.people || []),
+      ...(photoDatabase.bikes || []),
+      ...(photoDatabase.nature || [])
+    ];
+  } else {
+    filteredImages = photoDatabase[activeCategory] || [];
+  }
 
   const leftColumn = filteredImages.filter((_, i) => i % 2 === 0);
   const rightColumn = filteredImages.filter((_, i) => i % 2 !== 0);
@@ -36,17 +34,19 @@ const Photography = () => {
   useEffect(() => {
     let ctx = gsap.context(() => {
       const titleChars = titleRef.current.querySelectorAll('.char-reveal');
-      gsap.fromTo(titleChars,
-        { y: 50, rotateX: -90, opacity: 0 },
-        {
-          y: 0, rotateX: 0, opacity: 1,
-          duration: 1, stagger: 0.03, ease: 'power4.out',
-          delay: 0.2
-        }
-      );
+      if(titleChars.length) {
+        gsap.fromTo(titleChars,
+          { y: 50, rotateX: -90, opacity: 0 },
+          {
+            y: 0, rotateX: 0, opacity: 1,
+            duration: 1, stagger: 0.03, ease: 'power4.out',
+            delay: 0.2
+          }
+        );
+      }
     }, containerRef);
     return () => ctx.revert();
-  }, [activeCategory]); // Re-animate title when category changes
+  }, [activeCategory]); 
 
   // Image Reveals
   useEffect(() => {
@@ -56,29 +56,28 @@ const Photography = () => {
       imagesRef.current.forEach((img, idx) => {
         if (!img) return;
         
-        // Optimize right column
-        if (idx % 2 !== 0) {
-          gsap.set(img, { opacity: 1, y: 0 });
-          return;
-        }
+        // Ensure initial state is set
+        gsap.set(img, { opacity: 0, y: 80 });
 
-        gsap.fromTo(img,
-          { y: 80, opacity: 0 },
-          {
-            y: 0, opacity: 1,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: img,
-              start: 'top 90%',
-              toggleActions: 'play none none none'
-            }
+        gsap.to(img, {
+          y: 0, 
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top 95%', // Triggers slightly before it enters screen
+            toggleActions: 'play none none none'
           }
-        );
+        });
       });
     }, containerRef);
     
-    ScrollTrigger.refresh();
+    // Refresh ScrollTrigger to recalculate bounds once DOM renders
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
     const handleLoad = () => ScrollTrigger.refresh();
     window.addEventListener('load', handleLoad);
     
@@ -111,17 +110,18 @@ const Photography = () => {
 
         <div className="masonry-flex">
           <div className="masonry-col">
-            {leftColumn.map((entry, index) => {
+            {leftColumn.map((srcPath, index) => {
               const globalIndex = index * 2;
               return (
                 <div 
-                  key={entry.fileName} 
+                  key={`left-${index}`} 
                   className="masonry-item"
                   ref={el => imagesRef.current[globalIndex] = el}
+                  style={{ opacity: 0, transform: 'translateY(80px)' }} // Default CSS state to prevent flash before GSAP kicks in
                 >
                   <img 
-                    src={entry.src} 
-                    alt={`Photography ${entry.fileName}`}
+                    src={srcPath} 
+                    alt={`Photography ${activeCategory}`}
                     loading={globalIndex < 4 ? 'eager' : 'lazy'}
                     decoding="async"
                   />
@@ -130,17 +130,18 @@ const Photography = () => {
             })}
           </div>
           <div className="masonry-col">
-            {rightColumn.map((entry, index) => {
+            {rightColumn.map((srcPath, index) => {
               const globalIndex = index * 2 + 1;
               return (
                 <div 
-                  key={entry.fileName} 
+                  key={`right-${index}`} 
                   className="masonry-item"
                   ref={el => imagesRef.current[globalIndex] = el}
+                  style={{ opacity: 0, transform: 'translateY(80px)' }} // Default CSS state to prevent flash before GSAP kicks in
                 >
                   <img 
-                    src={entry.src} 
-                    alt={`Photography ${entry.fileName}`}
+                    src={srcPath} 
+                    alt={`Photography ${activeCategory}`}
                     loading={globalIndex < 4 ? 'eager' : 'lazy'}
                     decoding="async"
                   />

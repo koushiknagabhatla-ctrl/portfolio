@@ -4,10 +4,10 @@ import gsap from 'gsap';
 import './PhotographyDirectory.css';
 
 const categories = [
-  { id: 'recents', label: 'Recents' },
-  { id: 'faces', label: 'Faces' },
-  { id: 'bikes', label: 'Bikes' },
-  { id: 'nature', label: 'Nature' },
+  { id: 'all', label: 'All Archive' },
+  { id: 'people', label: 'People & Faces' },
+  { id: 'bikes', label: 'Bikes & Rides' },
+  { id: 'nature', label: 'Nature & Landscapes' },
 ];
 
 const PhotographyDirectory = () => {
