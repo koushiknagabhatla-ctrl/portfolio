@@ -1,0 +1,88 @@
+.navbar {
+  --nav-translate-y: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 5%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  font-family: var(--font-nav);
+  transform: translateY(var(--nav-translate-y));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.navbar.navbar-hidden {
+  --nav-translate-y: -100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: bold; /* Made font bold */
+}
+
+/* Line animation below text */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--text-color);
+  transition: width 0.3s ease;
+}
+
+/* Trigger line animation on hover and when active */
+.nav-links a:hover::after,
+.nav-links a.active::after,
+.nav-links a:active::after {
+  width: 100%;
+}
+
+.nav-socials {
+  display: flex;
+  gap: 15px; /* Reduced gap */
+  position: absolute;
+  right: 10%;
+}
+
+.nav-socials a {
+  transition: transform 0.3s ease;
+}
+
+.nav-socials a:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 5%;
+  }
+  .nav-links {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-socials {
+    position: relative;
+    right: auto;
+  }
+}
