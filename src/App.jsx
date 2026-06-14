@@ -62,7 +62,6 @@ function AppContent() {
 
   return (
     <div className="app">
-      <div className="grain-overlay" />
       <Navbar />
       <main>
         <Routes>
