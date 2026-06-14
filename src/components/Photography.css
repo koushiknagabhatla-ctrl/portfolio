@@ -49,7 +49,7 @@
 @media (max-width: 768px) {
   .masonry-flex {
     flex-direction: column;
-    padding: 0;
+    padding: 0 15px;
   }
   .masonry-col:nth-child(2) {
     margin-top: 0;
