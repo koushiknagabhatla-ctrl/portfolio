@@ -1,26 +1,40 @@
 import React, { useEffect, useRef } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Photography.css';
+import { imageCategories } from './imageCategories';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Dynamically import all images from the pfp directory
 const images = import.meta.glob('../assets/pfp/*.{webp,jpg,jpeg,png,JPG}', { eager: true, import: 'default' });
-const imageList = Object.values(images);
+
+const imageEntries = Object.entries(images).map(([path, src]) => {
+  const fileName = path.split('/').pop();
+  return { fileName, src };
+});
 
 const Photography = () => {
+  const { category } = useParams();
+  // If no category in URL, default to 'recents' (though routing should catch this)
+  const activeCategory = category || 'recents';
+  
   const containerRef = useRef(null);
   const imagesRef = useRef([]);
   const titleRef = useRef(null);
 
-  // Split into explicit columns to prevent CSS column reflow bugs
-  const leftColumn = imageList.filter((_, i) => i % 2 === 0);
-  const rightColumn = imageList.filter((_, i) => i % 2 !== 0);
+  // Filter images strictly based on URL category
+  const filteredImages = imageEntries.filter(entry => {
+    const categories = imageCategories[entry.fileName] || ['recents'];
+    return categories.includes(activeCategory);
+  });
 
+  const leftColumn = filteredImages.filter((_, i) => i % 2 === 0);
+  const rightColumn = filteredImages.filter((_, i) => i % 2 !== 0);
+
+  // Title Animation
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Title character reveal
       const titleChars = titleRef.current.querySelectorAll('.char-reveal');
       gsap.fromTo(titleChars,
         { y: 50, rotateX: -90, opacity: 0 },
@@ -30,13 +44,23 @@ const Photography = () => {
           delay: 0.2
         }
       );
+    }, containerRef);
+    return () => ctx.revert();
+  }, [activeCategory]); // Re-animate title when category changes
 
-      // Photo reveals (Highly Optimized for 85+ Images)
+  // Image Reveals
+  useEffect(() => {
+    imagesRef.current = imagesRef.current.slice(0, filteredImages.length); 
+    
+    let ctx = gsap.context(() => {
       imagesRef.current.forEach((img, idx) => {
         if (!img) return;
         
-        // Skip animation for the right side column (odd indices)
-        if (idx % 2 !== 0) return;
+        // Optimize right column
+        if (idx % 2 !== 0) {
+          gsap.set(img, { opacity: 1, y: 0 });
+          return;
+        }
 
         gsap.fromTo(img,
           { y: 80, opacity: 0 },
@@ -47,59 +71,58 @@ const Photography = () => {
             scrollTrigger: {
               trigger: img,
               start: 'top 90%',
-              toggleActions: 'play none none none' // Play once, don't reverse to save GPU
+              toggleActions: 'play none none none'
             }
           }
         );
       });
     }, containerRef);
     
-    // Force refresh when window loads to fix any trigger shifts
-    window.addEventListener('load', () => ScrollTrigger.refresh());
+    ScrollTrigger.refresh();
+    const handleLoad = () => ScrollTrigger.refresh();
+    window.addEventListener('load', handleLoad);
     
     return () => {
       ctx.revert();
-      window.removeEventListener('load', () => ScrollTrigger.refresh());
+      window.removeEventListener('load', handleLoad);
     };
-  }, []);
-
-  const title = 'PHOTOGRAPHY';
+  }, [activeCategory, filteredImages.length]);
 
   return (
-    <section id="photography" className="section photography-section" ref={containerRef}>
+    <section id="photography-gallery" className="section photography-section" ref={containerRef}>
       <div className="container">
-        <h2 className="section-title text-dark" ref={titleRef} style={{ perspective: '600px' }}>
-          {title.split(' ').map((word, wIndex) => (
-            <span 
-              key={wIndex} 
-              style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: '0.3em' }}
+        
+        <Link to="/photography" className="back-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back to Directory
+        </Link>
+
+        <h2 className="section-title text-dark" ref={titleRef} style={{ perspective: '600px', marginTop: '30px' }}>
+          {activeCategory.toUpperCase().split('').map((char, cIndex) => (
+            <span
+              key={cIndex}
+              className="char-reveal"
+              style={{ display: 'inline-block' }}
             >
-              {word.split('').map((char, cIndex) => (
-                <span
-                  key={`${wIndex}-${cIndex}`}
-                  className="char-reveal"
-                  style={{ display: 'inline-block' }}
-                >
-                  {char}
-                </span>
-              ))}
+              {char}
             </span>
           ))}
         </h2>
+
         <div className="masonry-flex">
           <div className="masonry-col">
-            {leftColumn.map((src, index) => {
-              const originalIndex = index * 2;
+            {leftColumn.map((entry, index) => {
+              const globalIndex = index * 2;
               return (
                 <div 
-                  key={originalIndex} 
+                  key={entry.fileName} 
                   className="masonry-item"
-                  ref={el => imagesRef.current[originalIndex] = el}
+                  ref={el => imagesRef.current[globalIndex] = el}
                 >
                   <img 
-                    src={src} 
-                    alt={`Photography ${originalIndex}`}
-                    loading={originalIndex < 4 ? 'eager' : 'lazy'}
+                    src={entry.src} 
+                    alt={`Photography ${entry.fileName}`}
+                    loading={globalIndex < 4 ? 'eager' : 'lazy'}
                     decoding="async"
                   />
                 </div>
@@ -107,18 +130,18 @@ const Photography = () => {
             })}
           </div>
           <div className="masonry-col">
-            {rightColumn.map((src, index) => {
-              const originalIndex = index * 2 + 1;
+            {rightColumn.map((entry, index) => {
+              const globalIndex = index * 2 + 1;
               return (
                 <div 
-                  key={originalIndex} 
+                  key={entry.fileName} 
                   className="masonry-item"
-                  ref={el => imagesRef.current[originalIndex] = el}
+                  ref={el => imagesRef.current[globalIndex] = el}
                 >
                   <img 
-                    src={src} 
-                    alt={`Photography ${originalIndex}`}
-                    loading={originalIndex < 4 ? 'eager' : 'lazy'}
+                    src={entry.src} 
+                    alt={`Photography ${entry.fileName}`}
+                    loading={globalIndex < 4 ? 'eager' : 'lazy'}
                     decoding="async"
                   />
                 </div>

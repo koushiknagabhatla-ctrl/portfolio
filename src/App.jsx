@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Works from './components/Works';
 import Photography from './components/Photography';
+import PhotographyDirectory from './components/PhotographyDirectory';
 import Footer from './components/Footer';
 import './index.css';
 
@@ -66,7 +67,8 @@ function AppContent() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/photography" element={<Photography />} />
+          <Route path="/photography" element={<PhotographyDirectory />} />
+          <Route path="/photography/:category" element={<Photography />} />
         </Routes>
       </main>
       <Footer />
