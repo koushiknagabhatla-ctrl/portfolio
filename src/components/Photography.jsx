@@ -32,8 +32,12 @@ const Photography = () => {
       );
 
       // Photo reveals (Highly Optimized for 85+ Images)
-      imagesRef.current.forEach((img) => {
+      imagesRef.current.forEach((img, idx) => {
         if (!img) return;
+        
+        // Skip animation for the right side column (odd indices)
+        if (idx % 2 !== 0) return;
+
         gsap.fromTo(img,
           { y: 80, opacity: 0 },
           {
