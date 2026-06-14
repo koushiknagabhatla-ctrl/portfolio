@@ -48,45 +48,7 @@ const Photography = () => {
     return () => ctx.revert();
   }, [activeCategory]); 
 
-  // Image Reveals
-  useEffect(() => {
-    imagesRef.current = imagesRef.current.slice(0, filteredImages.length); 
-    
-    let ctx = gsap.context(() => {
-      imagesRef.current.forEach((img, idx) => {
-        if (!img) return;
-        
-        // Ensure initial state is set
-        gsap.set(img, { opacity: 0, y: 80 });
-
-        gsap.to(img, {
-          y: 0, 
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: img,
-            start: 'top 95%', // Triggers slightly before it enters screen
-            toggleActions: 'play none none none'
-          }
-        });
-      });
-    }, containerRef);
-    
-    // Refresh ScrollTrigger to recalculate bounds once DOM renders
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 100);
-
-    const handleLoad = () => ScrollTrigger.refresh();
-    window.addEventListener('load', handleLoad);
-    
-    return () => {
-      ctx.revert();
-      window.removeEventListener('load', handleLoad);
-    };
-  }, [activeCategory, filteredImages.length]);
-
+  // Image Reveals removed to stop popping animations
   return (
     <section id="photography-gallery" className="section photography-section" ref={containerRef}>
       <div className="container">
@@ -117,7 +79,6 @@ const Photography = () => {
                   key={`left-${index}`} 
                   className="masonry-item"
                   ref={el => imagesRef.current[globalIndex] = el}
-                  style={{ opacity: 0, transform: 'translateY(80px)' }} // Default CSS state to prevent flash before GSAP kicks in
                 >
                   <img 
                     src={srcPath} 
@@ -137,7 +98,6 @@ const Photography = () => {
                   key={`right-${index}`} 
                   className="masonry-item"
                   ref={el => imagesRef.current[globalIndex] = el}
-                  style={{ opacity: 0, transform: 'translateY(80px)' }} // Default CSS state to prevent flash before GSAP kicks in
                 >
                   <img 
                     src={srcPath} 

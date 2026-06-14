@@ -8,15 +8,18 @@
     "/photography/people_86.webp",
     "/photography/people_87.webp",
     "/photography/people_93.webp",
-    "/photography/nature_95.webp"
+    "/photography/nature_95.webp",
+    "/photography/bikes_2.webp",
+    "/photography/bikes_7.webp",
+    "/photography/bikes_26.webp",
+    "/photography/bikes_11.webp",
+    "/photography/nature_39.webp"
   ],
   "bikes": [
     "/photography/bikes_1.webp",
     "/photography/bikes_2.webp",
     "/photography/bikes_3.webp",
     "/photography/bikes_7.webp",
-    "/photography/bikes_9.webp",
-    "/photography/bikes_11.webp",
     "/photography/bikes_22.webp",
     "/photography/bikes_24.webp",
     "/photography/bikes_25.webp",
@@ -72,11 +75,8 @@
     "/photography/people_58.webp",
     "/photography/people_73.webp",
     "/photography/people_77.webp",
-    "/photography/nature_13.webp",
-    "/photography/nature_21.webp",
-    "/photography/nature_39.webp",
-    "/photography/nature_63.webp",
-    "/photography/nature_80.webp"
+    "/photography/nature_80.webp",
+    "/photography/bikes_11.webp"
   ],
   "nature": [
     "/photography/nature_0.webp",
@@ -105,6 +105,11 @@
     "/photography/people_15.webp",
     "/photography/people_19.webp",
     "/photography/people_84.webp",
-    "/photography/people_85.webp"
+    "/photography/people_85.webp",
+    "/photography/bikes_9.webp",
+    "/photography/nature_13.webp",
+    "/photography/nature_21.webp",
+    "/photography/nature_39.webp",
+    "/photography/nature_63.webp"
   ]
 }
