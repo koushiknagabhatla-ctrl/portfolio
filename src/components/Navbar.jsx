@@ -22,6 +22,10 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname === '/photography') {
       setActiveLink('/photography');
+    } else if (location.pathname === '/works') {
+      setActiveLink('/works');
+    } else if (location.pathname === '/about') {
+      setActiveLink('/about');
     } else if (location.hash) {
       setActiveLink(location.hash);
     } else {
@@ -62,8 +66,8 @@ const Navbar = () => {
     <nav className={`navbar ${isHidden ? 'navbar-hidden' : ''}`} ref={navRef}>
       <div className="nav-links">
         <Link to="/" onClick={() => setActiveLink('/')} className={activeLink === '/' ? 'active' : ''}>HOME</Link>
-        <a href="#about" onClick={() => setActiveLink('#about')} className={activeLink === '#about' ? 'active' : ''}>ABOUT</a>
-        <a href="#works" onClick={() => setActiveLink('#works')} className={activeLink === '#works' ? 'active' : ''}>WORKS</a>
+        <Link to="/about" onClick={() => setActiveLink('/about')} className={activeLink === '/about' ? 'active' : ''}>ABOUT</Link>
+        <Link to="/works" onClick={() => setActiveLink('/works')} className={activeLink === '/works' ? 'active' : ''}>WORKS</Link>
         <Link to="/photography" onClick={() => setActiveLink('/photography')} className={activeLink === '/photography' ? 'active' : ''}>PHOTOGRAPHY</Link>
       </div>
       <div className="nav-socials">

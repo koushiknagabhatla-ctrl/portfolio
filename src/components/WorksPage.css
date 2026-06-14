@@ -1,0 +1,190 @@
+.awwwards-master-container {
+  background-color: #f2f2f2; /* Highly premium light grey */
+  color: #1a1a1a;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden; 
+}
+
+/* Header */
+.awwwards-header {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 10vw;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 10vh;
+}
+
+.header-title {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -2px;
+}
+
+.header-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  color: #555;
+  max-width: 500px;
+}
+
+/* Projects List */
+.awwwards-projects-list {
+  padding-bottom: 10vh;
+}
+
+.awwwards-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20vh;
+}
+
+/* Layout - Vertical Stack Architecture */
+.awwwards-layout {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10vw;
+}
+
+/* Typography Section */
+.awwwards-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 30px;
+}
+
+.info-top-row {
+  flex: 1;
+}
+
+.project-category {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #666;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.awwwards-title {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.info-bottom-row {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.project-desc {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
+.view-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: transparent;
+  border: 1px solid #1a1a1a;
+  border-radius: 50px;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.view-btn:hover {
+  background-color: #1a1a1a;
+  color: #dfdfd7;
+  transform: translateY(-5px);
+}
+
+/* Image Wrapper - The Core UX Fix! */
+.awwwards-img-wrapper {
+  width: 100%; /* Full width of container */
+  aspect-ratio: 16 / 9; /* Perfect aspect ratio for desktop web screenshots! */
+  position: relative;
+  overflow: hidden;
+  display: block;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+  border-radius: 8px; /* High-end rounded corners */
+}
+
+/* Image - No internal parallax cropping, show the whole site */
+.awwwards-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Since container is 16:9, it perfectly covers without massive cropping */
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.awwwards-img-wrapper:hover .awwwards-img {
+  transform: scale(1.03); /* Subtle, elegant scale on hover instead of aggressive parallax */
+}
+
+/* Footer */
+.awwwards-footer {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.awwwards-footer h2 {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  letter-spacing: -2px;
+  color: #1a1a1a;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .awwwards-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .info-bottom-row {
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .project-desc {
+    max-width: 100%;
+  }
+  
+  /* On mobile, standard web screenshots look better taller */
+  .awwwards-img-wrapper {
+    aspect-ratio: 4 / 3; 
+  }
+}

@@ -16,6 +16,10 @@ const Hero = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
+      
+      // Reveal the hidden containers first
+      gsap.set([titleRef.current, textContainerRef.current, imageWrapperRef.current], { visibility: 'visible' });
+
       // === TITLE: Character-by-character 3D reveal ===
       const titleChars = titleRef.current.querySelectorAll('.char-reveal');
       gsap.fromTo(titleChars,
@@ -69,7 +73,7 @@ const Hero = () => {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1
+          scrub: true
         }
       });
 
@@ -81,7 +85,7 @@ const Hero = () => {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1
+          scrub: true
         }
       });
 
@@ -94,7 +98,7 @@ const Hero = () => {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1
+          scrub: true
         }
       });
 
@@ -110,7 +114,7 @@ const Hero = () => {
       <div className="container">
         <div className="hero-layout">
           <div className="hero-content">
-            <h1 className="hero-title" ref={titleRef} style={{ perspective: '800px' }}>
+            <h1 className="hero-title" ref={titleRef} style={{ perspective: '800px', visibility: 'hidden' }}>
               {title.split(' ').map((word, wIndex) => (
                 <span 
                   key={wIndex} 
@@ -129,7 +133,7 @@ const Hero = () => {
               ))}
             </h1>
 
-            <div className="hero-text" ref={textContainerRef}>
+            <div className="hero-text" ref={textContainerRef} style={{ visibility: 'hidden' }}>
               <p className="hero-paragraph">
                 I am a 4th year b-tech student with a strong interest in software development and web technologies.
               </p>
@@ -141,7 +145,7 @@ const Hero = () => {
               </p>
             </div>
           </div>
-          <div className="hero-image-wrapper" ref={imageWrapperRef}>
+          <div className="hero-image-wrapper" ref={imageWrapperRef} style={{ visibility: 'hidden' }}>
             <img src={heroImg} alt="Koushik" className="hero-img" ref={imageRef} />
           </div>
         </div>

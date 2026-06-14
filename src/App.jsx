@@ -5,7 +5,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Works from './components/Works';
+import WorksPage from './components/WorksPage';
+import AboutPage from './components/AboutPage';
 import Photography from './components/Photography';
 import PhotographyDirectory from './components/PhotographyDirectory';
 import Footer from './components/Footer';
@@ -16,7 +17,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Home = () => (
   <>
     <Hero />
-    <Works />
   </>
 );
 
@@ -67,6 +67,8 @@ function AppContent() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/works" element={<WorksPage />} />
           <Route path="/photography" element={<PhotographyDirectory />} />
           <Route path="/photography/:category" element={<Photography />} />
         </Routes>
