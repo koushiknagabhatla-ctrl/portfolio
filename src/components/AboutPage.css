@@ -37,11 +37,11 @@
 }
 
 .text-section {
-  padding: 20vh 5vw;
+  padding: 10vh 10vw;
 }
 
 .offset-image-section {
-  padding: 10vh 5vw;
+  padding: 10vh 10vw;
 }
 
 .full-bleed-section {
@@ -51,19 +51,8 @@
   justify-content: center;
 }
 
-.gallery-section {
-  padding: 10vh 5vw;
-}
-
-.gallery-single {
-  padding: 5vh 5vw 20vh 5vw;
-  display: flex;
-  justify-content: center;
-}
-
-.outro-section {
-  padding: 0 0 20vh 0;
-  position: relative;
+.margin-top-massive {
+  margin-top: 15vh;
 }
 
 /* Typography */
@@ -96,10 +85,11 @@
 .double-indent { margin-left: 20vw; }
 
 .aww-poetic {
-  font-size: clamp(1.5rem, 3vw, 3rem);
-  line-height: 1.5;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  line-height: 1.4;
   color: #e0e0e0;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
 }
 
 .mix-blend {
@@ -120,8 +110,8 @@
 }
 
 .bottom-left {
-  bottom: 3vh;
-  left: 3vw;
+  bottom: 4vh;
+  left: 4vw;
 }
 
 .line-sep {
@@ -145,26 +135,65 @@
 .aww-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5vw;
+  gap: 8vw;
 }
 
 .aww-grid.reverse {
   grid-template-columns: 1.2fr 0.8fr;
 }
 
-.aww-grid.asymmetric {
-  grid-template-columns: 1.5fr 1fr;
+.aww-grid-triple {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3vw;
+  padding: 10vh 5vw;
 }
 
+.aww-overlap-grid {
+  position: relative;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlap-left {
+  position: absolute;
+  left: 15vw;
+  z-index: 2;
+}
+
+.overlap-right {
+  position: absolute;
+  right: 20vw;
+  z-index: 1;
+}
+
+.aww-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 5vw;
+  padding: 10vh 5vw;
+  align-items: center;
+}
+
+/* Positioning Modifiers */
 .middle-align {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.shift-down {
-  transform: translateY(20vh);
-}
+.shift-down { transform: translateY(15vh); }
+.shift-down-slight { transform: translateY(8vh); }
+.shift-down-medium { transform: translateY(20vh); }
+.shift-down-heavy { transform: translateY(30vh); }
+
+.right-align { margin-left: auto; margin-right: 0; }
+.right-align-caption { text-align: right; justify-content: flex-end; padding-right: 5vw; }
+.left-align { margin-left: 0; }
+.left-align-caption { padding-left: 5vw; }
 
 /* Images & Parallax */
 .aww-image-wrapper {
@@ -173,27 +202,18 @@
   background-color: #1a1a1a;
 }
 
-.aww-image-wrapper.full-bleed {
-  width: 100vw;
-  height: 100vh;
-}
-
-.aww-image-wrapper.cinematic-height {
-  height: 80vh;
-}
-
-.aww-image-wrapper.half-height {
-  height: 60vh;
-}
-
+.aww-image-wrapper.full-bleed { width: 100vw; height: 100vh; }
+.aww-image-wrapper.cinematic-height { height: 85vh; }
+.aww-image-wrapper.half-height { height: 60vh; }
 .aww-image-wrapper.portrait { aspect-ratio: 4/5; width: 100%; }
-.aww-image-wrapper.portrait-thin { aspect-ratio: 3/4; width: 80%; }
+.aww-image-wrapper.portrait-thin { aspect-ratio: 3/4; width: 100%; }
 .aww-image-wrapper.landscape { aspect-ratio: 16/10; width: 100%; }
-.aww-image-wrapper.panoramic { aspect-ratio: 21/9; width: 90vw; }
+.aww-image-wrapper.square { aspect-ratio: 1/1; width: 100%; }
+.aww-image-wrapper.panoramic { aspect-ratio: 21/9; width: 85vw; }
 
 .aww-image {
   width: 100%;
-  height: 130%; /* Extra height for vertical parallax panning */
+  height: 130%; 
   object-fit: cover;
   position: absolute;
   top: -15%;
@@ -201,28 +221,44 @@
   will-change: transform;
 }
 
+/* Outro */
+.outro-section {
+  padding: 0 0 20vh 0;
+  position: relative;
+}
+
 .outro-content {
-  padding: 10vh 5vw;
+  padding: 15vh 10vw;
 }
 
 /* Responsive */
 @media (max-width: 900px) {
-  .aww-grid, .aww-grid.reverse, .aww-grid.asymmetric {
+  .aww-grid, .aww-grid.reverse, .aww-gallery-grid, .aww-grid-triple {
     grid-template-columns: 1fr;
     gap: 10vh;
   }
   
-  .shift-down {
+  .shift-down, .shift-down-medium, .shift-down-heavy, .shift-down-slight {
     transform: none;
   }
 
-  .aww-image-wrapper.portrait-thin {
-    width: 100%;
+  .aww-overlap-grid {
+    height: auto;
+    flex-direction: column;
+    gap: 5vh;
+    padding: 0 5vw;
+  }
+
+  .overlap-left, .overlap-right {
+    position: relative;
+    left: 0; right: 0;
   }
 
   .aww-image-wrapper.panoramic {
     aspect-ratio: 16/9;
+    width: 95vw;
   }
 
   .indent, .double-indent { margin-left: 0; }
+  .right-align, .left-align { margin: 0 auto; width: 100%; }
 }
