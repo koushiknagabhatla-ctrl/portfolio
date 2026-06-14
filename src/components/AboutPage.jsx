@@ -9,9 +9,7 @@ const AboutPage = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      
-      // Text Reveal: Gentle slide-up and fade-in
+    const ctx = gsap.context(() => {
       const texts = gsap.utils.toArray('.aww-reveal');
       texts.forEach(text => {
         gsap.fromTo(text, 
@@ -28,8 +26,7 @@ const AboutPage = () => {
           }
         );
       });
-
-    }, containerRef); // Scoped to prevent global conflicts
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
@@ -37,10 +34,9 @@ const AboutPage = () => {
   return (
     <div className="aww-master-container" ref={containerRef}>
       
-      {/* Intro Hero - Edge to Edge */}
       <section className="aww-section hero-section">
         <div className="aww-image-wrapper full-bleed">
-          <img className="aww-image" src="/about/ultra_1.webp" alt="The Journey" decoding="async" />
+          <img className="aww-image" src="/about/ultra_1.webp" alt="The Journey" decoding="async" fetchPriority="high" />
           <div className="aww-hero-gradient"></div>
         </div>
         <h1 className="aww-massive-title mix-blend aww-reveal">Beyond<br/>the Code.</h1>
@@ -51,7 +47,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Chapter 1: The Builder */}
       <section className="aww-section text-section">
         <div className="aww-grid">
           <div className="aww-col empty-col"></div>
@@ -66,22 +61,20 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Triptych Grid */}
       <section className="aww-section gallery-section">
         <div className="aww-grid-triple">
           <div className="aww-image-wrapper portrait-thin">
-            <img className="aww-image" src="/about/ultra_2.webp" alt="Grid 1" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_2.webp" alt="Portrait 1" loading="lazy" decoding="async" />
           </div>
           <div className="aww-image-wrapper portrait shift-down-slight">
-            <img className="aww-image" src="/about/ultra_3.webp" alt="Grid 2" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_3.webp" alt="Portrait 2" loading="lazy" decoding="async" />
           </div>
           <div className="aww-image-wrapper portrait-thin shift-down-heavy">
-            <img className="aww-image" src="/about/ultra_4.webp" alt="Grid 3" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_4.webp" alt="Portrait 3" loading="lazy" decoding="async" />
           </div>
         </div>
       </section>
 
-      {/* Chapter 2: The Rider */}
       <section className="aww-section offset-image-section margin-top-massive">
         <div className="aww-grid reverse">
           <div className="aww-col img-col">
@@ -104,7 +97,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Edge to edge transition */}
       <section className="aww-section full-bleed-section">
         <div className="aww-image-wrapper full-bleed cinematic-height">
           <img className="aww-image" src="/about/ultra_6.webp" alt="Bike Perspective" loading="lazy" decoding="async" />
@@ -112,7 +104,6 @@ const AboutPage = () => {
         <h2 className="aww-massive-title centered mix-blend aww-reveal">The Horizon.</h2>
       </section>
 
-      {/* Chapter 3: The Explorer */}
       <section className="aww-section text-section margin-top-massive">
         <div className="aww-grid">
           <div className="aww-col text-col">
@@ -131,7 +122,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Dual Panoramic Gallery */}
       <section className="aww-section dual-panoramic">
         <div className="aww-image-wrapper panoramic right-align">
           <img className="aww-image" src="/about/ultra_8.webp" alt="Raw Wilderness" loading="lazy" decoding="async" />
@@ -148,7 +138,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Overlapping grid section for cinematic depth */}
       <section className="aww-section overlap-section margin-top-massive">
         <div className="aww-overlap-grid">
           <div className="aww-image-wrapper square overlap-left">
@@ -163,7 +152,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Outro */}
       <section className="aww-section outro-section margin-top-massive">
         <div className="aww-image-wrapper full-bleed half-height">
           <img className="aww-image" src="/about/ultra_13.webp" alt="Conclusion" loading="lazy" decoding="async" />
@@ -174,8 +162,6 @@ const AboutPage = () => {
           <h2 className="aww-huge-serif double-indent aww-reveal">beautiful.</h2>
         </div>
       </section>
-
-
 
     </div>
   );

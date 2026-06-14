@@ -15,12 +15,9 @@ const Hero = () => {
   const imageWrapperRef = useRef(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      
-      // Reveal the hidden containers first
+    const ctx = gsap.context(() => {
       gsap.set([titleRef.current, textContainerRef.current, imageWrapperRef.current], { visibility: 'visible' });
 
-      // === TITLE: Character-by-character 3D reveal ===
       const titleChars = titleRef.current.querySelectorAll('.char-reveal');
       gsap.fromTo(titleChars,
         { y: 80, rotateX: -90, opacity: 0 },
@@ -35,7 +32,6 @@ const Hero = () => {
         }
       );
 
-      // === PARAGRAPH REVEAL ===
       const paragraphs = textContainerRef.current.querySelectorAll('.hero-paragraph');
       gsap.fromTo(paragraphs,
         { y: 40, opacity: 0 },
@@ -49,7 +45,6 @@ const Hero = () => {
         }
       );
 
-      // === IMAGE REVEAL ===
       gsap.fromTo(imageRef.current,
         { x: 100, opacity: 0, scale: 0.9, rotate: 5 },
         {
@@ -63,7 +58,6 @@ const Hero = () => {
         }
       );
 
-      // === SCROLL-DRIVEN PARALLAX EXIT ===
       gsap.to(titleRef.current, {
         y: -200,
         opacity: 0,
@@ -89,7 +83,6 @@ const Hero = () => {
         }
       });
 
-      // Apply scroll animation to the wrapper to prevent GSAP conflict with intro animation
       gsap.to(imageWrapperRef.current, {
         y: -250,
         opacity: 0,
@@ -101,7 +94,6 @@ const Hero = () => {
           scrub: true
         }
       });
-
     });
 
     return () => ctx.revert();
@@ -146,7 +138,7 @@ const Hero = () => {
             </div>
           </div>
           <div className="hero-image-wrapper" ref={imageWrapperRef} style={{ visibility: 'hidden' }}>
-            <img src={heroImg} alt="Koushik" className="hero-img" ref={imageRef} />
+            <img src={heroImg} alt="Koushik Nagabhatla" className="hero-img" ref={imageRef} width="420" height="560" />
           </div>
         </div>
       </div>

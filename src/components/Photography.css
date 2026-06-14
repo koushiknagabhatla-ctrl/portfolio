@@ -29,9 +29,7 @@
 
 .masonry-item {
   position: relative;
-  will-change: transform, opacity;
   overflow: hidden;
-  /* Prevent background flash */
   background-color: rgba(98, 7, 7, 0.05);
   border-radius: 4px;
 }
@@ -41,9 +39,6 @@
   height: auto;
   display: block;
   border-radius: 4px;
-  /* GPU acceleration */
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 @media (max-width: 768px) {
@@ -56,42 +51,6 @@
   }
 }
 
-.category-menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin: 40px 0 20px;
-  padding: 0 20px;
-}
-
-.category-btn {
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 8px 24px;
-  border-radius: 30px;
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  color: var(--text-color);
-  opacity: 0.6;
-}
-
-.category-btn:hover {
-  opacity: 1;
-  border-color: rgba(0, 0, 0, 0.3);
-}
-
-.category-btn.active {
-  background: var(--text-color);
-  color: var(--bg-color);
-  opacity: 1;
-  border-color: var(--text-color);
-  transform: scale(1.05);
-}
 .back-btn {
   display: inline-flex;
   align-items: center;
@@ -101,7 +60,7 @@
   color: var(--text-color);
   opacity: 0.6;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   margin-bottom: 20px;
 }
 

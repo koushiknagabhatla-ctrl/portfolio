@@ -36,8 +36,7 @@ const Works = () => {
   const rowsRef = useRef([]);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      // Header reveal
+    const ctx = gsap.context(() => {
       gsap.fromTo(headerRef.current,
         { y: 50, opacity: 0 },
         {
@@ -50,11 +49,9 @@ const Works = () => {
         }
       );
 
-      // Rows stagger reveal
-      rowsRef.current.forEach((row, index) => {
+      rowsRef.current.forEach((row) => {
         if (!row) return;
 
-        // Animate the row container (slide up and fade)
         gsap.fromTo(row,
           { y: 100, opacity: 0 },
           {
@@ -67,19 +64,20 @@ const Works = () => {
           }
         );
 
-        // Animate the title text inside the row with a slight skew/clip reveal
         const title = row.querySelector('.work-title');
-        gsap.fromTo(title,
-          { y: 60, skewY: 5, opacity: 0 },
-          {
-            y: 0, skewY: 0, opacity: 1, duration: 1.2, ease: 'power3.out', delay: 0.2,
-            scrollTrigger: {
-              trigger: row,
-              start: 'top 90%',
-              toggleActions: 'play none none reverse'
+        if (title) {
+          gsap.fromTo(title,
+            { y: 60, skewY: 5, opacity: 0 },
+            {
+              y: 0, skewY: 0, opacity: 1, duration: 1.2, ease: 'power3.out', delay: 0.2,
+              scrollTrigger: {
+                trigger: row,
+                start: 'top 90%',
+                toggleActions: 'play none none reverse'
+              }
             }
-          }
-        );
+          );
+        }
       });
     }, sectionRef);
     
@@ -117,8 +115,7 @@ const Works = () => {
               </svg>
             </div>
 
-            {/* Floating Image Reveal */}
-            <img src={work.image} alt={work.name} className="work-image" />
+            <img src={work.image} alt={work.name} className="work-image" loading="lazy" decoding="async" />
           </a>
         ))}
       </div>

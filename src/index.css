@@ -14,6 +14,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -72,9 +76,7 @@ html.lenis, html.lenis body {
   width: 0;
 }
 
-/* ==========================================
-   PAGE TRANSITION OVERLAY
-   ========================================== */
+/* Page Transition Overlay */
 .page-transition-overlay {
   position: fixed;
   top: 0;
@@ -94,9 +96,7 @@ html.lenis, html.lenis body {
   transform-origin: bottom;
 }
 
-/* ==========================================
-   LOADING SCREEN
-   ========================================== */
+/* Loading Screen */
 .loading-screen {
   position: fixed;
   top: 0;
@@ -145,9 +145,7 @@ html.lenis, html.lenis body {
   border-radius: 1px;
 }
 
-/* ==========================================
-   FILM GRAIN OVERLAY (WebGL-style effect via CSS)
-   ========================================== */
+/* Film Grain Overlay */
 .grain-overlay {
   position: fixed;
   top: -50%;
@@ -174,9 +172,7 @@ html.lenis, html.lenis body {
   90% { transform: translate(-10%, 10%); }
 }
 
-/* ==========================================
-   CUSTOM CURSOR
-   ========================================== */
+/* Custom Cursor */
 .custom-cursor {
   position: fixed;
   width: 16px;
@@ -197,9 +193,7 @@ html.lenis, html.lenis body {
   border-color: var(--text-color);
 }
 
-/* ==========================================
-   SPLIT TEXT ANIMATIONS
-   ========================================== */
+/* Split Text Animations */
 .split-line {
   overflow: hidden;
   display: block;
@@ -217,4 +211,27 @@ html.lenis, html.lenis body {
   transform: translateY(80px) rotateX(-90deg);
   transform-origin: center bottom;
   will-change: transform, opacity;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .grain-overlay {
+    display: none;
+  }
+
+  .char-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .split-line-inner {
+    transform: none;
+  }
 }

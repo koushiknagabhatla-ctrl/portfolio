@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
 import './WorksPage.css';
 
 import img1 from '../assets/projects/project1.png';
@@ -40,44 +39,13 @@ const projects = [
 const WorksPage = () => {
   const containerRef = useRef(null);
 
-  // 1. Lenis Smooth Scroll Initialization
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.5,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    gsap.ticker.lagSmoothing(0, 0);
-
-    return () => {
-      lenis.destroy();
-      gsap.ticker.remove((time) => { lenis.raf(time * 1000) });
-    };
-  }, []);
-
-  // 2. Cinematic GSAP Parallax & Reveals
   useEffect(() => {
     let ctx = gsap.context(() => {
       const items = gsap.utils.toArray('.awwwards-item');
 
-      items.forEach((item, i) => {
+      items.forEach((item) => {
         const imageWrapper = item.querySelector('.awwwards-img-wrapper');
-        const image = item.querySelector('.awwwards-img');
 
-        // Cinematic Image Reveal (Clip Path)
         gsap.fromTo(imageWrapper, 
           { clipPath: "inset(0% 100% 0% 0%)" },
           { 
@@ -91,7 +59,6 @@ const WorksPage = () => {
           }
         );
 
-        // Subtle container parallax (Move the whole box, don't crop the image inside)
         gsap.fromTo(imageWrapper,
           { y: 50 },
           { 
@@ -106,7 +73,6 @@ const WorksPage = () => {
           }
         );
         
-        // Text fade in gracefully
         const textElements = item.querySelectorAll('.info-reveal');
         gsap.fromTo(textElements,
           { opacity: 0, y: 30 },
@@ -137,45 +103,37 @@ const WorksPage = () => {
       </div>
 
       <div className="awwwards-projects-list">
-        {projects.map((project, idx) => {
-          return (
-            <div className="awwwards-item" key={idx}>
-              
-              <div className="awwwards-layout">
+        {projects.map((project, idx) => (
+          <div className="awwwards-item" key={idx}>
+            <div className="awwwards-layout">
+              <div className="awwwards-info">
+                <div className="info-top-row">
+                  <span className="project-category info-reveal">{project.id} // {project.category}</span>
+                  <h2 className="awwwards-title info-reveal">{project.name}</h2>
+                </div>
                 
-                {/* Clean, Readable Typography Section - Full Width on Top */}
-                <div className="awwwards-info">
-                  <div className="info-top-row">
-                    <span className="project-category info-reveal">{project.id} // {project.category}</span>
-                    <h2 className="awwwards-title info-reveal">{project.name}</h2>
-                  </div>
-                  
-                  <div className="info-bottom-row">
-                    <p className="project-desc info-reveal">{project.desc}</p>
-                    <div className="btn-wrapper info-reveal">
-                      <a href={project.url} target="_blank" rel="noopener noreferrer" className="view-btn">
-                        VIEW PROJECT
-                      </a>
-                    </div>
+                <div className="info-bottom-row">
+                  <p className="project-desc info-reveal">{project.desc}</p>
+                  <div className="btn-wrapper info-reveal">
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="view-btn">
+                      VIEW PROJECT
+                    </a>
                   </div>
                 </div>
-
-                {/* Parallax Image Section - 16:9 Aspect Ratio to prevent cropping */}
-                <a 
-                  href={project.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="awwwards-img-wrapper"
-                >
-                  <img src={project.image} alt={project.name} className="awwwards-img" />
-                  <div className="awwwards-img-overlay"></div>
-                </a>
-
               </div>
 
+              <a 
+                href={project.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="awwwards-img-wrapper"
+              >
+                <img src={project.image} alt={project.name} className="awwwards-img" loading="lazy" decoding="async" />
+              </a>
+
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
 
       <div className="awwwards-footer">

@@ -12,10 +12,8 @@ const Photography = () => {
   const activeCategory = category || 'all';
   
   const containerRef = useRef(null);
-  const imagesRef = useRef([]);
   const titleRef = useRef(null);
 
-  // Filter images based on the photoDatabase
   let filteredImages = [];
   if (activeCategory === 'all') {
     filteredImages = [
@@ -30,11 +28,10 @@ const Photography = () => {
   const leftColumn = filteredImages.filter((_, i) => i % 2 === 0);
   const rightColumn = filteredImages.filter((_, i) => i % 2 !== 0);
 
-  // Title Animation
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       const titleChars = titleRef.current.querySelectorAll('.char-reveal');
-      if(titleChars.length) {
+      if (titleChars.length) {
         gsap.fromTo(titleChars,
           { y: 50, rotateX: -90, opacity: 0 },
           {
@@ -48,12 +45,11 @@ const Photography = () => {
     return () => ctx.revert();
   }, [activeCategory]); 
 
-  // Image Reveals removed to stop popping animations
   return (
     <section id="photography-gallery" className="section photography-section" ref={containerRef}>
       <div className="container">
         
-        <Link to="/photography" className="back-btn">
+        <Link to="/photography" className="back-btn" aria-label="Back to photography directory">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           Back to Directory
         </Link>
@@ -78,11 +74,10 @@ const Photography = () => {
                 <div 
                   key={`left-${index}`} 
                   className="masonry-item"
-                  ref={el => imagesRef.current[globalIndex] = el}
                 >
                   <img 
                     src={srcPath} 
-                    alt={`Photography ${activeCategory}`}
+                    alt={`${activeCategory} photography ${globalIndex + 1}`}
                     loading={globalIndex < 4 ? 'eager' : 'lazy'}
                     decoding="async"
                   />
@@ -97,11 +92,10 @@ const Photography = () => {
                 <div 
                   key={`right-${index}`} 
                   className="masonry-item"
-                  ref={el => imagesRef.current[globalIndex] = el}
                 >
                   <img 
                     src={srcPath} 
-                    alt={`Photography ${activeCategory}`}
+                    alt={`${activeCategory} photography ${globalIndex + 1}`}
                     loading={globalIndex < 4 ? 'eager' : 'lazy'}
                     decoding="async"
                   />
