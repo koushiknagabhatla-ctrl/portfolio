@@ -9,20 +9,7 @@ const AboutPage = () => {
   useEffect(() => {
     let ctx = gsap.context(() => {
 
-      // 1. Image Parallax: Images pan vertically inside their wrappers
-      const images = gsap.utils.toArray('.aww-image');
-      images.forEach(img => {
-        gsap.to(img, {
-          yPercent: 20,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img.parentElement,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
-        });
-      });
+      // Parallax removed to prevent zooming
 
       // 2. Text Reveal: Gentle slide-up and fade-in
       const texts = gsap.utils.toArray('.aww-reveal');
@@ -42,22 +29,7 @@ const AboutPage = () => {
         );
       });
 
-      // 3. Clip-Path Image Reveal (Curtain opening effect)
-      const wrappers = gsap.utils.toArray('.aww-clip-reveal');
-      wrappers.forEach(wrapper => {
-        gsap.fromTo(wrapper,
-          { clipPath: 'inset(100% 0% 0% 0%)' },
-          {
-            clipPath: 'inset(0% 0% 0% 0%)',
-            duration: 1.5,
-            ease: "power4.inOut",
-            scrollTrigger: {
-              trigger: wrapper,
-              start: "top 80%",
-            }
-          }
-        );
-      });
+      // ClipPath layer reveal removed to prevent the "layer coming up" bug.
 
     }, containerRef); // Scoped to prevent global conflicts
 
