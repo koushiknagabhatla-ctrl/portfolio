@@ -3,9 +3,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './WorksPage.css';
 
-import img1 from '../assets/projects/project1.png';
-import img2 from '../assets/projects/project2.png';
-import img3 from '../assets/projects/project3.png';
+import img1 from '../assets/projects/project1.webp';
+import img2 from '../assets/projects/project2.webp';
+import img3 from '../assets/projects/project3.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -5,8 +5,8 @@ import './AboutPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-import heroBg from '../assets/_DSC3834.jpg';
-import outroBg from '../assets/DSC00793.jpg';
+import heroBg from '../assets/_DSC3834.webp';
+import outroBg from '../assets/DSC00793.webp';
 
 const AboutPage = () => {
   const containerRef = useRef(null);
