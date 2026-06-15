@@ -5,7 +5,8 @@ import './AboutPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-import heroBg from '../assets/_DSC4621.jpg';
+import heroBg from '../assets/_DSC3834.jpg';
+import outroBg from '../assets/DSC00793.jpg';
 
 const AboutPage = () => {
   const containerRef = useRef(null);
@@ -155,13 +156,10 @@ const AboutPage = () => {
       </section>
 
       <section className="aww-section outro-section margin-top-massive" aria-label="Closing message">
-        <div className="aww-image-wrapper full-bleed half-height">
-          <img className="aww-image" src="/about/ultra_13.webp" alt="Conclusion — looking forward" loading="lazy" decoding="async" width="1920" height="1080" />
-        </div>
-        <div className="outro-content">
-          <h2 className="aww-huge-serif aww-reveal">Let's build</h2>
-          <h2 className="aww-huge-serif indent aww-reveal">something</h2>
-          <h2 className="aww-huge-serif double-indent aww-reveal">beautiful.</h2>
+        <div className="aww-image-wrapper full-bleed half-height" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <img className="aww-image" src={outroBg} alt="Conclusion — looking forward" loading="lazy" decoding="async" width="1920" height="1080" />
+          <div className="aww-hero-gradient"></div>
+          <h2 className="aww-massive-title centered mix-blend aww-reveal" style={{ fontSize: 'clamp(3rem, 10vw, 9rem)' }}>Let's build<br/>something beautiful.</h2>
         </div>
       </section>
 
