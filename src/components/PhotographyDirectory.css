@@ -1,11 +1,11 @@
 .photography-directory {
-  min-height: 100vh;
+  min-height: 85vh;
   width: 100%;
   background-color: var(--bg-color);
-  padding: clamp(100px, 12vh, 140px) clamp(20px, 8vw, 80px) 40px;
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 8vw, 80px) 40px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   position: relative;
   z-index: 10;
 }
@@ -107,4 +107,20 @@
 
 .directory-link:hover .directory-arrow {
   transform: translate(10px, -10px);
+}
+
+@media (max-width: 768px) {
+  .photography-directory {
+    min-height: 75vh;
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+  
+  .directory-list {
+    gap: 25px; /* Spreads out the items vertically on mobile to fill the empty space */
+  }
+  
+  .directory-link {
+    padding: 10px 20px; /* Larger tap targets */
+  }
 }

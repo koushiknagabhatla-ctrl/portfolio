@@ -71,163 +71,433 @@
   transform: translateX(-5px);
 }
 
-/* Real Apple Dynamic Island */
-.dynamic-island {
+/* ==========================================================================
+   THE ULTIMATE APPLE DYNAMIC ISLAND
+   ========================================================================== */
+
+:root {
+  /* Apple's Exact Physics */
+  --spring-expand: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --spring-collapse: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --content-fade-in: cubic-bezier(0.16, 1, 0.3, 1);
+  --content-fade-out: cubic-bezier(0.4, 0, 1, 1);
+  
+  /* Dimensions */
+  --di-height-prompt: 36px;
+  --di-width-prompt: 320px; /* Fits "Enable audio for a masterpiece experience" */
+  --di-radius-prompt: 100px;
+  
+  --di-height-minimized: 36px;
+  --di-width-minimized: 100px;
+  --di-radius-minimized: 100px;
+  
+  --di-height-expanded: 160px;
+  --di-width-expanded: 360px;
+  --di-radius-expanded: 38px;
+  
+  /* Colors */
+  --di-base-bg: rgba(10, 10, 10, 0.98);
+  --di-base-bg-expanded: rgba(0, 0, 0, 0.85);
+  
+  --color-purple: #6B21A8;
+  --color-blue: #1D4ED8;
+  --color-pink: #BE185D;
+  --color-crimson: #9F1239;
+}
+
+.ultimate-island {
   position: fixed;
   bottom: 30px;
   top: auto;
   left: 50%;
-  transform: translateX(-50%);
-  background: #000000;
-  color: #ffffff;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  /* World-class physics: CSS linear() spring simulation (with cubic-bezier fallback) */
-  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transition: all 0.8s linear(0, 0.218 6.8%, 0.58 15.3%, 0.864 24.3%, 1.031 33.6%, 1.096 43.4%, 1.095 53%, 1.047 62%, 0.997 70.3%, 0.969 77.9%, 0.966 84.7%, 0.98 90.7%, 1);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  z-index: 1000;
+  transform: translateX(-50%) scale(1);
+  z-index: 9999;
   cursor: pointer;
-  padding: 10px 20px;
-  gap: 12px;
-  min-height: 44px;
-  font-family: var(--font-body);
-}
-
-.dynamic-island:hover {
-  transform: translateX(-50%) scale(1.02);
-}
-
-.dynamic-island:active {
-  transform: translateX(-50%) scale(0.92);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-
-
-/* Playing (Expanded) state */
-.dynamic-island.playing {
-  padding: 10px 18px;
-  gap: 10px;
-  border-radius: 30px;
-}
-
-.dynamic-island.playing .island-text {
-  max-width: 175px;
-}
-
-/* Shared */
-.island-icon {
+  border-radius: var(--di-radius-prompt);
+  background: var(--di-base-bg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  color: #ffffff;
+  
+  /* Shape Morphing Physics */
+  width: var(--di-width-prompt);
+  height: var(--di-height-prompt);
+  will-change: width, height, transform, border-radius;
+  transition: 
+    width 360ms var(--spring-collapse), 
+    height 360ms var(--spring-collapse), 
+    border-radius 360ms var(--spring-collapse),
+    transform 100ms ease,
+    background 300ms ease,
+    backdrop-filter 300ms ease;
 }
 
-.island-text {
-  display: flex;
-  flex-direction: column;
-  white-space: nowrap;
+/* Base Interactions */
+.ultimate-island:hover {
+  filter: brightness(1.05);
+}
+
+.ultimate-island.pressed {
+  transform: translateX(-50%) scale(0.96) !important;
+  transition: transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   STATE: EXPANDED (Now Playing)
+   ========================================================================== */
+.ultimate-island.expanded {
+  width: var(--di-width-expanded);
+  height: var(--di-height-expanded);
+  border-radius: var(--di-radius-expanded);
+  background: var(--di-base-bg-expanded);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  transition: 
+    width 450ms var(--spring-expand), 
+    height 450ms var(--spring-expand), 
+    border-radius 450ms var(--spring-expand),
+    transform 100ms ease,
+    background 300ms ease;
+    
+  /* Gentle 120BPM pulse */
+  animation: islandPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes islandPulse {
+  0% { transform: translateX(-50%) scale(1); }
+  100% { transform: translateX(-50%) scale(1.015); }
+}
+
+/* ==========================================================================
+   STATE: MINIMIZED (Playing but collapsed)
+   ========================================================================== */
+.ultimate-island.minimized {
+  width: var(--di-width-minimized);
+  height: var(--di-height-minimized);
+  border-radius: var(--di-radius-minimized);
+  background: var(--di-base-bg);
+}
+
+/* ==========================================================================
+   LAYERS: BACKGROUND & LIGHTING
+   ========================================================================== */
+.island-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: inherit;
+  box-shadow: 0 0 32px 8px rgba(107, 33, 168, 0);
+  transition: box-shadow 400ms ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.ultimate-island.expanded .island-ambient-glow {
+  box-shadow: 0 0 32px 8px rgba(107, 33, 168, 0.2);
+  animation: glowPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+.island-background {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   overflow: hidden;
-  max-width: 380px;
-  filter: blur(0px);
-  transform: scale(1);
-  transition: max-width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease 0.3s, filter 0.6s ease 0.3s, transform 0.6s ease 0.3s;
-  transition: max-width 0.8s linear(0, 0.218 6.8%, 0.58 15.3%, 0.864 24.3%, 1.031 33.6%, 1.096 43.4%, 1.095 53%, 1.047 62%, 0.997 70.3%, 0.969 77.9%, 0.966 84.7%, 0.98 90.7%, 1), opacity 0.6s ease 0.3s, filter 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 300ms ease;
 }
 
-.island-title {
+.ultimate-island.expanded .island-background {
+  opacity: 1;
+}
+
+/* The Living Gradient Layer */
+.island-gradient {
+  position: absolute;
+  inset: -50%; /* Oversize to allow panning */
+  opacity: 0.85;
+  filter: blur(12px);
+  background: 
+    radial-gradient(circle at 20% 30%, var(--color-purple) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--color-blue) 0%, transparent 50%),
+    radial-gradient(circle at 50% 10%, var(--color-pink) 0%, transparent 60%),
+    radial-gradient(circle at 10% 80%, var(--color-crimson) 0%, transparent 60%);
+  background-size: 200% 200%;
+  animation: organicGradient 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes organicGradient {
+  0% { background-position: 0% 0%; }
+  33% { background-position: 100% 50%; }
+  66% { background-position: 50% 100%; }
+  100% { background-position: 0% 100%; }
+}
+
+.island-specular {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 20px;
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   CONTENT WRAPPER
+   ========================================================================== */
+.island-content {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none; /* Let parent handle clicks */
+}
+
+/* ==========================================================================
+   VIEWS ARCHITECTURE
+   ========================================================================== */
+.island-view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 80ms var(--content-fade-out), visibility 80ms;
+}
+
+/* Show active view */
+.ultimate-island.prompt .prompt-view,
+.ultimate-island.minimized .minimized-view,
+.ultimate-island.expanded .expanded-view {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 200ms var(--content-fade-in) 120ms, visibility 0s 120ms;
+}
+
+/* Float-in effect for expanded content */
+.ultimate-island.expanded .expanded-view {
+  animation: floatIn 200ms var(--content-fade-in) 120ms forwards;
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+@keyframes floatIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   VIEW: PROMPT
+   ========================================================================== */
+.prompt-view {
+  gap: 8px;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 0.85rem;
   font-weight: 500;
-  letter-spacing: 0.2px;
+  white-space: nowrap;
 }
 
-.island-subtitle {
-  font-size: 0.7rem;
-  opacity: 0.7;
-  margin-top: 1px;
+/* ==========================================================================
+   VIEW: MINIMIZED
+   ========================================================================== */
+.minimized-view {
+  justify-content: space-between;
+  padding: 0 12px;
 }
 
-/* Equalizer */
-.equalizer {
+.mini-icon {
   display: flex;
-  gap: 2px;
-  height: 12px;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-pink);
+  margin-left: 2px;
 }
-.equalizer span {
-  width: 2px;
-  background-color: #1ed760; /* Apple/Spotify green */
-  border-radius: 2px;
-  animation: equalize 1.2s infinite ease-in-out;
-  transform-origin: bottom;
-}
-.equalizer span:nth-child(1) { animation-duration: 1.1s; height: 100%; }
-.equalizer span:nth-child(2) { animation-duration: 1.3s; height: 60%; }
-.equalizer span:nth-child(3) { animation-duration: 0.9s; height: 80%; }
-.equalizer span:nth-child(4) { animation-duration: 1.2s; height: 40%; }
 
-@keyframes equalize {
-  0%, 100% { transform: scaleY(0.3); }
-  50% { transform: scaleY(1); }
+.mini-icon svg {
+  animation: pulsePlay 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulsePlay {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+.mini-art {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.mini-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: spinVinyl 6s linear infinite;
+}
+
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   VIEW: EXPANDED
+   ========================================================================== */
+.expanded-view {
+  flex-direction: column;
+  padding: 24px;
+  justify-content: space-between;
+  pointer-events: auto; /* Enable buttons inside */
+  box-sizing: border-box;
+}
+
+.expanded-top {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+}
+
+.expanded-art {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  flex-shrink: 0;
+}
+
+.expanded-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.expanded-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.expanded-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expanded-artist {
+  font-size: 0.95rem;
+  font-weight: 400;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.expanded-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.control-btn:hover {
+  opacity: 1;
+}
+
+.control-btn:active {
+  transform: scale(0.9);
+}
+
+.play-pause-btn {
+  opacity: 1;
+}
+
+.expanded-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  padding-bottom: 4px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #ffffff;
+  border-radius: 3px;
 }
 
 @media (max-width: 768px) {
-  .dynamic-island {
+  .ultimate-island {
     bottom: 20px;
-    padding: 8px 14px;
-    width: 90%;
-    max-width: 350px;
+    top: auto;
   }
-  .island-text {
-    white-space: normal;
-    text-align: left;
-    max-width: 100%;
-    transition: none;
+  
+  :root {
+    --di-width-expanded: 92vw;
+    --di-height-expanded: 150px;
+    --di-radius-expanded: 34px;
   }
-  .island-title {
-    font-size: 0.8rem;
+  
+  .expanded-view {
+    padding: 20px 16px;
   }
-  .island-subtitle {
-    font-size: 0.65rem;
+  
+  .expanded-art {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
   }
-}
-
-/* Internal Element Cinematic Animations */
-.island-text > span {
-  animation: cinematicTextIn 0.7s cubic-bezier(0.25, 1.2, 0.2, 1) forwards;
-}
-
-@keyframes cinematicTextIn {
-  0% { 
-    opacity: 0; 
-    transform: translateY(8px) scale(0.95); 
-    filter: blur(8px);
-  }
-  100% { 
-    opacity: 1; 
-    transform: translateY(0) scale(1); 
-    filter: blur(0px);
+  
+  .expanded-controls {
+    gap: 12px;
   }
 }
 
-.island-icon svg, .island-icon .equalizer {
-  animation: cinematicIconIn 0.7s cubic-bezier(0.25, 1.2, 0.2, 1) forwards;
-}
-
-@keyframes cinematicIconIn {
-  0% { 
-    opacity: 0; 
-    transform: scale(0.4) rotate(-15deg); 
-    filter: blur(6px);
-  }
-  100% { 
-    opacity: 1; 
-    transform: scale(1) rotate(0deg); 
-    filter: blur(0px);
-  }
-}
