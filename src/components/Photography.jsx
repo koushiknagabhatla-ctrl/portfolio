@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Photography.css';
 import photoDatabase from './photoDatabase.json';
+import natureAudio from '../assets/solace.mp3';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,24 @@ const Photography = () => {
   
   const containerRef = useRef(null);
   const titleRef = useRef(null);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (activeCategory === 'nature' && audioRef.current) {
+      audioRef.current.volume = 1.0;
+      audioRef.current.play().catch(e => console.warn("Audio autoplay blocked by browser:", e));
+    } else if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, [activeCategory]);
 
   let filteredImages = [];
   if (activeCategory === 'all') {
@@ -47,6 +66,7 @@ const Photography = () => {
 
   return (
     <section id="photography-gallery" className="section photography-section" ref={containerRef} aria-label={`${activeCategory} photography gallery`}>
+      <audio ref={audioRef} src={natureAudio} loop preload="auto" />
       <div className="container">
         
         <Link to="/photography" className="back-btn" aria-label="Back to photography directory">
