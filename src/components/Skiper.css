@@ -1,0 +1,285 @@
+/* ==========================================================================
+   SKIPER MEDIA PLAYBAR
+   ========================================================================== */
+
+.skiper-island {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 64px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 9999;
+  /* Ultimate Liquid Glass Effect */
+  background: rgba(15, 15, 15, 0.45);
+  backdrop-filter: blur(24px) saturate(200%) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.1);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.6), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Premium Bouncy spring transition */
+  transition: width 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              background-color 0.4s ease,
+              transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.4s ease;
+}
+
+.skiper-island:hover {
+  background: rgba(25, 25, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.skiper-island:active {
+  transform: translateX(-50%) scale(0.96);
+}
+
+.skiper-island.prompt {
+  width: 360px;
+  justify-content: center;
+}
+
+/* PROMPT VIEW */
+.sk-prompt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.skiper-island.prompt .sk-prompt {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sk-prompt span {
+  color: #fff;
+  animation: pulseText 2s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+  0%, 100% { 
+    opacity: 1; 
+    text-shadow: 0 0 12px rgba(255,255,255,0.6); 
+  }
+  50% { 
+    opacity: 0.7; 
+    text-shadow: none; 
+  }
+}
+
+.skiper-island.collapsed {
+  width: 64px;
+  justify-content: center;
+}
+
+.skiper-island.expanded {
+  width: 380px;
+  justify-content: flex-start;
+}
+
+/* COLLAPSED VIEW */
+.sk-collapsed {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.skiper-island.collapsed .sk-collapsed {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sk-collapsed-art {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: spinVinyl 6s linear infinite;
+}
+.sk-collapsed-art.paused img {
+  animation-play-state: paused !important;
+}
+.sk-collapsed-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* EXPANDED VIEW */
+.sk-expanded {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease 0.1s;
+}
+
+.skiper-island.expanded .sk-expanded {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sk-art {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: scale(0.6) rotate(-30deg);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s;
+}
+.skiper-island.expanded .sk-art {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.sk-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sk-art img.spinning {
+  animation: spinVinyl 6s linear infinite;
+}
+
+.sk-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 12px;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-15px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s;
+}
+.skiper-island.expanded .sk-details {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sk-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 6px;
+}
+
+.sk-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sk-time {
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+
+.sk-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.sk-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #fff;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.sk-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 4px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(15px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
+}
+.skiper-island.expanded .sk-controls {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sk-btn {
+  background: none;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.sk-btn:hover {
+  opacity: 1;
+}
+.sk-btn:active {
+  transform: scale(0.9);
+}
+.sk-play {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.sk-play:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .skiper-island {
+    bottom: 20px;
+  }
+  .skiper-island.expanded {
+    width: 90vw;
+  }
+}
