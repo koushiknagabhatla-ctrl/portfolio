@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -15,14 +15,26 @@ const Photography = () => {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
   const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (activeCategory !== 'nature') {
+      setIsPlaying(false);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    }
+  }, [activeCategory]);
 
   useEffect(() => {
     if (activeCategory === 'nature' && audioRef.current) {
       audioRef.current.volume = 1.0;
-      audioRef.current.play().catch(e => console.warn("Audio autoplay blocked by browser:", e));
-    } else if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      if (isPlaying) {
+        audioRef.current.play().catch(e => console.warn("Audio play blocked by browser:", e));
+      } else {
+        audioRef.current.pause();
+      }
     }
     
     // Cleanup on unmount
@@ -31,7 +43,7 @@ const Photography = () => {
         audioRef.current.pause();
       }
     };
-  }, [activeCategory]);
+  }, [isPlaying, activeCategory]);
 
   let filteredImages = [];
   if (activeCategory === 'all') {
@@ -85,6 +97,38 @@ const Photography = () => {
             </span>
           ))}
         </h1>
+
+        {activeCategory === 'nature' && (
+          <div 
+            className={`dynamic-island ${isPlaying ? 'playing' : 'prompt'}`} 
+            onClick={() => setIsPlaying(!isPlaying)}
+            role="button"
+            aria-label="Toggle background music"
+          >
+            <div className="island-icon">
+              {isPlaying ? (
+                <div className="equalizer">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              ) : (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+              )}
+            </div>
+            <div className="island-text">
+              {isPlaying ? (
+                <>
+                  <span className="island-title">Solace - Txmy</span>
+                  <span className="island-subtitle">Playing now • Tap to pause</span>
+                </>
+              ) : (
+                <>
+                  <span className="island-title">Want to listen to music while scrolling photos?</span>
+                  <span className="island-subtitle">Enable audio for masterpiece experience</span>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="masonry-flex" role="list" aria-label="Photography grid">
           <div className="masonry-col">
