@@ -13,12 +13,13 @@ async function optimizeImages() {
       
       console.log(`Optimizing ${file}...`);
       await sharp(inputPath)
+        .rotate() // Automatically rotate based on EXIF
         .resize({ width: 1920, withoutEnlargement: true })
         .webp({ quality: 80 })
         .toFile(outputPath);
       console.log(`Saved ${outputPath}`);
       
-      // Optionally delete the original
+      // Delete the original
       fs.unlinkSync(inputPath);
     }
   }

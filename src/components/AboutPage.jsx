@@ -159,7 +159,7 @@ const AboutPage = () => {
         <div className="aww-image-wrapper full-bleed half-height" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img className="aww-image" src={outroBg} alt="Conclusion — looking forward" loading="lazy" decoding="async" width="1920" height="1080" />
           <div className="aww-hero-gradient"></div>
-          <h2 className="aww-massive-title centered mix-blend aww-reveal" style={{ fontSize: 'clamp(3rem, 10vw, 9rem)' }}>Let's build<br/>something beautiful.</h2>
+          <h2 className="aww-massive-title centered mix-blend aww-reveal" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', lineHeight: '1.1', width: '90%', paddingBottom: '0.2em' }}>Let's build<br/>something beautiful.</h2>
         </div>
       </section>
 
