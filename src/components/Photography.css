@@ -1,6 +1,6 @@
 .photography-section {
   background-color: var(--bg-color);
-  padding: 100px 0;
+  padding: 60px 0;
 }
 
 .text-dark {
@@ -10,21 +10,21 @@
 
 .masonry-flex {
   display: flex;
-  gap: clamp(20px, 4vw, 60px);
+  gap: clamp(10px, 2vw, 20px);
   width: 100%;
   padding: 0 clamp(20px, 5vw, 100px);
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .masonry-col {
   display: flex;
   flex-direction: column;
-  gap: clamp(20px, 4vw, 60px);
+  gap: clamp(10px, 2vw, 20px);
   flex: 1;
 }
 
 .masonry-col:nth-child(2) {
-  margin-top: clamp(40px, 8vw, 120px);
+  margin-top: clamp(20px, 4vw, 40px);
 }
 
 .masonry-item {

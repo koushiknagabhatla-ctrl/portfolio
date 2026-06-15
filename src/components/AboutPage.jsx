@@ -5,6 +5,8 @@ import './AboutPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+import heroBg from '../assets/_DSC4621.jpg';
+
 const AboutPage = () => {
   const containerRef = useRef(null);
 
@@ -36,7 +38,7 @@ const AboutPage = () => {
       
       <section className="aww-section hero-section" aria-label="About hero">
         <div className="aww-image-wrapper full-bleed">
-          <img className="aww-image" src="/about/ultra_1.webp" alt="Koushik Nagabhatla — Beyond the Code" decoding="async" fetchPriority="high" width="1920" height="1080" />
+          <img className="aww-image" src={heroBg} alt="Koushik Nagabhatla — Beyond the Code" decoding="async" fetchPriority="high" width="1920" height="1080" />
           <div className="aww-hero-gradient"></div>
         </div>
         <h1 className="aww-massive-title mix-blend aww-reveal">Beyond<br/>the Code.</h1>

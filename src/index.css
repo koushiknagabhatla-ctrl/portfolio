@@ -3,7 +3,7 @@
   --text-color: #620707;
   --font-nav: 'Italiana', serif;
   --font-body: 'Habibi', serif;
-  --font-heading: 'Darumadrop One', cursive;
+  --font-heading: 'Cinzel', serif;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
@@ -14,9 +14,7 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+
 
 body {
   background-color: var(--bg-color);
