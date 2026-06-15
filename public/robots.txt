@@ -1,0 +1,68 @@
+# https://www.robotstxt.org/robotstxt.html
+
+# Default: Allow search engines to index all public pages
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /works
+Allow: /photography
+
+# Block all administrative, config, and infrastructure paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /_vercel/
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /src/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /assets/
+Disallow: /*?*
+
+# Block common vulnerability scanner probe paths
+Disallow: /wp-admin
+Disallow: /wp-login
+Disallow: /wp-content
+Disallow: /wp-includes
+Disallow: /xmlrpc.php
+Disallow: /phpmyadmin
+Disallow: /admin
+Disallow: /administrator
+Disallow: /config
+Disallow: /setup
+Disallow: /install
+Disallow: /shell
+Disallow: /cmd
+Disallow: /exec
+Disallow: /eval
+Disallow: /cgi-bin
+Disallow: /backup
+Disallow: /.htaccess
+Disallow: /.htpasswd
+Disallow: /server-status
+Disallow: /server-info
+Disallow: /.well-known/
+Disallow: /debug
+Disallow: /trace
+Disallow: /console
+Disallow: /login
+Disallow: /register
+
+# Block aggressive crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Crawl delay for respectful bots
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://koushiknagabhatla.vercel.app/sitemap.xml

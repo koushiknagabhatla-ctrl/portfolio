@@ -46,15 +46,15 @@ const Photography = () => {
   }, [activeCategory]); 
 
   return (
-    <section id="photography-gallery" className="section photography-section" ref={containerRef}>
+    <section id="photography-gallery" className="section photography-section" ref={containerRef} aria-label={`${activeCategory} photography gallery`}>
       <div className="container">
         
         <Link to="/photography" className="back-btn" aria-label="Back to photography directory">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           Back to Directory
         </Link>
 
-        <h2 className="section-title text-dark" ref={titleRef} style={{ perspective: '600px', marginTop: '30px' }}>
+        <h1 className="section-title text-dark" ref={titleRef} style={{ perspective: '600px', marginTop: '30px' }}>
           {activeCategory.toUpperCase().split('').map((char, cIndex) => (
             <span
               key={cIndex}
@@ -64,9 +64,9 @@ const Photography = () => {
               {char}
             </span>
           ))}
-        </h2>
+        </h1>
 
-        <div className="masonry-flex">
+        <div className="masonry-flex" role="list" aria-label="Photography grid">
           <div className="masonry-col">
             {leftColumn.map((srcPath, index) => {
               const globalIndex = index * 2;
@@ -74,12 +74,15 @@ const Photography = () => {
                 <div 
                   key={`left-${index}`} 
                   className="masonry-item"
+                  role="listitem"
                 >
                   <img 
                     src={srcPath} 
-                    alt={`${activeCategory} photography ${globalIndex + 1}`}
+                    alt={`${activeCategory} photograph ${globalIndex + 1}`}
                     loading={globalIndex < 4 ? 'eager' : 'lazy'}
                     decoding="async"
+                    width="800"
+                    height="1000"
                   />
                 </div>
               );
@@ -92,12 +95,15 @@ const Photography = () => {
                 <div 
                   key={`right-${index}`} 
                   className="masonry-item"
+                  role="listitem"
                 >
                   <img 
                     src={srcPath} 
-                    alt={`${activeCategory} photography ${globalIndex + 1}`}
+                    alt={`${activeCategory} photograph ${globalIndex + 1}`}
                     loading={globalIndex < 4 ? 'eager' : 'lazy'}
                     decoding="async"
+                    width="800"
+                    height="1000"
                   />
                 </div>
               );

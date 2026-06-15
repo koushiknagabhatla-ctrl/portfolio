@@ -34,20 +34,20 @@ const AboutPage = () => {
   return (
     <div className="aww-master-container" ref={containerRef}>
       
-      <section className="aww-section hero-section">
+      <section className="aww-section hero-section" aria-label="About hero">
         <div className="aww-image-wrapper full-bleed">
-          <img className="aww-image" src="/about/ultra_1.webp" alt="The Journey" decoding="async" fetchPriority="high" />
+          <img className="aww-image" src="/about/ultra_1.webp" alt="Koushik Nagabhatla — Beyond the Code" decoding="async" fetchPriority="high" width="1920" height="1080" />
           <div className="aww-hero-gradient"></div>
         </div>
         <h1 className="aww-massive-title mix-blend aww-reveal">Beyond<br/>the Code.</h1>
-        <div className="aww-meta bottom-left mix-blend aww-reveal">
+        <div className="aww-meta bottom-left mix-blend aww-reveal" aria-hidden="true">
           <span>CHAPTER 00</span>
           <span className="line-sep"></span>
           <span>THE HUMAN BEHIND THE SCREEN</span>
         </div>
       </section>
 
-      <section className="aww-section text-section">
+      <section className="aww-section text-section" aria-label="About introduction">
         <div className="aww-grid">
           <div className="aww-col empty-col"></div>
           <div className="aww-col text-col">
@@ -61,27 +61,27 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="aww-section gallery-section">
+      <section className="aww-section gallery-section" aria-label="Portrait gallery">
         <div className="aww-grid-triple">
           <div className="aww-image-wrapper portrait-thin">
-            <img className="aww-image" src="/about/ultra_2.webp" alt="Portrait 1" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_2.webp" alt="Portrait photograph 1" loading="lazy" decoding="async" width="800" height="1067" />
           </div>
           <div className="aww-image-wrapper portrait shift-down-slight">
-            <img className="aww-image" src="/about/ultra_3.webp" alt="Portrait 2" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_3.webp" alt="Portrait photograph 2" loading="lazy" decoding="async" width="800" height="1000" />
           </div>
           <div className="aww-image-wrapper portrait-thin shift-down-heavy">
-            <img className="aww-image" src="/about/ultra_4.webp" alt="Portrait 3" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_4.webp" alt="Portrait photograph 3" loading="lazy" decoding="async" width="800" height="1067" />
           </div>
         </div>
       </section>
 
-      <section className="aww-section offset-image-section margin-top-massive">
+      <section className="aww-section offset-image-section margin-top-massive" aria-label="The road and riding">
         <div className="aww-grid reverse">
           <div className="aww-col img-col">
             <div className="aww-image-wrapper portrait">
-              <img className="aww-image" src="/about/ultra_5.webp" alt="The Open Road" loading="lazy" decoding="async" />
+              <img className="aww-image" src="/about/ultra_5.webp" alt="The open highway" loading="lazy" decoding="async" width="800" height="1000" />
             </div>
-            <div className="aww-caption aww-reveal">
+            <div className="aww-caption aww-reveal" aria-hidden="true">
               <span>LOCATION: HIGHWAY</span>
               <span>[ 01 ]</span>
             </div>
@@ -97,14 +97,14 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="aww-section full-bleed-section">
+      <section className="aww-section full-bleed-section" aria-label="Cinematic landscape">
         <div className="aww-image-wrapper full-bleed cinematic-height">
-          <img className="aww-image" src="/about/ultra_6.webp" alt="Bike Perspective" loading="lazy" decoding="async" />
+          <img className="aww-image" src="/about/ultra_6.webp" alt="Bike ride perspective" loading="lazy" decoding="async" width="1920" height="900" />
         </div>
         <h2 className="aww-massive-title centered mix-blend aww-reveal">The Horizon.</h2>
       </section>
 
-      <section className="aww-section text-section margin-top-massive">
+      <section className="aww-section text-section margin-top-massive" aria-label="Photography and travel">
         <div className="aww-grid">
           <div className="aww-col text-col">
             <p className="aww-poetic aww-reveal">
@@ -116,45 +116,45 @@ const AboutPage = () => {
           </div>
           <div className="aww-col img-col shift-down">
              <div className="aww-image-wrapper landscape">
-               <img className="aww-image" src="/about/ultra_7.webp" alt="Travel" loading="lazy" decoding="async" />
+               <img className="aww-image" src="/about/ultra_7.webp" alt="Travel landscape" loading="lazy" decoding="async" width="1200" height="750" />
              </div>
           </div>
         </div>
       </section>
 
-      <section className="aww-section dual-panoramic">
+      <section className="aww-section dual-panoramic" aria-label="Nature panoramic photos">
         <div className="aww-image-wrapper panoramic right-align">
-          <img className="aww-image" src="/about/ultra_8.webp" alt="Raw Wilderness" loading="lazy" decoding="async" />
+          <img className="aww-image" src="/about/ultra_8.webp" alt="Raw wilderness panoramic" loading="lazy" decoding="async" width="1600" height="686" />
         </div>
-        <div className="aww-caption right-align-caption aww-reveal">
+        <div className="aww-caption right-align-caption aww-reveal" aria-hidden="true">
           <span>NATURE // UNTAMED</span>
         </div>
 
         <div className="aww-image-wrapper panoramic left-align shift-down-medium">
-          <img className="aww-image" src="/about/ultra_9.webp" alt="Scale" loading="lazy" decoding="async" />
+          <img className="aww-image" src="/about/ultra_9.webp" alt="Scale and perspective" loading="lazy" decoding="async" width="1600" height="686" />
         </div>
-        <div className="aww-caption left-align-caption aww-reveal shift-down-medium">
+        <div className="aww-caption left-align-caption aww-reveal shift-down-medium" aria-hidden="true">
           <span>PERSPECTIVE</span>
         </div>
       </section>
 
-      <section className="aww-section overlap-section margin-top-massive">
+      <section className="aww-section overlap-section margin-top-massive" aria-label="Overlapping photo grid">
         <div className="aww-overlap-grid">
           <div className="aww-image-wrapper square overlap-left">
-            <img className="aww-image" src="/about/ultra_10.webp" alt="Details" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_10.webp" alt="Details close-up" loading="lazy" decoding="async" width="800" height="800" />
           </div>
           <div className="aww-image-wrapper portrait overlap-right shift-down">
-            <img className="aww-image" src="/about/ultra_11.webp" alt="Vibe" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_11.webp" alt="Portrait mood" loading="lazy" decoding="async" width="800" height="1000" />
           </div>
           <div className="aww-image-wrapper landscape overlap-center shift-down-heavy">
-            <img className="aww-image" src="/about/ultra_12.webp" alt="Core" loading="lazy" decoding="async" />
+            <img className="aww-image" src="/about/ultra_12.webp" alt="Core essence" loading="lazy" decoding="async" width="1200" height="750" />
           </div>
         </div>
       </section>
 
-      <section className="aww-section outro-section margin-top-massive">
+      <section className="aww-section outro-section margin-top-massive" aria-label="Closing message">
         <div className="aww-image-wrapper full-bleed half-height">
-          <img className="aww-image" src="/about/ultra_13.webp" alt="Conclusion" loading="lazy" decoding="async" />
+          <img className="aww-image" src="/about/ultra_13.webp" alt="Conclusion — looking forward" loading="lazy" decoding="async" width="1920" height="1080" />
         </div>
         <div className="outro-content">
           <h2 className="aww-huge-serif aww-reveal">Let's build</h2>

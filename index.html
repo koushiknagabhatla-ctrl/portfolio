@@ -3,21 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Koushik Nagabhatla — Developer, photographer, and builder. Explore my projects, photography, and story." />
-    <title>Koushik Nagabhatla | Portfolio</title>
+    <meta name="description" content="Koushik Nagabhatla — Developer, photographer, and creative builder crafting cinematic web experiences, IoT systems, and visual stories." />
+    <meta name="theme-color" content="#620707" />
+    <meta name="author" content="Koushik Nagabhatla" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Koushik Nagabhatla | Developer & Photographer" />
+    <meta property="og:description" content="Developer, photographer, and creative builder crafting cinematic web experiences, IoT systems, and visual stories." />
+    <meta property="og:url" content="https://koushiknagabhatla.vercel.app/" />
+    <meta property="og:site_name" content="Koushik Nagabhatla Portfolio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Koushik Nagabhatla | Developer & Photographer" />
+    <meta name="twitter:description" content="Developer, photographer, and creative builder crafting cinematic web experiences, IoT systems, and visual stories." />
+
+    <link rel="canonical" href="https://koushiknagabhatla.vercel.app/" />
+
+    <title>Koushik Nagabhatla | Developer &amp; Photographer</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Resource Hints -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Habibi&family=Italiana&display=swap" rel="stylesheet" />
+
+    <!-- Google Fonts with display=swap for zero render-blocking -->
+    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Habibi&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Koushik Nagabhatla",
+      "url": "https://koushiknagabhatla.vercel.app/",
+      "jobTitle": "Software Developer",
+      "knowsAbout": ["Web Development", "Photography", "IoT", "AI"],
+      "sameAs": [
+        "https://github.com/koushiknagabhatla-ctrl",
+        "https://www.linkedin.com/in/koushik-nagabhatla-113a493a2",
+        "https://www.instagram.com/__.koushik__.7"
+      ]
+    }
+    </script>
+
+    <!-- Critical CSS inlined for zero render-blocking FCP -->
     <style>
-      body {
-        background-color: #f4f4f4;
-        color: #620707;
-        margin: 0;
-        padding: 0;
-      }
+      *{margin:0;padding:0;box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{background-color:#f4f4f4;color:#620707;font-family:'Habibi',serif;overflow-x:hidden;line-height:1.6}
+      a{color:inherit;text-decoration:none}
+      .navbar{display:flex;justify-content:center;align-items:center;padding:30px 5%;position:fixed;top:0;left:0;width:100%;z-index:100;font-family:'Italiana',serif;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .3s cubic-bezier(.16,1,.3,1)}
+      .nav-links{display:flex;gap:30px}
+      .nav-links a{position:relative;color:#620707;font-size:clamp(.9rem,1.5vw,1.2rem);letter-spacing:1px;text-transform:uppercase;font-weight:bold}
+      .hero-section{display:flex;justify-content:flex-start;align-items:center;padding-top:140px;padding-bottom:20px;min-height:70vh;position:relative;overflow:hidden}
+      .container{width:min(100%,1400px);margin:0 auto;padding:0 clamp(20px,5%,60px)}
+      #root{min-height:100vh}
     </style>
   </head>
   <body>

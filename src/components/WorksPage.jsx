@@ -40,7 +40,7 @@ const WorksPage = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       const items = gsap.utils.toArray('.awwwards-item');
 
       items.forEach((item) => {
@@ -102,9 +102,9 @@ const WorksPage = () => {
         <p className="header-subtitle">A collection of cinematic interactive experiences.</p>
       </div>
 
-      <div className="awwwards-projects-list">
+      <div className="awwwards-projects-list" role="list">
         {projects.map((project, idx) => (
-          <div className="awwwards-item" key={idx}>
+          <article className="awwwards-item" key={idx} role="listitem">
             <div className="awwwards-layout">
               <div className="awwwards-info">
                 <div className="info-top-row">
@@ -115,7 +115,7 @@ const WorksPage = () => {
                 <div className="info-bottom-row">
                   <p className="project-desc info-reveal">{project.desc}</p>
                   <div className="btn-wrapper info-reveal">
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="view-btn">
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="view-btn" aria-label={`View ${project.name} project`}>
                       VIEW PROJECT
                     </a>
                   </div>
@@ -127,12 +127,14 @@ const WorksPage = () => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="awwwards-img-wrapper"
+                aria-label={`${project.name} screenshot`}
+                tabIndex="-1"
               >
-                <img src={project.image} alt={project.name} className="awwwards-img" loading="lazy" decoding="async" />
+                <img src={project.image} alt={`${project.name} — ${project.category} project screenshot`} className="awwwards-img" loading="lazy" decoding="async" width="1200" height="675" />
               </a>
 
             </div>
-          </div>
+          </article>
         ))}
       </div>
 

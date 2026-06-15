@@ -85,12 +85,12 @@ const Works = () => {
   }, []);
 
   return (
-    <section id="works" className="works-section" ref={sectionRef}>
+    <section id="works" className="works-section" ref={sectionRef} aria-label="Projects">
       <div className="works-header" ref={headerRef}>
         <h2>PROJECTS I HAVE DONE</h2>
       </div>
       
-      <div className="works-list">
+      <div className="works-list" role="list">
         {worksList.map((work, index) => (
           <a 
             key={index} 
@@ -98,9 +98,11 @@ const Works = () => {
             target="_blank" 
             rel="noopener noreferrer" 
             className="work-row"
+            role="listitem"
             ref={el => rowsRef.current[index] = el}
+            aria-label={`View project: ${work.name} — ${work.desc}`}
           >
-            <div className="work-num">
+            <div className="work-num" aria-hidden="true">
               {String(index + 1).padStart(2, '0')}
             </div>
             
@@ -108,14 +110,14 @@ const Works = () => {
             
             <div className="work-type">{work.desc}</div>
             
-            <div className="work-arrow">
-              <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+            <div className="work-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter" aria-hidden="true">
                 <line x1="5" y1="19" x2="19" y2="5"></line>
                 <polyline points="9 5 19 5 19 15"></polyline>
               </svg>
             </div>
 
-            <img src={work.image} alt={work.name} className="work-image" loading="lazy" decoding="async" />
+            <img src={work.image} alt="" className="work-image" loading="lazy" decoding="async" width="500" height="350" aria-hidden="true" />
           </a>
         ))}
       </div>

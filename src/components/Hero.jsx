@@ -127,18 +127,27 @@ const Hero = () => {
 
             <div className="hero-text" ref={textContainerRef} style={{ visibility: 'hidden' }}>
               <p className="hero-paragraph">
-                I am a 4th year b-tech student with a strong interest in software development and web technologies.
+                I am a 4th year B.Tech student with a strong interest in software development and web technologies.
               </p>
               <p className="hero-paragraph">
-                i enjoy building projects that help me improve my problem solving and coding skills.
+                I enjoy building projects that help me improve my problem solving and coding skills.
               </p>
               <p className="hero-paragraph">
-                i am eager to learn new technologies, gain real-world experience, and contribute to a team where i can grow as a developer.
+                I am eager to learn new technologies, gain real-world experience, and contribute to a team where I can grow as a developer.
               </p>
             </div>
           </div>
           <div className="hero-image-wrapper" ref={imageWrapperRef} style={{ visibility: 'hidden' }}>
-            <img src={heroImg} alt="Koushik Nagabhatla" className="hero-img" ref={imageRef} width="420" height="560" />
+            <img
+              src={heroImg}
+              alt="Koushik Nagabhatla — Developer and photographer, portrait"
+              className="hero-img"
+              ref={imageRef}
+              width="420"
+              height="560"
+              fetchPriority="high"
+              decoding="async"
+            />
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 .navbar {
-  --nav-translate-y: 0%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,13 +9,11 @@
   width: 100%;
   z-index: 100;
   font-family: var(--font-nav);
-  transform: translateY(var(--nav-translate-y));
   transition: transform 0.3s var(--ease-out-expo), opacity 0.3s var(--ease-out-expo);
-  will-change: transform;
 }
 
 .navbar.navbar-hidden {
-  --nav-translate-y: -100%;
+  transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
 }
@@ -61,6 +58,9 @@
 }
 
 .nav-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.3s ease;
 }
 

@@ -56,8 +56,9 @@ function AppContent() {
 
   return (
     <div className="app">
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/about" element={<AboutPage />} />
