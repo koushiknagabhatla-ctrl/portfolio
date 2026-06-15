@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './AboutPage.css';
@@ -144,19 +144,16 @@ const AboutPage = () => {
       <section className="aww-section overlap-section margin-top-massive" aria-label="Overlapping photo grid">
         <div className="aww-overlap-grid">
           <div className="aww-image-wrapper square overlap-left">
-            <img className="aww-image" src="/about/ultra_10.webp" alt="Details close-up" loading="lazy" decoding="async" width="800" height="800" />
+            <img className="aww-image" src="/about/ultra_10.webp" alt="Statue" loading="lazy" decoding="async" width="800" height="800" />
           </div>
-          <div className="aww-image-wrapper portrait overlap-right shift-down">
-            <img className="aww-image" src="/about/ultra_11.webp" alt="Portrait mood" loading="lazy" decoding="async" width="800" height="1000" />
-          </div>
-          <div className="aww-image-wrapper landscape overlap-center shift-down-heavy">
-            <img className="aww-image" src="/about/ultra_12.webp" alt="Core essence" loading="lazy" decoding="async" width="1200" height="750" />
+          <div className="aww-image-wrapper landscape overlap-right shift-down">
+            <img className="aww-image" src="/about/ultra_8.webp" alt="Horizontal Nature Photo" loading="lazy" decoding="async" width="1200" height="750" />
           </div>
         </div>
       </section>
 
       <section className="aww-section outro-section margin-top-massive" aria-label="Closing message">
-        <div className="aww-image-wrapper full-bleed half-height" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="aww-image-wrapper full-bleed" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img className="aww-image" src={outroBg} alt="Conclusion — looking forward" loading="lazy" decoding="async" width="1920" height="1080" />
           <div className="aww-hero-gradient"></div>
           <h2 className="aww-massive-title centered mix-blend aww-reveal" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', lineHeight: '1.1', width: '90%', paddingBottom: '0.2em' }}>Let's build<br/>something beautiful.</h2>

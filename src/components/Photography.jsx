@@ -19,10 +19,48 @@ const Photography = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [expandedState, setExpandedState] = useState('closed'); // 'closed', 'initial', 'hover', 'pinned'
-  const [isPressed, setIsPressed] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [prevCategory, setPrevCategory] = useState(activeCategory);
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
+  const touchStartY = useRef(0);
+  const touchCurrentY = useRef(0);
+
+  // Derive state on category change to prevent cascading renders
+  if (activeCategory !== prevCategory) {
+    setPrevCategory(activeCategory);
+    if (activeCategory !== 'nature') {
+      setIsPlaying(false);
+      setHasStarted(false);
+      setExpandedState('closed');
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+      setIsLowPerformance(true);
+    }
+    
+    const handleViewportChange = () => {
+      if (window.visualViewport) {
+        document.documentElement.style.setProperty('--vvp-height', `${window.visualViewport.height}px`);
+      }
+    };
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleViewportChange);
+      handleViewportChange();
+    }
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleViewportChange);
+      }
+    };
+  }, []);
 
   const formatTime = (time) => {
     if (!time || isNaN(time)) return "0:00";
@@ -62,17 +100,7 @@ const Photography = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (activeCategory !== 'nature') {
-      setIsPlaying(false);
-      setHasStarted(false);
-      setExpandedState('closed');
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-    }
-  }, [activeCategory]);
+  // Effect removed, logic moved to derived state above
 
   useEffect(() => {
     if (activeCategory === 'nature' && audioRef.current) {
@@ -85,23 +113,21 @@ const Photography = () => {
     }
     
     // Cleanup on unmount
+    const currentAudio = audioRef.current;
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
+      if (currentAudio) {
+        currentAudio.pause();
       }
     };
   }, [isPlaying, activeCategory]);
 
-  let filteredImages = [];
-  if (activeCategory === 'all') {
-    filteredImages = [
-      ...(photoDatabase.people || []),
-      ...(photoDatabase.bikes || []),
-      ...(photoDatabase.nature || [])
-    ];
-  } else {
-    filteredImages = photoDatabase[activeCategory] || [];
-  }
+  const filteredImages = activeCategory === 'all' 
+    ? [
+        ...(photoDatabase.people || []),
+        ...(photoDatabase.bikes || []),
+        ...(photoDatabase.nature || [])
+      ]
+    : photoDatabase[activeCategory] || [];
 
   const leftColumn = filteredImages.filter((_, i) => i % 2 === 0);
   const rightColumn = filteredImages.filter((_, i) => i % 2 !== 0);
@@ -127,7 +153,19 @@ const Photography = () => {
     if (!hasStarted) {
       setHasStarted(true);
       setIsPlaying(true);
-      setExpandedState('pinned'); // Pin open permanently on first play
+      setExpandedState('pinned');
+      
+      // Auto-collapse after 2 seconds to create a seamless dynamic island effect
+      setTimeout(() => {
+        setExpandedState(current => current === 'pinned' ? 'closed' : current);
+      }, 2000);
+      
+      // iOS Audio Context Resume Guard
+      if (audioRef.current) {
+        audioRef.current.play().catch(e => {
+          console.warn("Audio resume blocked by browser:", e);
+        });
+      }
     } else {
       // Toggle pinned state
       if (expandedState === 'pinned') {
@@ -145,7 +183,6 @@ const Photography = () => {
   };
 
   const handleIslandMouseLeave = () => {
-    setIsPressed(false);
     if (expandedState === 'hover') {
       setExpandedState('closed');
     }
@@ -167,14 +204,33 @@ const Photography = () => {
     e.stopPropagation();
     if (!audioRef.current) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
+    const clickX = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
     const width = rect.width;
-    const percentage = clickX / width;
+    const percentage = Math.max(0, Math.min(1, clickX / width));
     audioRef.current.currentTime = percentage * audioRef.current.duration;
   };
 
-  const handleIslandInteractStart = () => setIsPressed(true);
-  const handleIslandInteractEnd = () => setIsPressed(false);
+  const handleTouchStart = (e) => {
+    if (expandedState === 'pinned') {
+      touchStartY.current = e.touches[0].clientY;
+      touchCurrentY.current = e.touches[0].clientY;
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (expandedState === 'pinned') {
+      touchCurrentY.current = e.touches[0].clientY;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (expandedState === 'pinned') {
+      const deltaY = touchCurrentY.current - touchStartY.current;
+      if (deltaY > 80) { // 80px swipe down threshold
+        setExpandedState('closed');
+      }
+    }
+  };
 
   // Determine the island state class
   let islandState = 'prompt';
@@ -193,10 +249,13 @@ const Photography = () => {
       {/* SKIPER MEDIA PLAYBAR */}
       {activeCategory === 'nature' && (
         <div 
-          className={`skiper-island ${islandState}`}
+          className={`skiper-island ${islandState} ${isLowPerformance ? 'low-performance' : ''}`}
           onClick={handleIslandClick}
           onMouseEnter={handleIslandMouseEnter}
           onMouseLeave={handleIslandMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           role="region"
           aria-label="Media Player"
         >
@@ -224,7 +283,12 @@ const Photography = () => {
                 <span className="sk-title">Solace</span>
                 <span className="sk-time">{formatTime(currentTime)} / {formatTime(duration)}</span>
               </div>
-              <div className="sk-progress" onClick={handleProgressClick}>
+              <div 
+                className="sk-progress" 
+                onClick={handleProgressClick}
+                onTouchStart={handleProgressClick}
+                onTouchMove={handleProgressClick}
+              >
                 <div className="sk-progress-fill" style={{ width: `${progress}%`, transition: 'width 0.1s linear' }}></div>
               </div>
             </div>

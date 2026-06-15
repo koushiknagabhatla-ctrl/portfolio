@@ -14,16 +14,10 @@
   overflow: hidden;
   cursor: pointer;
   z-index: 9999;
-  /* Ultimate Liquid Glass Effect */
-  background: rgba(15, 15, 15, 0.45);
-  backdrop-filter: blur(24px) saturate(200%) brightness(1.1);
-  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.1);
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.6), 
-    inset 0 1px 1px rgba(255, 255, 255, 0.15),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-    inset 0 0 20px rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Solid Black Styling */
+  background: #000000;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   /* Premium Bouncy spring transition */
   transition: width 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
               background-color 0.4s ease,
@@ -32,8 +26,8 @@
 }
 
 .skiper-island:hover {
-  background: rgba(25, 25, 25, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .skiper-island:active {
@@ -279,7 +273,12 @@
   .skiper-island {
     bottom: 20px;
   }
+  .skiper-island.prompt {
+    width: 90vw;
+  }
   .skiper-island.expanded {
     width: 90vw;
   }
 }
+
+
