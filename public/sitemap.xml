@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://koushiknagabhatla.vercel.app/</loc>
+    <loc>https://nrkportfolio.in/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://koushiknagabhatla.vercel.app/about</loc>
+    <loc>https://nrkportfolio.in/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://koushiknagabhatla.vercel.app/works</loc>
+    <loc>https://nrkportfolio.in/works</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://koushiknagabhatla.vercel.app/photography</loc>
+    <loc>https://nrkportfolio.in/photography</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://koushiknagabhatla.vercel.app/photography/all</loc>
+    <loc>https://nrkportfolio.in/photography/all</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://koushiknagabhatla.vercel.app/photography/people</loc>
+    <loc>https://nrkportfolio.in/photography/people</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://koushiknagabhatla.vercel.app/photography/bikes</loc>
+    <loc>https://nrkportfolio.in/photography/bikes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://koushiknagabhatla.vercel.app/photography/nature</loc>
+    <loc>https://nrkportfolio.in/photography/nature</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

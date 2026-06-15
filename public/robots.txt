@@ -65,4 +65,4 @@ Disallow: /
 Crawl-delay: 1
 
 # Sitemap
-Sitemap: https://koushiknagabhatla.vercel.app/sitemap.xml
+Sitemap: https://nrkportfolio.in/sitemap.xml
