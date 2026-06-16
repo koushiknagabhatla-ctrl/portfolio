@@ -29,6 +29,27 @@ const AboutPage = () => {
           }
         );
       });
+
+      // Image Parallax Effect (smooth slight moving on scroll)
+      const imageWrappers = gsap.utils.toArray('.aww-image-wrapper');
+      imageWrappers.forEach(wrapper => {
+        const img = wrapper.querySelector('.aww-image');
+        if (img) {
+          gsap.fromTo(img, 
+            { yPercent: -10 },
+            {
+              yPercent: 10,
+              ease: "none",
+              scrollTrigger: {
+                trigger: wrapper,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+              }
+            }
+          );
+        }
+      });
     }, containerRef);
 
     return () => ctx.revert();

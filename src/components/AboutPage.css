@@ -216,6 +216,8 @@
   position: absolute;
   top: 0;
   left: 0;
+  transform: scale(1.2);
+  will-change: transform;
 }
 
 /* Hero Gradient */
