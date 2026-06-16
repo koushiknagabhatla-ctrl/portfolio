@@ -1,13 +1,22 @@
-# https://www.robotstxt.org/robotstxt.html
+# =============================================================================
+# ROBOTS.TXT — Security-Hardened
+# Portfolio: https://nrkportfolio.in
+# =============================================================================
 
-# Default: Allow search engines to index all public pages
+# Default: Allow search engines to index only real user-facing pages
 User-agent: *
-Allow: /
-Allow: /about
-Allow: /works
-Allow: /photography
+Allow: /$
+Allow: /about$
+Allow: /works$
+Allow: /photography$
+Allow: /photography/all$
+Allow: /photography/people$
+Allow: /photography/bikes$
+Allow: /photography/nature$
+Allow: /sitemap.xml$
+Allow: /favicon.svg$
 
-# Block all administrative, config, and infrastructure paths
+# Block all internal / infrastructure paths
 Disallow: /api/
 Disallow: /_next/
 Disallow: /_vercel/
@@ -19,36 +28,149 @@ Disallow: /.env
 Disallow: /assets/
 Disallow: /*?*
 
-# Block common vulnerability scanner probe paths
-Disallow: /wp-admin
-Disallow: /wp-login
-Disallow: /wp-content
-Disallow: /wp-includes
-Disallow: /xmlrpc.php
-Disallow: /phpmyadmin
+# Block all administrative paths
 Disallow: /admin
 Disallow: /administrator
+Disallow: /wp-admin
+Disallow: /wp-login
+Disallow: /wp-login.php
+Disallow: /wp-content
+Disallow: /wp-includes
+Disallow: /wp-json
+Disallow: /wp-cron.php
+Disallow: /xmlrpc.php
+Disallow: /login
+Disallow: /signin
+Disallow: /signup
+Disallow: /register
+Disallow: /dashboard
+Disallow: /control
+Disallow: /manage
+Disallow: /backend
+Disallow: /cpanel
+Disallow: /panel
+Disallow: /webmail
+
+# Block database admin tools
+Disallow: /phpmyadmin
+Disallow: /phpMyAdmin
+Disallow: /pma
+Disallow: /adminer
+Disallow: /adminer.php
+Disallow: /mysql
+Disallow: /myadmin
+Disallow: /dbadmin
+Disallow: /sql
+Disallow: /pgadmin
+
+# Block configuration and setup paths
 Disallow: /config
+Disallow: /configuration
+Disallow: /settings
 Disallow: /setup
 Disallow: /install
+Disallow: /installation
+Disallow: /env
+Disallow: /environment
+
+# Block technology-revealing paths
+Disallow: /*.php$
+Disallow: /*.asp$
+Disallow: /*.aspx$
+Disallow: /*.jsp$
+Disallow: /*.cgi$
+Disallow: /cgi-bin
+Disallow: /perl
+Disallow: /python
+Disallow: /ruby
+
+# Block paths probed for sensitive files
+Disallow: /backup
+Disallow: /backups
+Disallow: /*.bak$
+Disallow: /*.old$
+Disallow: /*.orig$
+Disallow: /temp
+Disallow: /tmp
+Disallow: /cache
+Disallow: /log
+Disallow: /logs
+Disallow: /debug
+Disallow: /trace
+Disallow: /test
+Disallow: /tests
+Disallow: /dev
+Disallow: /development
+Disallow: /staging
+Disallow: /console
+
+# Block server info and status paths
+Disallow: /server-status
+Disallow: /server-info
+Disallow: /.htaccess
+Disallow: /.htpasswd
+Disallow: /.well-known/
+Disallow: /info.php
+Disallow: /phpinfo.php
+Disallow: /status
+Disallow: /health
+Disallow: /healthcheck
+
+# Block shell, command, and exploit paths
 Disallow: /shell
 Disallow: /cmd
 Disallow: /exec
 Disallow: /eval
-Disallow: /cgi-bin
-Disallow: /backup
-Disallow: /.htaccess
-Disallow: /.htpasswd
-Disallow: /server-status
-Disallow: /server-info
-Disallow: /.well-known/
-Disallow: /debug
-Disallow: /trace
-Disallow: /console
-Disallow: /login
-Disallow: /register
+Disallow: /remote
+Disallow: /exploit
+Disallow: /c99
+Disallow: /r57
+Disallow: /webshell
+Disallow: /upload
+Disallow: /uploads
+Disallow: /filemanager
 
-# Block aggressive crawlers
+# Block common CMS paths
+Disallow: /joomla
+Disallow: /drupal
+Disallow: /magento
+Disallow: /typo3
+Disallow: /craft
+Disallow: /ghost
+Disallow: /strapi
+
+# Block version control and CI paths
+Disallow: /.svn
+Disallow: /.hg
+Disallow: /.bzr
+Disallow: /.gitlab
+Disallow: /.github
+Disallow: /Jenkinsfile
+Disallow: /.circleci
+Disallow: /.travis.yml
+Disallow: /docker-compose.yml
+Disallow: /Dockerfile
+
+# Block package manager and config files
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /yarn.lock
+Disallow: /composer.json
+Disallow: /Gemfile
+Disallow: /Makefile
+Disallow: /Gruntfile
+Disallow: /Gulpfile
+Disallow: /webpack.config
+Disallow: /vite.config
+Disallow: /tsconfig
+Disallow: /.eslintrc
+Disallow: /.babelrc
+Disallow: /.npmrc
+
+# Crawl rate
+Crawl-delay: 2
+
+# Block aggressive SEO crawlers
 User-agent: AhrefsBot
 Disallow: /
 
@@ -61,8 +183,91 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-# Crawl delay for respectful bots
-Crawl-delay: 1
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+# Block AI training crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+# Block known vulnerability scanners
+User-agent: Nikto
+Disallow: /
+
+User-agent: sqlmap
+Disallow: /
+
+User-agent: Nmap
+Disallow: /
+
+User-agent: masscan
+Disallow: /
+
+User-agent: DirBuster
+Disallow: /
+
+User-agent: GoBuster
+Disallow: /
+
+User-agent: Hydra
+Disallow: /
+
+User-agent: Nessus
+Disallow: /
+
+User-agent: OpenVAS
+Disallow: /
+
+User-agent: Nuclei
+Disallow: /
+
+User-agent: WPScan
+Disallow: /
+
+User-agent: Wapiti
+Disallow: /
+
+User-agent: w3af
+Disallow: /
+
+User-agent: Arachni
+Disallow: /
+
+User-agent: Skipfish
+Disallow: /
+
+User-agent: ZAP
+Disallow: /
 
 # Sitemap
 Sitemap: https://nrkportfolio.in/sitemap.xml

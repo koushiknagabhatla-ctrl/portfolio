@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,13 +10,26 @@ import AboutPage from './components/AboutPage';
 import Photography from './components/Photography';
 import PhotographyDirectory from './components/PhotographyDirectory';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 import './index.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function AppContent() {
   const location = useLocation();
+  const navigate = useNavigate();
   const lenisRef = useRef(null);
+
+  // --- URL Sanitization: strip special characters before Routes processes them ---
+  const cleanedPath = location.pathname.replace(/[^a-zA-Z0-9/\-_]/g, '');
+  const normalizedPath = cleanedPath === '/' ? '/' : cleanedPath.replace(/\/+$/, '');
+  const isDirtyUrl = normalizedPath !== location.pathname;
+
+  useEffect(() => {
+    if (isDirtyUrl) {
+      navigate(normalizedPath, { replace: true });
+    }
+  }, [isDirtyUrl, normalizedPath, navigate]);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -54,6 +67,15 @@ function AppContent() {
     setTimeout(() => ScrollTrigger.refresh(), 100);
   }, [location.pathname]);
 
+  // If URL contains special characters, render nothing while redirect happens.
+  // This prevents the footer flash entirely — no content is painted with the dirty URL.
+  if (isDirtyUrl) {
+    return null;
+  }
+
+  const isKnownRoute = ['/', '/about', '/works', '/photography'].includes(normalizedPath)
+    || /^\/photography\/(all|people|bikes|nature)$/.test(normalizedPath);
+
   return (
     <div className="app">
       <a href="#main-content" className="skip-link">Skip to content</a>
@@ -65,9 +87,10 @@ function AppContent() {
           <Route path="/works" element={<WorksPage />} />
           <Route path="/photography" element={<PhotographyDirectory />} />
           <Route path="/photography/:category" element={<Photography />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <Footer />
+      {isKnownRoute && <Footer />}
     </div>
   );
 }

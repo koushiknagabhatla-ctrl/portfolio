@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Photography.css';
@@ -9,9 +9,13 @@ import natureAudio from '../assets/solace.mp3';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Whitelist of valid category values — reject anything else
+const VALID_CATEGORIES = new Set(['all', 'people', 'bikes', 'nature']);
+
 const Photography = () => {
   const { category } = useParams();
   const activeCategory = category || 'all';
+  const isValidCategory = VALID_CATEGORIES.has(activeCategory);
   
   const containerRef = useRef(null);
   const titleRef = useRef(null);
@@ -240,6 +244,11 @@ const Photography = () => {
     } else {
       islandState = 'collapsed';
     }
+  }
+
+  // Validate category after all hooks — redirect invalid categories
+  if (!isValidCategory) {
+    return <Navigate to="/photography" replace />;
   }
 
   return (
