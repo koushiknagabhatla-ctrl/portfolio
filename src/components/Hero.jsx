@@ -16,62 +16,60 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Ensure visibility is reset after hydration
       gsap.set([titleRef.current, textContainerRef.current, imageWrapperRef.current], { visibility: 'visible' });
 
-      const titleChars = titleRef.current.querySelectorAll('.char-reveal');
-      gsap.fromTo(titleChars,
-        { y: 80, rotateX: -90, opacity: 0 },
+      // 1. Sleek Masked Text Reveal (ref.digital style)
+      const titleWords = titleRef.current.querySelectorAll('.word-inner');
+      gsap.fromTo(titleWords,
+        { y: '120%', rotateZ: 5 },
         {
-          y: 0,
-          rotateX: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.04,
+          y: '0%',
+          rotateZ: 0,
+          duration: 1.6,
+          stagger: 0.08,
           ease: 'power4.out',
-          delay: 0.1
+          delay: 0.2
         }
       );
 
+      // 2. Fade up paragraphs smoothly
       const paragraphs = textContainerRef.current.querySelectorAll('.hero-paragraph');
       gsap.fromTo(paragraphs,
-        { y: 40, opacity: 0 },
+        { opacity: 0, y: 30 },
         {
-          y: 0,
           opacity: 1,
-          duration: 1.2,
-          stagger: 0.2,
-          ease: 'power4.out',
+          y: 0,
+          duration: 1.4,
+          stagger: 0.15,
+          ease: 'power3.out',
           delay: 0.8
         }
       );
 
-      gsap.fromTo(imageRef.current,
-        { x: 100, opacity: 0, scale: 0.9, rotate: 5 },
+      // 3. Cinematic Image Reveal (Clip Path + Scale)
+      gsap.fromTo(imageWrapperRef.current,
+        { clipPath: 'inset(100% 0% 0% 0%)' },
         {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          rotate: 0,
-          duration: 1.5,
-          ease: 'power4.out',
-          delay: 0.6
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 1.6,
+          ease: 'power4.inOut',
+          delay: 0.4
         }
       );
 
-      gsap.to(titleRef.current, {
-        y: -200,
-        opacity: 0,
-        scale: 0.95,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
+      gsap.fromTo(imageRef.current,
+        { scale: 1.3 },
+        {
+          scale: 1,
+          duration: 1.6,
+          ease: 'power4.inOut',
+          delay: 0.4
         }
-      });
+      );
 
-      gsap.to(textContainerRef.current, {
+      // Scroll Parallax Effects
+      gsap.to(titleRef.current, {
         y: -150,
         opacity: 0,
         ease: 'none',
@@ -83,9 +81,20 @@ const Hero = () => {
         }
       });
 
-      gsap.to(imageWrapperRef.current, {
-        y: -250,
+      gsap.to(textContainerRef.current, {
+        y: -100,
         opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+
+      gsap.to(imageWrapperRef.current, {
+        y: -200,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -106,21 +115,19 @@ const Hero = () => {
       <div className="container">
         <div className="hero-layout">
           <div className="hero-content">
-            <h1 className="hero-title" ref={titleRef} style={{ perspective: '800px', visibility: 'hidden' }}>
+            <h1 className="hero-title" ref={titleRef} style={{ visibility: 'hidden' }}>
               {title.split(' ').map((word, wIndex) => (
                 <span 
                   key={wIndex} 
-                  style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: '0.3em' }}
+                  className="word-mask"
+                  style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'top', paddingBottom: '0.1em', marginRight: '0.3em' }}
                 >
-                  {word.split('').map((char, cIndex) => (
-                    <span
-                      key={`${wIndex}-${cIndex}`}
-                      className="char-reveal"
-                      style={{ display: 'inline-block' }}
-                    >
-                      {char}
-                    </span>
-                  ))}
+                  <span
+                    className="word-inner"
+                    style={{ display: 'inline-block', transformOrigin: 'left bottom', willChange: 'transform' }}
+                  >
+                    {word}
+                  </span>
                 </span>
               ))}
             </h1>
