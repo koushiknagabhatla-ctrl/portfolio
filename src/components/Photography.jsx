@@ -14,6 +14,13 @@ const VALID_CATEGORIES = new Set(['all', 'people', 'bikes', 'nature']);
 
 const ProgressiveImage = ({ src, alt, isEager }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsLoaded(true);
+    }
+  }, [src]);
   
   return (
     <>
@@ -21,6 +28,7 @@ const ProgressiveImage = ({ src, alt, isEager }) => {
         <link rel="preload" as="image" href={src} fetchPriority="high" />
       )}
       <img 
+        ref={imgRef}
         src={src} 
         alt={alt}
         loading={isEager ? 'eager' : 'lazy'}
@@ -30,6 +38,7 @@ const ProgressiveImage = ({ src, alt, isEager }) => {
         height="1000"
         className={isLoaded ? 'loaded' : ''}
         onLoad={() => setIsLoaded(true)}
+        onError={() => setIsLoaded(true)}
       />
     </>
   );
