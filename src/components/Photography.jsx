@@ -12,6 +12,29 @@ gsap.registerPlugin(ScrollTrigger);
 // Whitelist of valid category values — reject anything else
 const VALID_CATEGORIES = new Set(['all', 'people', 'bikes', 'nature']);
 
+const ProgressiveImage = ({ src, alt, isEager }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  return (
+    <>
+      {isEager && (
+        <link rel="preload" as="image" href={src} fetchPriority="high" />
+      )}
+      <img 
+        src={src} 
+        alt={alt}
+        loading={isEager ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchPriority={isEager ? 'high' : 'auto'}
+        width="800"
+        height="1000"
+        className={isLoaded ? 'loaded' : ''}
+        onLoad={() => setIsLoaded(true)}
+      />
+    </>
+  );
+};
+
 const Photography = () => {
   const { category } = useParams();
   const activeCategory = category || 'all';
@@ -349,13 +372,10 @@ const Photography = () => {
                   className="masonry-item"
                   role="listitem"
                 >
-                  <img 
+                  <ProgressiveImage 
                     src={srcPath} 
                     alt={`${activeCategory} photograph ${globalIndex + 1}`}
-                    loading={globalIndex < 4 ? 'eager' : 'lazy'}
-                    decoding="async"
-                    width="800"
-                    height="1000"
+                    isEager={globalIndex < 4}
                   />
                 </div>
               );
@@ -370,13 +390,10 @@ const Photography = () => {
                   className="masonry-item"
                   role="listitem"
                 >
-                  <img 
+                  <ProgressiveImage 
                     src={srcPath} 
                     alt={`${activeCategory} photograph ${globalIndex + 1}`}
-                    loading={globalIndex < 4 ? 'eager' : 'lazy'}
-                    decoding="async"
-                    width="800"
-                    height="1000"
+                    isEager={globalIndex < 4}
                   />
                 </div>
               );

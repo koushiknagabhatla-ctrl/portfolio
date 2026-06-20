@@ -1,6 +1,6 @@
 .photography-section {
   background-color: var(--bg-color);
-  padding: 60px 0;
+  padding: 140px 0 60px;
   transition: background-color 0.8s ease;
 }
 
@@ -29,18 +29,36 @@
   margin-top: clamp(20px, 4vw, 40px);
 }
 
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
 .masonry-item {
   position: relative;
   overflow: hidden;
-  background-color: rgba(98, 7, 7, 0.05);
+  background: linear-gradient(90deg, rgba(98, 7, 7, 0.03) 25%, rgba(98, 7, 7, 0.08) 50%, rgba(98, 7, 7, 0.03) 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
   border-radius: 4px;
 }
 
 .masonry-item img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
   display: block;
   border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.04);
+  will-change: opacity, transform;
+}
+
+.masonry-item img.loaded {
+  opacity: 1;
+  transform: scale(1);
 }
 
 @media (max-width: 768px) {
