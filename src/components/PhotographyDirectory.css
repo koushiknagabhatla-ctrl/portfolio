@@ -1,6 +1,8 @@
 .photography-directory {
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
+  flex-grow: 1;
   background-color: #000000;
   color: #ffffff;
   padding: 92px clamp(20px, 8vw, 80px) 60px;

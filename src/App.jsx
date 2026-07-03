@@ -75,6 +75,20 @@ function AppContent() {
     setTimeout(() => ScrollTrigger.refresh(), 100);
   }, [location.pathname]);
 
+  const isPhotographyPage = normalizedPath.startsWith('/photography');
+
+  useEffect(() => {
+    if (isPhotographyPage) {
+      document.body.style.backgroundColor = '#000000';
+      document.documentElement.style.backgroundColor = '#000000';
+      document.body.classList.add('no-grain');
+    } else {
+      document.body.style.backgroundColor = '';
+      document.documentElement.style.backgroundColor = '';
+      document.body.classList.remove('no-grain');
+    }
+  }, [isPhotographyPage]);
+
   if (isDirtyUrl) {
     return null;
   }
@@ -83,7 +97,7 @@ function AppContent() {
   const showFooter = normalizedPath === '/';
 
   return (
-    <div className="app">
+    <div className="app" style={{ backgroundColor: isPhotographyPage ? '#000000' : undefined, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {loading && (
         <Preloader
           onComplete={() => {
@@ -94,7 +108,7 @@ function AppContent() {
       )}
       <a href="#main-content" className="skip-link">Skip to content</a>
       <Navbar />
-      <main id="main-content">
+      <main id="main-content" style={{ backgroundColor: isPhotographyPage ? '#000000' : undefined, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />

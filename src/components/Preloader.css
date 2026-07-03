@@ -4,7 +4,8 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #f4f4f4;
+  height: 100dvh;
+  background-color: var(--bg-color, #fffdf1);
   z-index: 999999;
   display: flex;
   pointer-events: none;
@@ -14,12 +15,12 @@
 
 .preloader-logo-wrapper {
   position: absolute;
-  top: clamp(20px, 4vh, 50px);
-  left: clamp(20px, 4vw, 50px);
+  top: clamp(24px, 4vh, 50px);
+  left: clamp(24px, 5vw, 50px);
 }
 
 .preloader-logo {
-  height: clamp(35px, 5vw, 60px);
+  height: clamp(32px, 5vw, 55px);
   width: auto;
   object-fit: contain;
   display: block;
@@ -27,8 +28,8 @@
 
 .preloader-counter {
   position: absolute;
-  bottom: clamp(15px, 3vh, 40px);
-  right: clamp(20px, 4vw, 50px);
+  bottom: clamp(45px, 8vh, 60px);
+  right: clamp(24px, 5vw, 60px);
   font-family: 'Pixelify Sans', monospace, sans-serif;
   font-size: clamp(4rem, 15vw, 9rem);
   font-weight: 600;
@@ -36,19 +37,20 @@
   color: #000000;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
+  z-index: 10;
 }
 
 @media (max-width: 600px) {
   .preloader-logo-wrapper {
-    top: 20px;
-    left: 20px;
+    top: 28px;
+    left: 24px;
   }
   .preloader-logo {
-    height: 32px;
+    height: 48px;
   }
   .preloader-counter {
-    bottom: 20px;
-    right: 20px;
-    font-size: 3.8rem;
+    bottom: 85px; /* Ensures number is clearly visible above mobile browser bottom address bar */
+    right: 24px;
+    font-size: 6.8rem;
   }
 }

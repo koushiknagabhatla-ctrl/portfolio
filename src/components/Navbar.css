@@ -1,15 +1,15 @@
 .navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 30px 5%;
+  padding: clamp(20px, 2.5vh, 32px) clamp(20px, 5vw, 60px);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
-  font-family: var(--font-nav);
-  transition: transform 0.3s var(--ease-out-expo), opacity 0.3s var(--ease-out-expo), color 0.4s ease;
+  background-color: transparent;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
 }
 
 .navbar.navbar-hidden {
@@ -22,69 +22,87 @@
   color: #ffffff;
 }
 
-.nav-links {
+.navbar__logo-link {
   display: flex;
-  gap: 30px;
-}
-
-.nav-links a {
-  position: relative;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
-  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: bold;
 }
 
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: currentColor;
-  transition: width 0.3s ease;
+.navbar__logo-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  letter-spacing: 0.05em;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
-  width: 100%;
+.navbar-dark-page .navbar__logo-text {
+  color: #ffffff;
 }
 
-.nav-socials {
+.navbar__logo-label {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.6rem, 0.75vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--accent-color);
+  margin-top: 2px;
+}
+
+.navbar__list {
   display: flex;
-  gap: 15px;
-  position: absolute;
-  right: 10%;
-  color: inherit;
+  gap: clamp(16px, 2.5vw, 36px);
+  list-style: none;
 }
 
-.nav-socials a {
-  display: inline-flex;
+.navbar__link {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
-.nav-socials a:hover {
-  transform: scale(1.1);
+.navbar-dark-page .navbar__link {
+  color: #ffffff;
+}
+
+.navbar__bracket {
+  color: var(--accent-color);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__link:hover .navbar__bracket {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.navbar__link:hover {
+  color: var(--accent-color);
 }
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px 5%;
+    padding: 16px 20px;
   }
-  .nav-links {
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
+  .navbar__logo-text {
+    font-size: 0.95rem;
   }
-  .nav-socials {
-    position: relative;
-    right: auto;
+  .navbar__logo-label {
+    font-size: 0.58rem;
+  }
+  .navbar__list {
+    gap: 14px;
+  }
+  .navbar__link {
+    font-size: 0.8rem;
   }
 }

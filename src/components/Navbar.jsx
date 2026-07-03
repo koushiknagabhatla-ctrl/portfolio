@@ -23,7 +23,7 @@ const Navbar = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
-          if (currentScrollY > lastScrollY.current && currentScrollY > 10) {
+          if (currentScrollY > lastScrollY.current && currentScrollY > 20) {
             setIsHidden(true);
           } else if (currentScrollY < lastScrollY.current) {
             setIsHidden(false);
@@ -47,24 +47,43 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
-  const isDarkPage = location.pathname.startsWith('/photography');
+  const isDarkPage = location.pathname.startsWith('/photography') || location.pathname.startsWith('/about');
 
   return (
-    <nav className={`navbar ${isHidden ? 'navbar-hidden' : ''} ${isDarkPage ? 'navbar-dark-page' : ''}`} ref={navRef} role="navigation" aria-label="Main navigation">
-      <div className="nav-links" role="menubar">
-        <Link to="/" role="menuitem" className={isActive('/') ? 'active' : ''}>HOME</Link>
-        <Link to="/about" role="menuitem" className={isActive('/about') ? 'active' : ''}>ABOUT</Link>
-        <Link to="/photography" role="menuitem" className={isActive('/photography') ? 'active' : ''}>PHOTOGRAPHY</Link>
+    <header className={`navbar ${isHidden ? 'navbar-hidden' : ''} ${isDarkPage ? 'navbar-dark-page' : ''}`} ref={navRef} role="navigation" aria-label="Main navigation">
+      <div className="navbar__logo">
+        <Link to="/" className="navbar__logo-link">
+          <span className="navbar__logo-text">KOUSHIK NAGABHATLA</span>
+          <span className="navbar__logo-label">CREATIVE ENGINEER & PHOTOGRAPHER</span>
+        </Link>
       </div>
-      <div className="nav-socials">
-        <a href="https://www.instagram.com/__.koushik__.7" target="_blank" rel="noopener noreferrer" aria-label="Visit Koushik on Instagram">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/koushik-nagabhatla-113a493a2" target="_blank" rel="noopener noreferrer" aria-label="Visit Koushik on LinkedIn">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-        </a>
-      </div>
-    </nav>
+
+      <nav className="navbar__nav" role="menubar">
+        <ul className="navbar__list">
+          <li className="navbar__item">
+            <Link to="/" role="menuitem" className={`navbar__link ${isActive('/') ? 'active' : ''}`}>
+              <span className="navbar__bracket">[</span>
+              <span className="navbar__link-text">Home</span>
+              <span className="navbar__bracket">]</span>
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link to="/about" role="menuitem" className={`navbar__link ${isActive('/about') ? 'active' : ''}`}>
+              <span className="navbar__bracket">[</span>
+              <span className="navbar__link-text">About</span>
+              <span className="navbar__bracket">]</span>
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link to="/photography" role="menuitem" className={`navbar__link ${isActive('/photography') ? 'active' : ''}`}>
+              <span className="navbar__bracket">[</span>
+              <span className="navbar__link-text">Photography</span>
+              <span className="navbar__bracket">]</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 };
 

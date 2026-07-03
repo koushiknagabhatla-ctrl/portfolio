@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Footer.css';
@@ -10,16 +11,16 @@ const Footer = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo('.footer-compact-content',
-        { y: 25, opacity: 0 },
+      gsap.fromTo('.kaisei-footer__title',
+        { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          ease: 'power3.out',
+          duration: 1.2,
+          ease: 'power4.out',
           scrollTrigger: {
             trigger: footerRef.current,
-            start: 'top 90%'
+            start: 'top 85%'
           }
         }
       );
@@ -29,26 +30,46 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="footer-compact" ref={footerRef} role="contentinfo">
-      <div className="container footer-compact-content">
-        <div className="footer-compact-row">
-          <div className="footer-compact-left">
-            <h3 className="footer-compact-title">Get in touch</h3>
-            <a href="mailto:koushiknagabhatla@gmail.com" className="footer-email">
-              koushiknagabhatla@gmail.com
-            </a>
+    <footer className="kaisei-footer" ref={footerRef} role="contentinfo">
+      <div className="kaisei-container kaisei-footer__wrapper">
+        <div className="kaisei-footer__head">
+          <div className="kaisei-footer__col">
+            <p className="kaisei-footer__label">[Menu]</p>
+            <ul className="kaisei-footer__list">
+              <li><Link to="/">Top</Link></li>
+              <li><a href="#works">Works</a></li>
+              <li><a href="#story">Story</a></li>
+              <li><Link to="/photography">Photography</Link></li>
+            </ul>
           </div>
 
-          <div className="footer-compact-socials">
-            <a href="https://github.com/koushiknagabhatla-ctrl" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.linkedin.com/in/koushik-nagabhatla-113a493a2" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://www.instagram.com/__.koushik__.7" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <div className="kaisei-footer__col">
+            <p className="kaisei-footer__label">[Social]</p>
+            <ul className="kaisei-footer__list">
+              <li><a href="https://github.com/koushiknagabhatla-ctrl" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/koushik-nagabhatla-113a493a2" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="https://www.instagram.com/__.koushik__.7" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            </ul>
+          </div>
+
+          <div className="kaisei-footer__col">
+            <p className="kaisei-footer__label">[Mail]</p>
+            <p><a href="mailto:koushiknagabhatla@gmail.com" className="kaisei-footer__mail">koushiknagabhatla@gmail.com</a></p>
+          </div>
+
+          <div className="kaisei-footer__col">
+            <p className="kaisei-footer__label">[Credit]</p>
+            <p className="kaisei-footer__credit">
+              Design & Development by<br />
+              <span>Koushik Nagabhatla</span>
+            </p>
           </div>
         </div>
 
-        <div className="footer-compact-bottom">
-          <span>&copy; {new Date().getFullYear()} Koushik Nagabhatla</span>
-          <span>All Rights Reserved</span>
+        <div className="kaisei-footer__bottom">
+          <h2 className="kaisei-footer__title">
+            thank you
+          </h2>
         </div>
       </div>
     </footer>

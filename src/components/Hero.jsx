@@ -1,98 +1,152 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
 import './Hero.css';
 
 import heroImg from '../assets/hero.webp';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Hero = () => {
   const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-  const textContainerRef = useRef(null);
-  const imageWrapperRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.to(titleRef.current, {
-        y: -200,
-        opacity: 0,
-        scale: 0.95,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        }
-      });
-
-      gsap.to(textContainerRef.current, {
-        y: -150,
-        opacity: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        }
-      });
-
-      gsap.to(imageWrapperRef.current, {
-        y: -250,
-        opacity: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        }
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
-
-  const title = 'HI, THIS IS KOUSHIK';
+  const storyRef = useRef(null);
 
   return (
-    <section id="home" className="section hero-section" ref={sectionRef}>
-      <div className="container">
-        <div className="hero-layout">
-          <div className="hero-content">
-            <h1 className="hero-title" ref={titleRef}>
-              {title}
+    <div className="kaisei-home-wrapper" ref={sectionRef}>
+      {/* 2. MAIN HERO SECTION */}
+      <section className="kaisei-hero">
+        <div className="kaisei-container kaisei-hero__grid">
+          <div className="kaisei-hero__header">
+            <h1 className="kaisei-hero__title">
+              KOUSHIK<br />
+              NAGABHATLA
             </h1>
+          </div>
 
-            <div className="hero-text" ref={textContainerRef}>
-              <p className="hero-paragraph">
-                I am a 4th year B.Tech student with a strong interest in software development and web technologies.
-              </p>
-              <p className="hero-paragraph">
-                I enjoy building projects that help me improve my problem solving and coding skills.
-              </p>
-              <p className="hero-paragraph">
-                I am eager to learn new technologies, gain real-world experience, and contribute to a team where I can grow as a developer.
-              </p>
+          <div className="kaisei-hero__meta-sub">
+            <p className="kaisei-hero__subtitle">
+              FRONT-END & IOT DEVELOPER<br />
+              <span className="kaisei-hero__location">Based in Hyderabad, India</span>
+            </p>
+            <div className="kaisei-hero__desc">
+              Hello, I am currently finishing my 4th year B.Tech while crafting clean, human-centered digital platforms. Rather than just writing lines of code, I focus on thoughtful architecture, responsive precision, and visual storytelling.
             </div>
           </div>
-          <div className="hero-image-wrapper" ref={imageWrapperRef}>
-            <img
-              src={heroImg}
-              alt="Koushik Nagabhatla — Developer and photographer, portrait"
-              className="hero-img"
-              width="420"
-              height="560"
-              fetchPriority="high"
-              decoding="async"
-            />
+        </div>
+
+        {/* 3. HERO BOTTOM METADATA BAR */}
+        <div className="kaisei-hero__bottom">
+          <div className="kaisei-container kaisei-hero__bottom-grid">
+            <div className="kaisei-meta__box kaisei-meta__nav">
+              <span className="kaisei-meta__label">[Index]</span>
+              <ul className="kaisei-index__list">
+                <li><span className="kaisei-num">01</span> <a href="#works">Selected Works</a></li>
+                <li><span className="kaisei-num">02</span> <a href="#story">Story & Approach</a></li>
+                <li><span className="kaisei-num">03</span> <a href="/photography">Photography</a></li>
+              </ul>
+            </div>
+
+            <div className="kaisei-meta__box kaisei-meta__action">
+              <a href="#story" className="kaisei-next__btn" aria-label="Scroll to Story Section">
+                <div className="kaisei-circle">
+                  <span className="kaisei-dot"></span>
+                </div>
+                <span className="kaisei-next__label">Explore Story ↓</span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* 4. STORYTELLING & IMAGE PLACEMENT EDITORIAL SECTION (Kaisei /about style) */}
+      <section id="story" className="kaisei-story" ref={storyRef}>
+        <div className="kaisei-container kaisei-story__grid">
+          {/* Asymmetrical Portrait Image Placement */}
+          <div className="kaisei-story__img-col">
+            <div className="kaisei-story__img-wrapper">
+              <img
+                src={heroImg}
+                alt="Koushik Nagabhatla Portrait"
+                className="kaisei-story__img"
+                width="500"
+                height="680"
+                loading="eager"
+              />
+            </div>
+            <span className="kaisei-story__img-caption">[Portrait // Hyderabad, 2026]</span>
+          </div>
+
+          {/* Giant Tabular Number Display */}
+          <div className="kaisei-story__stat-col">
+            <span className="kaisei-story__stat-label">[Academic Year]</span>
+            <div className="kaisei-story__stat-num">4<span className="kaisei-story__stat-unit">TH</span></div>
+          </div>
+
+          {/* Detailed Authentic Story Profile */}
+          <div className="kaisei-story__profile-col">
+            <h2 className="kaisei-story__section-title">info</h2>
+            <div className="kaisei-story__profile-grid">
+              <div className="kaisei-profile__item">
+                <span className="kaisei-meta__label">[Profile]</span>
+                <p className="kaisei-profile__text">
+                  I am a 4th-year B.Tech software developer and photographer based in Hyderabad. I love writing code, debugging logic, and engineering systems from scratch. Off the screen, I enjoy open highway riding, travel, and freezing fleeting moments through photography.
+                </p>
+              </div>
+
+              <div className="kaisei-profile__item">
+                <span className="kaisei-meta__label">[Tech Stack]</span>
+                <p className="kaisei-profile__text">
+                  React, JavaScript, Vite, Node.js, HTML5, CSS3, Supabase, ESP32 / Industrial IoT, Figma
+                </p>
+              </div>
+
+              <div className="kaisei-profile__item">
+                <span className="kaisei-meta__label">[Featured Works]</span>
+                <p className="kaisei-profile__text">
+                  TRAVELWISE — Smart Flight Tracking & Booking Platform<br />
+                  PIXEL FORGE — AI Creative Studio & Enhancement<br />
+                  SK JALRAKSHAK — Industrial IoT Telemetry Grid
+                </p>
+              </div>
+
+              <div className="kaisei-profile__item">
+                <span className="kaisei-meta__label">[Languages]</span>
+                <p className="kaisei-profile__text">English, Telugu, Hindi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 5. APPROACH & PHILOSOPHY SECTION */}
+        <div className="kaisei-approach">
+          <div className="kaisei-container kaisei-approach__grid">
+            <div className="kaisei-approach__head">
+              <h2 className="kaisei-approach__title">approach</h2>
+              <p className="kaisei-approach__sub">Core values guiding my engineering & creative projects</p>
+            </div>
+
+            <div className="kaisei-approach__list">
+              <div className="kaisei-approach__item">
+                <h3 className="kaisei-approach__item-title">Communication</h3>
+                <p className="kaisei-approach__item-desc">
+                  I believe exceptional software begins with transparent dialogue. Whether defining architecture or refining user experience, I value clear communication to ensure every requirement is met with precision and purpose.
+                </p>
+              </div>
+
+              <div className="kaisei-approach__item">
+                <h3 className="kaisei-approach__item-title">Precision</h3>
+                <p className="kaisei-approach__item-desc">
+                  From pixel-perfect UI rendering and buttery 60 FPS animations to low-latency IoT hardware loops, I dedicate immense care to every detail, ensuring scalable and reliable engineering.
+                </p>
+              </div>
+
+              <div className="kaisei-approach__item">
+                <h3 className="kaisei-approach__item-title">Exploration</h3>
+                <p className="kaisei-approach__item-desc">
+                  Every project presents a new frontier. Blending my background in software systems with visual photography allows me to approach problems with curiosity, artistic intuition, and modern technical rigor.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

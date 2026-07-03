@@ -123,7 +123,10 @@ function Preloader({ onComplete }) {
   return (
     <div className="preloader-container" ref={containerRef} role="status" aria-live="polite">
       <div className="preloader-logo-wrapper">
-        <img src="/porsche-logo.png" alt="Porsche" className="preloader-logo" />
+        <picture>
+          <source srcSet="/porsche-logo.webp" type="image/webp" />
+          <img src="/porsche-logo.png" alt="Porsche" className="preloader-logo" fetchPriority="high" decoding="sync" />
+        </picture>
       </div>
       <div className="preloader-counter">
         {counter}

@@ -1,91 +1,367 @@
-.hero-section {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 100px;
-  padding-bottom: 20px;
-  min-height: 55vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-layout {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: clamp(30px, 5vw, 60px);
+/* Kaisei Sadatoki Reference Theme Styles */
+.kaisei-home-wrapper {
+  background-color: var(--bg-color, #fffdf1);
+  color: var(--text-color, #1a1a1a);
+  font-family: 'Inter', sans-serif;
   width: 100%;
+  overflow-x: hidden;
+  padding-top: 80px;
 }
 
-.hero-content {
-  width: min(100%, 600px);
+.kaisei-container {
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 80px);
+}
+
+/* 2. MAIN HERO SECTION */
+.kaisei-hero {
+  position: relative;
+  min-height: calc(90vh - 120px);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  flex-shrink: 1;
-  padding-top: 10px;
+  justify-content: space-between;
+  padding-top: clamp(40px, 6vh, 80px);
 }
 
-.hero-image-wrapper {
-  flex-shrink: 0;
-  width: clamp(180px, 22vw, 300px);
+.kaisei-hero__watermark {
+  position: absolute;
+  right: clamp(10px, 4vw, 60px);
+  top: clamp(20px, 5vh, 60px);
+  font-family: var(--font-ja, 'Zen Old Mincho', serif);
+  font-size: clamp(4.5rem, 16vw, 15rem);
+  font-weight: 500;
+  color: var(--subtext-color, #e1dbc3);
+  opacity: 0.45;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 0;
+}
+
+.kaisei-hero__grid {
   position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 5vh, 60px);
+}
+
+@media (min-width: 1024px) {
+  .kaisei-hero__grid {
+    grid-template-columns: 7fr 5fr;
+    align-items: flex-start;
+  }
+}
+
+.kaisei-hero__title {
+  font-family: var(--font-heading, 'The Night Watch', serif);
+  font-size: clamp(3.5rem, 8.5vw, 8rem);
+  font-weight: normal;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--text-color, #e56a44);
+}
+
+.kaisei-hero__meta-sub {
   display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: clamp(10px, 2vh, 20px);
+}
+
+.kaisei-hero__subtitle {
+  font-size: clamp(0.95rem, 1.3vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent-color, #e56a44);
+  line-height: 1.4;
+}
+
+.kaisei-hero__location {
+  font-weight: 500;
+  color: var(--text-color, #e56a44);
+  opacity: 0.8;
+}
+
+.kaisei-hero__desc {
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--text-color, #e56a44);
+  max-width: 540px;
+}
+
+/* 3. HERO BOTTOM METADATA BAR */
+.kaisei-hero__bottom {
+  margin-top: clamp(60px, 10vh, 100px);
+  border-top: dashed 1px var(--accent-color, #e56a44);
+  padding: clamp(24px, 4vh, 40px) 0;
+}
+
+.kaisei-hero__bottom-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.kaisei-meta__box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kaisei-meta__label {
+  font-size: clamp(0.7rem, 0.8vw, 0.8rem);
+  font-weight: 600;
+  color: var(--accent-color, #e56a44);
+  letter-spacing: -0.02em;
+}
+
+.kaisei-meta__val {
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+}
+
+.kaisei-index__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kaisei-index__list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(0.9rem, 1vw, 0.98rem);
+  font-weight: 600;
+}
+
+.kaisei-num {
+  color: var(--accent-color, #e56a44);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+}
+
+.kaisei-index__list a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.kaisei-index__list a:hover {
+  color: var(--accent-color, #e56a44);
+}
+
+/* Next Button Action */
+.kaisei-next__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--text-color, #1a1a1a);
+  font-weight: 600;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.kaisei-next__btn:hover {
+  color: var(--accent-color, #e56a44);
+  transform: translateY(3px);
+}
+
+.kaisei-circle {
+  width: clamp(40px, 4vw, 50px);
+  height: clamp(40px, 4vw, 50px);
+  border-radius: 50%;
+  border: 1px solid var(--accent-color, #e56a44);
+  display: flex;
+  align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-.hero-img {
+.kaisei-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-color, #e56a44);
+}
+
+/* 4. STORYTELLING EDITORIAL SECTION */
+.kaisei-story {
+  padding: clamp(80px, 12vh, 160px) 0;
+  border-top: dashed 1px var(--accent-color, #e56a44);
+}
+
+.kaisei-story__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 1024px) {
+  .kaisei-story__grid {
+    grid-template-columns: 5fr 3fr 4fr;
+    align-items: flex-start;
+  }
+}
+
+.kaisei-story__img-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kaisei-story__img-wrapper {
   width: 100%;
-  height: auto;
-  aspect-ratio: 3/4;
+  max-width: 460px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--subtext-color, #e1dbc3);
+}
+
+.kaisei-story__img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center 20%;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (max-width: 1024px) {
-  .hero-layout {
-    flex-direction: column-reverse;
-    text-align: center;
-    gap: 30px;
-  }
-  
-  .hero-content {
-    align-items: center;
-    text-align: center;
-  }
-  
-  .hero-title, .hero-text {
-    text-align: center;
-    align-items: center;
-  }
-  
-  .hero-image-wrapper {
-    width: clamp(160px, 40vw, 260px);
+.kaisei-story__img-wrapper:hover .kaisei-story__img {
+  transform: scale(1.04);
+}
+
+.kaisei-story__img-caption {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-color, #e56a44);
+}
+
+.kaisei-story__stat-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.kaisei-story__stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-color, #e56a44);
+}
+
+.kaisei-story__stat-num {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(5rem, 13vw, 15rem);
+  line-height: 0.85;
+  font-weight: 700;
+  color: var(--text-color, #1a1a1a);
+  letter-spacing: -0.05em;
+  margin-top: 20px;
+}
+
+.kaisei-story__stat-unit {
+  font-size: clamp(1.5rem, 3.5vw, 4rem);
+  color: var(--accent-color, #e56a44);
+  vertical-align: top;
+}
+
+.kaisei-story__profile-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.kaisei-story__section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 600;
+  color: var(--accent-color, #e56a44);
+  line-height: 1;
+}
+
+.kaisei-story__profile-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.kaisei-profile__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kaisei-profile__text {
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.65;
+  color: var(--text-color, #1a1a1a);
+}
+
+/* 5. APPROACH & PHILOSOPHY */
+.kaisei-approach {
+  margin-top: clamp(80px, 12vh, 140px);
+  padding: clamp(60px, 10vh, 100px) 0;
+  border-top: dashed 1px var(--accent-color, #e56a44);
+}
+
+.kaisei-approach__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 1024px) {
+  .kaisei-approach__grid {
+    grid-template-columns: 5fr 7fr;
   }
 }
 
-.hero-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-  margin-bottom: clamp(12px, 2.5vw, 20px);
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  text-align: left;
-  line-height: 1.15;
+.kaisei-approach__head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.hero-text {
+.kaisei-approach__title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3rem, 6vw, 6.5rem);
+  font-weight: 600;
+  color: var(--accent-color, #e56a44);
+  line-height: 0.9;
+}
+
+.kaisei-approach__sub {
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+}
+
+.kaisei-approach__list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 6vh, 70px);
+}
+
+.kaisei-approach__item {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  text-align: left;
-  align-items: flex-start;
 }
 
-.hero-paragraph {
-  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-  line-height: 1.6;
-  margin: 0;
+.kaisei-approach__item-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+}
+
+.kaisei-approach__item-desc {
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--text-color, #1a1a1a);
+  opacity: 0.9;
 }
