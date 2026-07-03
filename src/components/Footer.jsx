@@ -55,13 +55,6 @@ const Footer = () => {
             <p><a href="mailto:koushiknagabhatla@gmail.com" className="kaisei-footer__mail">koushiknagabhatla@gmail.com</a></p>
           </div>
 
-          <div className="kaisei-footer__col">
-            <p className="kaisei-footer__label">[Credit]</p>
-            <p className="kaisei-footer__credit">
-              Design & Development by<br />
-              <span>Koushik Nagabhatla</span>
-            </p>
-          </div>
         </div>
 
         <div className="kaisei-footer__bottom">

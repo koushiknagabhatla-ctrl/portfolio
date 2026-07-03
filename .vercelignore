@@ -2,5 +2,11 @@ node_modules
 .git
 README.md
 .vscode
+.idea
+.agents
+.claude
+.gemini
 *.log
+.env.local
+.env.*.local
 dist

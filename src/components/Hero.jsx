@@ -130,7 +130,7 @@ const Hero = () => {
               <div className="kaisei-profile__item">
                 <span className="kaisei-meta__label">[Profile]</span>
                 <p className="kaisei-profile__text">
-                  I am a 4th-year B.Tech software developer and photographer based in Hyderabad. I love writing code, debugging logic, and engineering systems from scratch. Off the screen, I enjoy open highway riding, travel, and freezing fleeting moments through photography.
+                  Fourth-year B.Tech Computer Science student at D.N.R College of Engineering & Technology with deep hands-on experience in modern web technologies and software engineering. Passionate about building scalable full-stack applications and high-fidelity UI/UX from scratch.
                 </p>
               </div>
 
@@ -144,9 +144,9 @@ const Hero = () => {
               <div className="kaisei-profile__item">
                 <span className="kaisei-meta__label">[Featured Works]</span>
                 <p className="kaisei-profile__text">
-                  TRAVELWISE — Smart Flight Tracking & Booking Platform<br />
-                  PIXEL FORGE — AI Creative Studio & Enhancement<br />
-                  SK JALRAKSHAK — Industrial IoT Telemetry Grid
+                  TRAVELWISE — Full-Stack Flight Booking & Real-Time Tracking<br />
+                  PIXEL FORGE AI — AI Image Platform powered by Gemini API<br />
+                  SK JALRAKSHAK — Corporate Platform for IIT Delhi IoT Startup
                 </p>
               </div>
 

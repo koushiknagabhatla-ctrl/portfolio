@@ -13,24 +13,24 @@ const projects = [
   { 
     id: '01',
     name: 'TRAVELWISE', 
-    category: 'FLIGHT TRACKING PLATFORM',
-    desc: 'India\'s smart flight booking platform. Compare prices across airlines in real-time, track flights with AviationStack, and book securely with Supabase.',
+    category: 'FLIGHT BOOKING PLATFORM',
+    desc: 'Full-stack Indian flight booking platform featuring real-time flight tracking, live fare comparison, and Supabase authentication. Engineered with React, FastAPI, and Supabase.',
     image: img1,
-    url: 'https://travelwise-theta.vercel.app/' 
+    url: 'https://travelwisetheta.vercel.app/' 
   },
   { 
     id: '02',
-    name: 'PIXEL FORGE', 
-    category: 'AI CREATIVE STUDIO',
-    desc: 'An AI-powered creative studio designed for next-generation image generation and high-fidelity image enhancement.',
+    name: 'PIXEL FORGE AI', 
+    category: 'AI IMAGE PLATFORM',
+    desc: 'AI image engineering platform powered by React/Vite and a serverless FastAPI Python backend. Integrates the Google Gemini API for intelligent image processing and enhancement.',
     image: img2,
-    url: 'https://pixelforge-ai-six.vercel.app/' 
+    url: 'https://pixelforgeaisix.vercel.app/' 
   },
   { 
     id: '03',
     name: 'SK JALRAKSHAK', 
-    category: 'INDUSTRIAL IOT GRID',
-    desc: 'A revolutionary IoT-based intelligence grid providing AI-driven energy monitoring, water quality telemetry, and autonomous edge devices.',
+    category: 'IIT DELHI INCUBATED STARTUP',
+    desc: 'Corporate website independently engineered from scratch for an IIT Delhi-incubated IoT startup. Built complete UI/UX, domain & DNS configuration, Vercel deployment, and on-page SEO.',
     image: img3,
     url: 'https://www.skjal.in/' 
   }

@@ -52,9 +52,8 @@ const Navbar = () => {
   return (
     <header className={`navbar ${isHidden ? 'navbar-hidden' : ''} ${isDarkPage ? 'navbar-dark-page' : ''}`} ref={navRef} role="navigation" aria-label="Main navigation">
       <div className="navbar__logo">
-        <Link to="/" className="navbar__logo-link">
-          <span className="navbar__logo-text">KOUSHIK NAGABHATLA</span>
-          <span className="navbar__logo-label">CREATIVE ENGINEER & PHOTOGRAPHER</span>
+        <Link to="/" className="navbar__logo-link" aria-label="Home">
+          <img src="/porsche-logo.webp" alt="Porsche Crest" className="navbar__porsche-logo" width="90" height="50" />
         </Link>
       </div>
 
@@ -80,6 +79,13 @@ const Navbar = () => {
               <span className="navbar__link-text">Photography</span>
               <span className="navbar__bracket">]</span>
             </Link>
+          </li>
+          <li className="navbar__item">
+            <a href="/NAGABHATLA_RAMA_KOUSHIK_Resume.pdf" download="NAGABHATLA RAMA KOUSHIK - Resume.pdf" target="_blank" rel="noopener noreferrer" role="menuitem" className="navbar__link">
+              <span className="navbar__bracket">[</span>
+              <span className="navbar__link-text">Resume</span>
+              <span className="navbar__bracket">]</span>
+            </a>
           </li>
         </ul>
       </nav>
