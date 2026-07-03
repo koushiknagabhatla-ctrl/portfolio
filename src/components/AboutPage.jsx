@@ -64,11 +64,7 @@ const AboutPage = () => {
           <div className="aww-hero-gradient"></div>
         </div>
         <h1 className="aww-massive-title mix-blend aww-reveal">Beyond<br/>the Code.</h1>
-        <div className="aww-meta bottom-left mix-blend aww-reveal" aria-hidden="true">
-          <span>CHAPTER 00</span>
-          <span className="line-sep"></span>
-          <span>THE HUMAN BEHIND THE SCREEN</span>
-        </div>
+
       </section>
 
       <section className="aww-section text-section" aria-label="About introduction">
@@ -105,10 +101,7 @@ const AboutPage = () => {
             <div className="aww-image-wrapper portrait">
               <img className="aww-image" src="/about/ultra_5.webp" alt="The open highway" loading="lazy" decoding="async" width="800" height="1000" />
             </div>
-            <div className="aww-caption aww-reveal" aria-hidden="true">
-              <span>LOCATION: HIGHWAY</span>
-              <span>[ 01 ]</span>
-            </div>
+
           </div>
           <div className="aww-col text-col middle-align">
             <p className="aww-poetic aww-reveal">
@@ -150,16 +143,12 @@ const AboutPage = () => {
         <div className="aww-image-wrapper panoramic right-align">
           <img className="aww-image" src="/about/ultra_8.webp" alt="Raw wilderness panoramic" loading="lazy" decoding="async" width="1600" height="686" />
         </div>
-        <div className="aww-caption right-align-caption aww-reveal" aria-hidden="true">
-          <span>NATURE // UNTAMED</span>
-        </div>
+
 
         <div className="aww-image-wrapper panoramic left-align shift-down-medium">
           <img className="aww-image" src="/about/ultra_9.webp" alt="Scale and perspective" loading="lazy" decoding="async" width="1600" height="686" />
         </div>
-        <div className="aww-caption left-align-caption aww-reveal shift-down-medium" aria-hidden="true">
-          <span>PERSPECTIVE</span>
-        </div>
+
       </section>
 
       <section className="aww-section overlap-section margin-top-massive" aria-label="Overlapping photo grid">

@@ -398,12 +398,12 @@
 
 @media (max-width: 768px) {
   .kaisei-home-wrapper {
-    padding-top: 100px;
+    padding-top: 80px;
   }
   .kaisei-hero {
-    min-height: 78vh;
-    padding-top: 24px;
-    padding-bottom: 28px;
+    min-height: auto;
+    padding-top: 20px;
+    padding-bottom: 24px;
   }
   .kaisei-hero__watermark {
     display: none;
@@ -414,7 +414,7 @@
     word-break: break-word;
   }
   .kaisei-hero__footer-row {
-    margin-top: 40px;
+    margin-top: 36px;
     align-items: flex-end;
   }
   .kaisei-hero__bottom-grid {
@@ -423,7 +423,10 @@
     gap: 28px;
   }
   .kaisei-story {
-    padding: 60px 0;
+    padding: 36px 0 60px 0;
+  }
+  .kaisei-story__grid {
+    gap: 32px;
   }
   .kaisei-story__stat-num {
     font-size: clamp(4.5rem, 18vw, 9rem);
@@ -432,8 +435,8 @@
     font-size: clamp(2rem, 8vw, 3rem);
   }
   .kaisei-approach {
-    margin-top: 60px;
-    padding: 50px 0;
+    margin-top: 40px;
+    padding: 40px 0;
   }
   .kaisei-approach__title {
     font-size: clamp(2.2rem, 9vw, 4rem);

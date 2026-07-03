@@ -36,9 +36,7 @@ const Footer = () => {
           <div className="kaisei-footer__col">
             <p className="kaisei-footer__label">[Menu]</p>
             <ul className="kaisei-footer__list">
-              <li><Link to="/">Top</Link></li>
               <li><a href="#works">Works</a></li>
-              <li><a href="#story">Story</a></li>
               <li><Link to="/photography">Photography</Link></li>
             </ul>
           </div>

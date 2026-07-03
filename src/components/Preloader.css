@@ -20,7 +20,7 @@
 }
 
 .preloader-logo {
-  height: clamp(32px, 5vw, 55px);
+  height: clamp(60px, 8vw, 110px);
   width: auto;
   object-fit: contain;
   display: block;
@@ -46,7 +46,7 @@
     left: 24px;
   }
   .preloader-logo {
-    height: 48px;
+    height: 80px;
   }
   .preloader-counter {
     bottom: 85px; /* Ensures number is clearly visible above mobile browser bottom address bar */

@@ -114,7 +114,7 @@ const Hero = () => {
                 loading="eager"
               />
             </div>
-            <span className="kaisei-story__img-caption">[Portrait // Hyderabad, 2026]</span>
+
           </div>
 
           {/* Giant Tabular Number Display */}
