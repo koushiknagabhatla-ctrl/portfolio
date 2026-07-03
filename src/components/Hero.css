@@ -365,3 +365,41 @@
   color: var(--text-color, #1a1a1a);
   opacity: 0.9;
 }
+
+@media (max-width: 768px) {
+  .kaisei-home-wrapper {
+    padding-top: 100px;
+  }
+  .kaisei-hero {
+    min-height: auto;
+    padding-top: 20px;
+  }
+  .kaisei-hero__title {
+    font-size: clamp(2.8rem, 12vw, 5rem);
+    word-break: break-word;
+  }
+  .kaisei-hero__bottom-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .kaisei-story {
+    padding: 60px 0;
+  }
+  .kaisei-story__stat-num {
+    font-size: clamp(4.5rem, 18vw, 9rem);
+  }
+  .kaisei-story__section-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  .kaisei-approach {
+    margin-top: 60px;
+    padding: 50px 0;
+  }
+  .kaisei-approach__title {
+    font-size: clamp(2.2rem, 9vw, 4rem);
+  }
+  .kaisei-approach__item-title {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+}

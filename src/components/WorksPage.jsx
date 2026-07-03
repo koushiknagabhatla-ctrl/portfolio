@@ -45,12 +45,13 @@ const WorksPage = () => {
 
       items.forEach((item) => {
         const imageWrapper = item.querySelector('.awwwards-img-wrapper');
+        const img = item.querySelector('.awwwards-img');
 
-        // Subtle vertical movement on scroll without side clip-path reveal
+        // Outer wrapper subtle floating movement
         gsap.fromTo(imageWrapper,
-          { y: 30 },
+          { y: 35 },
           { 
-            y: -30, 
+            y: -35, 
             ease: "none",
             scrollTrigger: {
               trigger: item,
@@ -60,19 +61,37 @@ const WorksPage = () => {
             }
           }
         );
+
+        // Inner image deep multi-layer parallax
+        if (img) {
+          gsap.fromTo(img,
+            { yPercent: -14, scale: 1.15 },
+            {
+              yPercent: 14,
+              ease: "none",
+              scrollTrigger: {
+                trigger: item,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+              }
+            }
+          );
+        }
         
         const textElements = item.querySelectorAll('.info-reveal');
         gsap.fromTo(textElements,
-          { opacity: 0, y: 25 },
+          { opacity: 0, y: 30 },
           {
              opacity: 1,
              y: 0,
-             duration: 1,
-             stagger: 0.1,
+             duration: 1.1,
+             stagger: 0.12,
              ease: "power3.out",
              scrollTrigger: {
                trigger: item,
                start: "top 85%",
+               toggleActions: 'play none none reverse'
              }
           }
         );

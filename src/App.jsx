@@ -76,18 +76,23 @@ function AppContent() {
   }, [location.pathname]);
 
   const isPhotographyPage = normalizedPath.startsWith('/photography');
+  const isAboutPage = normalizedPath.startsWith('/about');
 
   useEffect(() => {
     if (isPhotographyPage) {
       document.body.style.backgroundColor = '#000000';
       document.documentElement.style.backgroundColor = '#000000';
-      document.body.classList.add('no-grain');
     } else {
       document.body.style.backgroundColor = '';
       document.documentElement.style.backgroundColor = '';
+    }
+
+    if (isPhotographyPage || isAboutPage) {
+      document.body.classList.add('no-grain');
+    } else {
       document.body.classList.remove('no-grain');
     }
-  }, [isPhotographyPage]);
+  }, [isPhotographyPage, isAboutPage]);
 
   if (isDirtyUrl) {
     return null;

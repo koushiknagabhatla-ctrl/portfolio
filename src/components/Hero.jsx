@@ -1,11 +1,76 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Hero.css';
 
 import heroImg from '../assets/hero.webp';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Hero = () => {
   const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const imgRef = useRef(null);
   const storyRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. Hero Title Parallax on Scroll
+      if (titleRef.current) {
+        gsap.to(titleRef.current, {
+          yPercent: -30,
+          opacity: 0.85,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
+
+      // 2. Editorial Portrait Parallax (Image moves smoothly inside wrapper)
+      if (imgRef.current) {
+        gsap.fromTo(
+          imgRef.current,
+          { yPercent: -12, scale: 1.15 },
+          {
+            yPercent: 12,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: storyRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true
+            }
+          }
+        );
+      }
+
+      // 3. Smooth Fade-up for Story & Approach items
+      const fadeItems = gsap.utils.toArray('.kaisei-profile__item, .kaisei-approach__item');
+      fadeItems.forEach((item) => {
+        gsap.fromTo(
+          item,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 88%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div className="kaisei-home-wrapper" ref={sectionRef}>
@@ -13,7 +78,7 @@ const Hero = () => {
       <section className="kaisei-hero">
         <div className="kaisei-container kaisei-hero__grid">
           <div className="kaisei-hero__header">
-            <h1 className="kaisei-hero__title">
+            <h1 className="kaisei-hero__title" ref={titleRef}>
               KOUSHIK<br />
               NAGABHATLA
             </h1>
@@ -64,6 +129,7 @@ const Hero = () => {
                 src={heroImg}
                 alt="Koushik Nagabhatla Portrait"
                 className="kaisei-story__img"
+                ref={imgRef}
                 width="500"
                 height="680"
                 loading="eager"
