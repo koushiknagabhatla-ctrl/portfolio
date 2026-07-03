@@ -14,12 +14,12 @@
 
 .preloader-logo-wrapper {
   position: absolute;
-  top: clamp(30px, 5vh, 60px);
-  left: clamp(30px, 5vw, 60px);
+  top: clamp(20px, 4vh, 50px);
+  left: clamp(20px, 4vw, 50px);
 }
 
 .preloader-logo {
-  height: clamp(45px, 6vw, 65px);
+  height: clamp(35px, 5vw, 60px);
   width: auto;
   object-fit: contain;
   display: block;
@@ -27,10 +27,10 @@
 
 .preloader-counter {
   position: absolute;
-  bottom: clamp(20px, 4vh, 50px);
-  right: clamp(30px, 5vw, 60px);
+  bottom: clamp(15px, 3vh, 40px);
+  right: clamp(20px, 4vw, 50px);
   font-family: 'Pixelify Sans', monospace, sans-serif;
-  font-size: clamp(5rem, 14vw, 10rem);
+  font-size: clamp(4rem, 15vw, 9rem);
   font-weight: 600;
   line-height: 0.85;
   color: #000000;
@@ -38,17 +38,17 @@
   font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .preloader-logo-wrapper {
-    top: 25px;
-    left: 25px;
+    top: 20px;
+    left: 20px;
   }
   .preloader-logo {
-    height: 40px;
+    height: 32px;
   }
   .preloader-counter {
-    bottom: 25px;
-    right: 25px;
-    font-size: 4.5rem;
+    bottom: 20px;
+    right: 20px;
+    font-size: 3.8rem;
   }
 }

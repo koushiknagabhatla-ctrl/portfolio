@@ -5,58 +5,123 @@ import './Preloader.css';
 function Preloader({ onComplete }) {
   const [counter, setCounter] = useState(0);
   const containerRef = useRef(null);
+  const counterValRef = useRef({ val: 0 });
 
   useEffect(() => {
-    // Lock page scrolling during loading
     document.body.style.overflow = 'hidden';
 
-    // Check motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     if (prefersReducedMotion) {
       setCounter(100);
       const timer = setTimeout(() => {
         document.body.style.overflow = '';
         if (onComplete) onComplete();
-      }, 500);
+      }, 300);
       return () => clearTimeout(timer);
     }
 
-    const counterObj = { val: 0 };
+    let isFinished = false;
+    const startTime = Date.now();
+    const minDisplayTime = 900; // Minimum duration in ms for a cinematic feel
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        document.body.style.overflow = '';
-        if (onComplete) onComplete();
-      }
-    });
+    // Function to calculate real asset loading percentage across any active page
+    const updateRealProgress = () => {
+      if (isFinished) return;
 
-    // Count up animation
-    tl.to(counterObj, {
-      val: 100,
-      duration: 2.2,
-      ease: 'power1.inOut',
-      onUpdate: () => {
-        setCounter(Math.floor(counterObj.val));
+      const allImages = Array.from(document.images);
+      // Filter out tiny tracking pixels or hidden images if any, keep real page assets
+      const relevantImages = allImages.filter(img => !img.src.includes('data:image'));
+      
+      if (relevantImages.length === 0) {
+        // If no images on current page yet, progress steadily
+        const elapsed = Date.now() - startTime;
+        const fallbackProg = Math.min(90, Math.floor((elapsed / minDisplayTime) * 100));
+        animateTo(fallbackProg);
+        return;
       }
-    })
-    // Brief hold at 100
-    .to({}, { duration: 0.3 })
-    // Slide up exit animation
-    .to(containerRef.current, {
-      yPercent: -100,
-      duration: 0.9,
-      ease: 'power3.inOut'
-    });
+
+      let loadedCount = 0;
+      relevantImages.forEach(img => {
+        if (img.complete && img.naturalHeight !== 0) {
+          loadedCount++;
+        } else if (!img._tracked) {
+          img._tracked = true;
+          img.addEventListener('load', updateRealProgress, { once: true });
+          img.addEventListener('error', updateRealProgress, { once: true });
+        }
+      });
+
+      const actualRatio = loadedCount / relevantImages.length;
+      const targetPercent = Math.min(100, Math.floor(actualRatio * 100));
+
+      animateTo(targetPercent);
+
+      // If all images loaded AND minimum time elapsed, trigger exit
+      if (loadedCount === relevantImages.length && (Date.now() - startTime >= minDisplayTime)) {
+        finishPreloader();
+      }
+    };
+
+    const animateTo = (target) => {
+      if (isFinished) return;
+      gsap.to(counterValRef.current, {
+        val: target,
+        duration: 0.4,
+        ease: 'power2.out',
+        onUpdate: () => {
+          setCounter(Math.min(100, Math.floor(counterValRef.current.val)));
+        }
+      });
+    };
+
+    const finishPreloader = () => {
+      if (isFinished) return;
+      isFinished = true;
+
+      gsap.to(counterValRef.current, {
+        val: 100,
+        duration: 0.5,
+        ease: 'power3.out',
+        onUpdate: () => {
+          setCounter(Math.min(100, Math.floor(counterValRef.current.val)));
+        },
+        onComplete: () => {
+          gsap.to(containerRef.current, {
+            yPercent: -100,
+            duration: 0.85,
+            ease: 'power4.inOut',
+            onComplete: () => {
+              document.body.style.overflow = '';
+              if (onComplete) onComplete();
+            }
+          });
+        }
+      });
+    };
+
+    // Check periodically as React child components mount and append DOM images
+    const interval = setInterval(() => {
+      updateRealProgress();
+      if (!isFinished && Date.now() - startTime >= minDisplayTime) {
+        const allImages = Array.from(document.images).filter(img => !img.src.includes('data:image'));
+        const allLoaded = allImages.every(img => img.complete);
+        if (allLoaded || Date.now() - startTime >= 4000) { // Safety max timeout 4s
+          finishPreloader();
+        }
+      }
+    }, 100);
+
+    // Initial check
+    updateRealProgress();
 
     return () => {
-      tl.kill();
+      clearInterval(interval);
       document.body.style.overflow = '';
     };
   }, [onComplete]);
 
   return (
-    <div className="preloader-container" ref={containerRef}>
+    <div className="preloader-container" ref={containerRef} role="status" aria-live="polite">
       <div className="preloader-logo-wrapper">
         <img src="/porsche-logo.png" alt="Porsche" className="preloader-logo" />
       </div>

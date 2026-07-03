@@ -1,32 +1,37 @@
 .photography-section {
-  background-color: var(--bg-color);
-  padding: 140px 0 60px;
-  transition: background-color 0.8s ease;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 92px 0 60px;
+  min-height: 100vh;
 }
 
 .text-dark {
-  color: var(--text-color);
+  color: #ffffff;
   font-family: var(--font-heading);
-  transition: color 0.8s ease;
 }
 
 .masonry-flex {
   display: flex;
-  gap: clamp(10px, 2vw, 20px);
+  gap: clamp(14px, 2vw, 24px);
   width: 100%;
-  padding: 0 clamp(20px, 5vw, 100px);
-  margin-top: 20px;
+  max-width: 1250px;
+  margin: 16px auto 0;
+  padding: 0 clamp(16px, 3vw, 40px);
 }
 
 .masonry-col {
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 2vw, 20px);
+  gap: clamp(14px, 2vw, 24px);
   flex: 1;
 }
 
 .masonry-col:nth-child(2) {
-  margin-top: clamp(20px, 4vw, 40px);
+  margin-top: clamp(20px, 3vw, 45px);
+}
+
+.masonry-col:nth-child(3) {
+  margin-top: clamp(10px, 1.5vw, 22px);
 }
 
 @keyframes shimmer {
@@ -37,22 +42,19 @@
 .masonry-item {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, rgba(98, 7, 7, 0.03) 25%, rgba(98, 7, 7, 0.08) 50%, rgba(98, 7, 7, 0.03) 75%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite linear;
-  border-radius: 4px;
+  background: #111111;
+  border-radius: 6px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .masonry-item img {
   width: 100%;
-  height: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+  height: auto;
   display: block;
-  border-radius: 4px;
+  border-radius: 6px;
   opacity: 0;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: scale(1.04);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.03);
   will-change: opacity, transform;
 }
 
@@ -64,9 +66,10 @@
 @media (max-width: 768px) {
   .masonry-flex {
     flex-direction: column;
-    padding: 0 15px;
+    padding: 0 16px;
   }
-  .masonry-col:nth-child(2) {
+  .masonry-col:nth-child(2),
+  .masonry-col:nth-child(3) {
     margin-top: 0;
   }
 }
@@ -76,17 +79,17 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-body);
-  font-size: 1.1rem;
-  color: var(--text-color);
-  opacity: 0.6;
+  font-size: 1rem;
+  color: #ffffff;
+  opacity: 0.7;
   text-decoration: none;
-  transition: color 0.8s ease, opacity 0.3s ease, transform 0.3s ease;
-  margin-bottom: 20px;
+  transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  margin-bottom: 12px;
 }
 
 .back-btn:hover {
   opacity: 1;
-  transform: translateX(-5px);
+  transform: translateX(-6px);
 }
 
 /* ==========================================================================

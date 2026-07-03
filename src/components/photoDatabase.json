@@ -1,5 +1,9 @@
 {
   "people": [
+    "/photography/hq/people_hq_1.webp",
+    "/photography/hq/people_hq_2.webp",
+    "/photography/hq/people_hq_3.webp",
+    "/photography/hq/people_hq_4.webp",
     "/photography/people_12.webp",
     "/photography/people_23.webp",
     "/photography/people_31.webp",
@@ -16,6 +20,10 @@
     "/photography/nature_39.webp"
   ],
   "bikes": [
+    "/photography/hq/bikes_hq_1.webp",
+    "/photography/hq/bikes_hq_2.webp",
+    "/photography/hq/bikes_hq_3.webp",
+    "/photography/hq/bikes_hq_4.webp",
     "/photography/bikes_1.webp",
     "/photography/bikes_2.webp",
     "/photography/bikes_3.webp",
@@ -79,6 +87,9 @@
     "/photography/bikes_11.webp"
   ],
   "nature": [
+    "/photography/hq/nature_hq_2.webp",
+    "/photography/hq/nature_hq_3.webp",
+    "/photography/hq/nature_hq_4.webp",
     "/photography/nature_0.webp",
     "/photography/nature_4.webp",
     "/photography/nature_6.webp",

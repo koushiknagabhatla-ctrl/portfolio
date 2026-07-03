@@ -34,8 +34,6 @@ const ProgressiveImage = ({ src, alt, isEager }) => {
         loading={isEager ? 'eager' : 'lazy'}
         decoding="async"
         fetchPriority={isEager ? 'high' : 'auto'}
-        width="800"
-        height="1000"
         className={isLoaded ? 'loaded' : ''}
         onLoad={() => setIsLoaded(true)}
         onError={() => setIsLoaded(true)}
@@ -165,8 +163,9 @@ const Photography = () => {
       ]
     : photoDatabase[activeCategory] || [];
 
-  const leftColumn = filteredImages.filter((_, i) => i % 2 === 0);
-  const rightColumn = filteredImages.filter((_, i) => i % 2 !== 0);
+  const col1 = filteredImages.filter((_, i) => i % 3 === 0);
+  const col2 = filteredImages.filter((_, i) => i % 3 === 1);
+  const col3 = filteredImages.filter((_, i) => i % 3 === 2);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -373,36 +372,54 @@ const Photography = () => {
 
         <div className="masonry-flex" role="list" aria-label="Photography grid">
           <div className="masonry-col">
-            {leftColumn.map((srcPath, index) => {
-              const globalIndex = index * 2;
+            {col1.map((srcPath, index) => {
+              const globalIndex = index * 3;
               return (
                 <div 
-                  key={`left-${index}`} 
+                  key={`col1-${index}`} 
                   className="masonry-item"
                   role="listitem"
                 >
                   <ProgressiveImage 
                     src={srcPath} 
                     alt={`${activeCategory} photograph ${globalIndex + 1}`}
-                    isEager={globalIndex < 4}
+                    isEager={globalIndex < 6}
                   />
                 </div>
               );
             })}
           </div>
           <div className="masonry-col">
-            {rightColumn.map((srcPath, index) => {
-              const globalIndex = index * 2 + 1;
+            {col2.map((srcPath, index) => {
+              const globalIndex = index * 3 + 1;
               return (
                 <div 
-                  key={`right-${index}`} 
+                  key={`col2-${index}`} 
                   className="masonry-item"
                   role="listitem"
                 >
                   <ProgressiveImage 
                     src={srcPath} 
                     alt={`${activeCategory} photograph ${globalIndex + 1}`}
-                    isEager={globalIndex < 4}
+                    isEager={globalIndex < 6}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          <div className="masonry-col">
+            {col3.map((srcPath, index) => {
+              const globalIndex = index * 3 + 2;
+              return (
+                <div 
+                  key={`col3-${index}`} 
+                  className="masonry-item"
+                  role="listitem"
+                >
+                  <ProgressiveImage 
+                    src={srcPath} 
+                    alt={`${activeCategory} photograph ${globalIndex + 1}`}
+                    isEager={globalIndex < 6}
                   />
                 </div>
               );

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,13 +16,19 @@ import './index.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const Home = () => (
+  <>
+    <Hero />
+    <WorksPage />
+  </>
+);
+
 function AppContent() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const lenisRef = useRef(null);
 
-  // --- URL Sanitization: strip special characters before Routes processes them ---
   const cleanedPath = location.pathname.replace(/[^a-zA-Z0-9/\-_]/g, '');
   const normalizedPath = cleanedPath === '/' ? '/' : cleanedPath.replace(/\/+$/, '');
   const isDirtyUrl = normalizedPath !== location.pathname;
@@ -69,14 +75,12 @@ function AppContent() {
     setTimeout(() => ScrollTrigger.refresh(), 100);
   }, [location.pathname]);
 
-  // If URL contains special characters, render nothing while redirect happens.
-  // This prevents the footer flash entirely — no content is painted with the dirty URL.
   if (isDirtyUrl) {
     return null;
   }
 
-  const isKnownRoute = ['/', '/about', '/works', '/photography'].includes(normalizedPath)
-    || /^\/photography\/(all|people|bikes|nature)$/.test(normalizedPath);
+  // Task 1 & 3: Footer is removed from About and Photography pages. It ONLY displays on the Home page.
+  const showFooter = normalizedPath === '/';
 
   return (
     <div className="app">
@@ -92,15 +96,15 @@ function AppContent() {
       <Navbar />
       <main id="main-content">
         <Routes>
-          <Route path="/" element={<Hero />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/works" element={<WorksPage />} />
+          <Route path="/works" element={<Navigate to="/" replace />} />
           <Route path="/photography" element={<PhotographyDirectory />} />
           <Route path="/photography/:category" element={<Photography />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {isKnownRoute && <Footer />}
+      {showFooter && <Footer />}
     </div>
   );
 }

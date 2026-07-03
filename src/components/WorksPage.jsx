@@ -13,7 +13,7 @@ const projects = [
   { 
     id: '01',
     name: 'TRAVELWISE', 
-    category: 'FLIGHT TRACKING',
+    category: 'FLIGHT TRACKING PLATFORM',
     desc: 'India\'s smart flight booking platform. Compare prices across airlines in real-time, track flights with AviationStack, and book securely with Supabase.',
     image: img1,
     url: 'https://travelwise-theta.vercel.app/' 
@@ -21,7 +21,7 @@ const projects = [
   { 
     id: '02',
     name: 'PIXEL FORGE', 
-    category: 'AI STUDIO',
+    category: 'AI CREATIVE STUDIO',
     desc: 'An AI-powered creative studio designed for next-generation image generation and high-fidelity image enhancement.',
     image: img2,
     url: 'https://pixelforge-ai-six.vercel.app/' 
@@ -29,7 +29,7 @@ const projects = [
   { 
     id: '03',
     name: 'SK JALRAKSHAK', 
-    category: 'INDUSTRIAL IOT',
+    category: 'INDUSTRIAL IOT GRID',
     desc: 'A revolutionary IoT-based intelligence grid providing AI-driven energy monitoring, water quality telemetry, and autonomous edge devices.',
     image: img3,
     url: 'https://www.skjal.in/' 
@@ -46,23 +46,11 @@ const WorksPage = () => {
       items.forEach((item) => {
         const imageWrapper = item.querySelector('.awwwards-img-wrapper');
 
-        gsap.fromTo(imageWrapper, 
-          { clipPath: "inset(0% 100% 0% 0%)" },
-          { 
-            clipPath: "inset(0% 0% 0% 0%)", 
-            ease: "power4.inOut", 
-            duration: 1.5,
-            scrollTrigger: {
-              trigger: item,
-              start: "top 80%", 
-            }
-          }
-        );
-
+        // Subtle vertical movement on scroll without side clip-path reveal
         gsap.fromTo(imageWrapper,
-          { y: 50 },
+          { y: 30 },
           { 
-            y: -50, 
+            y: -30, 
             ease: "none",
             scrollTrigger: {
               trigger: item,
@@ -75,12 +63,12 @@ const WorksPage = () => {
         
         const textElements = item.querySelectorAll('.info-reveal');
         gsap.fromTo(textElements,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 25 },
           {
              opacity: 1,
              y: 0,
              duration: 1,
-             stagger: 0.15,
+             stagger: 0.1,
              ease: "power3.out",
              scrollTrigger: {
                trigger: item,
@@ -95,11 +83,10 @@ const WorksPage = () => {
   }, []);
 
   return (
-    <div className="awwwards-master-container" ref={containerRef}>
-      
+    <section id="works" className="awwwards-master-container" ref={containerRef}>
       <div className="awwwards-header">
-        <h1 className="header-title">SELECTED WORKS</h1>
-        <p className="header-subtitle">A collection of cinematic interactive experiences.</p>
+        <h2 className="header-title">SELECTED WORKS</h2>
+        <p className="header-subtitle">A curated collection of digital platforms &amp; engineering achievements.</p>
       </div>
 
       <div className="awwwards-projects-list" role="list">
@@ -109,14 +96,14 @@ const WorksPage = () => {
               <div className="awwwards-info">
                 <div className="info-top-row">
                   <span className="project-category info-reveal">{project.id} // {project.category}</span>
-                  <h2 className="awwwards-title info-reveal">{project.name}</h2>
+                  <h3 className="awwwards-title info-reveal">{project.name}</h3>
                 </div>
                 
                 <div className="info-bottom-row">
                   <p className="project-desc info-reveal">{project.desc}</p>
                   <div className="btn-wrapper info-reveal">
                     <a href={project.url} target="_blank" rel="noopener noreferrer" className="view-btn" aria-label={`View ${project.name} project`}>
-                      VIEW PROJECT
+                      EXPLORE PROJECT
                     </a>
                   </div>
                 </div>
@@ -127,22 +114,16 @@ const WorksPage = () => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="awwwards-img-wrapper"
-                aria-label={`${project.name} screenshot`}
+                aria-label={`${project.name} live application`}
                 tabIndex="-1"
               >
-                <img src={project.image} alt={`${project.name} — ${project.category} project screenshot`} className="awwwards-img" loading="lazy" decoding="async" width="1200" height="675" />
+                <img src={project.image} alt={`${project.name} — ${project.category}`} className="awwwards-img" loading="lazy" decoding="async" width="1200" height="675" />
               </a>
-
             </div>
           </article>
         ))}
       </div>
-
-      <div className="awwwards-footer">
-        <h2>MORE TO COME.</h2>
-      </div>
-
-    </div>
+    </section>
   );
 };
 

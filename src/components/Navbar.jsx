@@ -47,12 +47,13 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
+  const isDarkPage = location.pathname.startsWith('/photography');
+
   return (
-    <nav className={`navbar ${isHidden ? 'navbar-hidden' : ''}`} ref={navRef} role="navigation" aria-label="Main navigation">
+    <nav className={`navbar ${isHidden ? 'navbar-hidden' : ''} ${isDarkPage ? 'navbar-dark-page' : ''}`} ref={navRef} role="navigation" aria-label="Main navigation">
       <div className="nav-links" role="menubar">
         <Link to="/" role="menuitem" className={isActive('/') ? 'active' : ''}>HOME</Link>
         <Link to="/about" role="menuitem" className={isActive('/about') ? 'active' : ''}>ABOUT</Link>
-        <Link to="/works" role="menuitem" className={isActive('/works') ? 'active' : ''}>WORKS</Link>
         <Link to="/photography" role="menuitem" className={isActive('/photography') ? 'active' : ''}>PHOTOGRAPHY</Link>
       </div>
       <div className="nav-socials">
