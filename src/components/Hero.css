@@ -401,12 +401,21 @@
     padding-top: 100px;
   }
   .kaisei-hero {
-    min-height: auto;
-    padding-top: 20px;
+    min-height: 78vh;
+    padding-top: 24px;
+    padding-bottom: 28px;
+  }
+  .kaisei-hero__watermark {
+    display: none;
   }
   .kaisei-hero__title {
-    font-size: clamp(2.8rem, 12vw, 5rem);
+    font-size: clamp(2.6rem, 11vw, 5rem);
+    line-height: 1.02;
     word-break: break-word;
+  }
+  .kaisei-hero__footer-row {
+    margin-top: 40px;
+    align-items: flex-end;
   }
   .kaisei-hero__bottom-grid {
     flex-direction: column;
