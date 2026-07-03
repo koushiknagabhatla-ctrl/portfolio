@@ -1,0 +1,54 @@
+.preloader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4f4f4;
+  z-index: 999999;
+  display: flex;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+.preloader-logo-wrapper {
+  position: absolute;
+  top: clamp(30px, 5vh, 60px);
+  left: clamp(30px, 5vw, 60px);
+}
+
+.preloader-logo {
+  height: clamp(45px, 6vw, 65px);
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.preloader-counter {
+  position: absolute;
+  bottom: clamp(20px, 4vh, 50px);
+  right: clamp(30px, 5vw, 60px);
+  font-family: 'Pixelify Sans', monospace, sans-serif;
+  font-size: clamp(5rem, 14vw, 10rem);
+  font-weight: 600;
+  line-height: 0.85;
+  color: #000000;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 768px) {
+  .preloader-logo-wrapper {
+    top: 25px;
+    left: 25px;
+  }
+  .preloader-logo {
+    height: 40px;
+  }
+  .preloader-counter {
+    bottom: 25px;
+    right: 25px;
+    font-size: 4.5rem;
+  }
+}

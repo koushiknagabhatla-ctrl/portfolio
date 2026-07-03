@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -11,11 +11,13 @@ import Photography from './components/Photography';
 import PhotographyDirectory from './components/PhotographyDirectory';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
+import Preloader from './components/Preloader';
 import './index.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function AppContent() {
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const lenisRef = useRef(null);
@@ -78,6 +80,14 @@ function AppContent() {
 
   return (
     <div className="app">
+      {loading && (
+        <Preloader
+          onComplete={() => {
+            setLoading(false);
+            setTimeout(() => ScrollTrigger.refresh(), 100);
+          }}
+        />
+      )}
       <a href="#main-content" className="skip-link">Skip to content</a>
       <Navbar />
       <main id="main-content">
