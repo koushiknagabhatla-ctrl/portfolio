@@ -17,78 +17,108 @@
 /* 2. MAIN HERO SECTION */
 .kaisei-hero {
   position: relative;
-  min-height: calc(90vh - 120px);
+  min-height: calc(98vh - 80px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: clamp(40px, 6vh, 80px);
+  justify-content: flex-start;
+  padding-top: clamp(180px, 28vh, 280px);
+  padding-bottom: clamp(16px, 2.5vh, 28px);
 }
 
 .kaisei-hero__watermark {
   position: absolute;
-  right: clamp(10px, 4vw, 60px);
-  top: clamp(20px, 5vh, 60px);
-  font-family: var(--font-ja, 'Zen Old Mincho', serif);
-  font-size: clamp(4.5rem, 16vw, 15rem);
+  right: clamp(10px, 2.5vw, 40px);
+  top: 33%;
+  transform: translateY(-50%);
+  font-family: 'Zen Old Mincho', 'Noto Serif JP', serif;
+  font-size: clamp(3.5rem, 8.5vw, 8.8rem);
   font-weight: 500;
-  color: var(--subtext-color, #e1dbc3);
+  color: #ebe4cf;
   opacity: 0.45;
   pointer-events: none;
   user-select: none;
-  line-height: 1;
+  line-height: 1.1;
   z-index: 0;
 }
 
 .kaisei-hero__grid {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(32px, 5vh, 60px);
-}
-
-@media (min-width: 1024px) {
-  .kaisei-hero__grid {
-    grid-template-columns: 7fr 5fr;
-    align-items: flex-start;
-  }
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .kaisei-hero__title {
-  font-family: var(--font-heading, 'The Night Watch', serif);
-  font-size: clamp(3.5rem, 8.5vw, 8rem);
+  font-family: 'The Night Watch', 'Cinzel', serif;
+  font-size: clamp(2.3rem, 5.2vw, 5.4rem);
   font-weight: normal;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
-  color: var(--text-color, #e56a44);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  color: #e56a44;
+  margin: 0;
+  width: 100%;
 }
 
-.kaisei-hero__meta-sub {
+.kaisei-hero__footer-row {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding-top: clamp(10px, 2vh, 20px);
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: auto;
 }
 
-.kaisei-hero__subtitle {
-  font-size: clamp(0.95rem, 1.3vw, 1.25rem);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--accent-color, #e56a44);
-  line-height: 1.4;
-}
-
-.kaisei-hero__location {
+.kaisei-hero__about-label {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
   font-weight: 500;
-  color: var(--text-color, #e56a44);
-  opacity: 0.8;
+  color: #e56a44;
+  margin: 0;
 }
 
-.kaisei-hero__desc {
-  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
-  line-height: 1.7;
-  color: var(--text-color, #e56a44);
-  max-width: 540px;
+.kaisei-scroll {
+  position: relative;
+  width: fit-content;
+  overflow: hidden;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.kaisei-scroll__text {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #e56a44;
+  will-change: transform;
+  animation: kaisei-scroll-down 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.kaisei-scroll__text--clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-name: kaisei-scroll-down-clone;
+}
+
+@keyframes kaisei-scroll-down {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+@keyframes kaisei-scroll-down-clone {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kaisei-scroll__text {
+    animation: none;
+  }
 }
 
 /* 3. HERO BOTTOM METADATA BAR */

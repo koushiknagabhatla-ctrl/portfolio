@@ -76,44 +76,23 @@ const Hero = () => {
     <div className="kaisei-home-wrapper" ref={sectionRef}>
       {/* 2. MAIN HERO SECTION */}
       <section className="kaisei-hero">
-        <div className="kaisei-container kaisei-hero__grid">
-          <div className="kaisei-hero__header">
-            <h1 className="kaisei-hero__title" ref={titleRef}>
-              KOUSHIK<br />
-              NAGABHATLA
-            </h1>
-          </div>
-
-          <div className="kaisei-hero__meta-sub">
-            <p className="kaisei-hero__subtitle">
-              FRONT-END & IOT DEVELOPER<br />
-              <span className="kaisei-hero__location">Based in Hyderabad, India</span>
-            </p>
-            <div className="kaisei-hero__desc">
-              Hello, I am currently finishing my 4th year B.Tech while crafting clean, human-centered digital platforms. Rather than just writing lines of code, I focus on thoughtful architecture, responsive precision, and visual storytelling.
-            </div>
-          </div>
+        <div className="kaisei-hero__watermark">
+          自己紹介
         </div>
+        <div className="kaisei-container kaisei-hero__grid">
+          <h1 className="kaisei-hero__title" ref={titleRef}>
+            I&apos;M<br />
+            FRONT-END &amp; IOT<br />
+            DEVELOPER &amp; ENGINEER
+          </h1>
 
-        {/* 3. HERO BOTTOM METADATA BAR */}
-        <div className="kaisei-hero__bottom">
-          <div className="kaisei-container kaisei-hero__bottom-grid">
-            <div className="kaisei-meta__box kaisei-meta__nav">
-              <span className="kaisei-meta__label">[Index]</span>
-              <ul className="kaisei-index__list">
-                <li><span className="kaisei-num">01</span> <a href="#works">Selected Works</a></li>
-                <li><span className="kaisei-num">02</span> <a href="#story">Story & Approach</a></li>
-                <li><span className="kaisei-num">03</span> <a href="/photography">Photography</a></li>
-              </ul>
-            </div>
-
-            <div className="kaisei-meta__box kaisei-meta__action">
-              <a href="#story" className="kaisei-next__btn" aria-label="Scroll to Story Section">
-                <div className="kaisei-circle">
-                  <span className="kaisei-dot"></span>
-                </div>
-                <span className="kaisei-next__label">Explore Story ↓</span>
-              </a>
+          <div className="kaisei-hero__footer-row">
+            <p className="kaisei-hero__about-label">
+              About me
+            </p>
+            <div className="kaisei-scroll" aria-label="Scroll">
+              <span className="kaisei-scroll__text">Scroll</span>
+              <span className="kaisei-scroll__text kaisei-scroll__text--clone" aria-hidden="true">Scroll</span>
             </div>
           </div>
         </div>
