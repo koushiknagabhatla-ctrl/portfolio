@@ -1,13 +1,8 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './WorksPage.css';
 
 import img1 from '../assets/projects/project1.webp';
 import img2 from '../assets/projects/project2.webp';
 import img3 from '../assets/projects/project3.webp';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -18,6 +13,8 @@ const projects = [
     stack: 'React · FastAPI · Supabase',
     role: 'Design & Development',
     image: img1,
+    imageWidth: 1200,
+    imageHeight: 597,
     url: 'https://travelwisetheta.vercel.app/'
   },
   {
@@ -28,6 +25,8 @@ const projects = [
     stack: 'React · Vite · Gemini API',
     role: 'Design & Development',
     image: img2,
+    imageWidth: 1200,
+    imageHeight: 603,
     url: 'https://pixelforgeaisix.vercel.app/'
   },
   {
@@ -38,60 +37,15 @@ const projects = [
     stack: 'React · Vercel · SEO',
     role: 'Design & Development',
     image: img3,
+    imageWidth: 1200,
+    imageHeight: 597,
     url: 'https://www.skjal.in/'
   }
 ];
 
 const WorksPage = () => {
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray('.work-item');
-
-      items.forEach((item) => {
-        // Inner image parallax: img is 120% of its frame, slides up on scroll
-        const img = item.querySelector('.work-item__img img');
-        if (img) {
-          gsap.fromTo(img,
-            { yPercent: 0 },
-            {
-              yPercent: -16,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: item.querySelector('.work-item__img'),
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: true
-              }
-            }
-          );
-        }
-
-        const textElements = item.querySelectorAll('.info-reveal');
-        gsap.fromTo(textElements,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.1,
-            stagger: 0.12,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        );
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="works" className="awwwards-master-container" ref={containerRef}>
+    <section id="works" className="awwwards-master-container">
       <div className="awwwards-header">
         <h2 className="header-title">SELECTED WORKS</h2>
         <p className="header-subtitle">A curated collection of digital platforms &amp; engineering achievements.</p>
@@ -101,11 +55,11 @@ const WorksPage = () => {
         {projects.map((project) => (
           <article className="work-item" key={project.id} role="listitem">
             <div className="work-item__info">
-              <span className="work-item__category info-reveal">{project.id} // {project.category}</span>
-              <h3 className="work-item__title info-reveal">{project.name}</h3>
-              <p className="work-item__desc info-reveal">{project.desc}</p>
+              <span className="work-item__category">{project.id} // {project.category}</span>
+              <h3 className="work-item__title">{project.name}</h3>
+              <p className="work-item__desc">{project.desc}</p>
 
-              <div className="work-item__detail info-reveal">
+              <div className="work-item__detail">
                 <div>
                   <span>Stack</span>
                   <p>{project.stack}</p>
@@ -117,7 +71,7 @@ const WorksPage = () => {
               </div>
 
               <a
-                className="work-item__link info-reveal"
+                className="work-item__link"
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -138,7 +92,7 @@ const WorksPage = () => {
               aria-label={`${project.name} live application`}
               tabIndex="-1"
             >
-              <img src={project.image} alt={`${project.name} — ${project.category}`} loading="lazy" decoding="async" width="1200" height="675" />
+              <img src={project.image} alt={`${project.name} — ${project.category}`} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} />
             </a>
           </article>
         ))}
