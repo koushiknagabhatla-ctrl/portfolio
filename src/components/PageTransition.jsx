@@ -7,11 +7,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Timings replicated from the reference implementation (Taxi.js desktop
 // transition): new page rises from 100vh at scale 0.8 while the old page
-// drifts up -50vh and dims, both over 1.4s expo.inOut. Below 1100px the
-// reference falls back to a sequential 0.4s crossfade.
+// drifts up -50vh and dims, both over 1.4s expo.inOut. Used on all viewport
+// sizes — the reference's mobile crossfade was too subtle to register.
 const CARD_DURATION = 1.4;
 const CARD_EASE = 'expo.inOut';
-const FADE_DURATION = 0.4;
 
 const isDarkPath = (pathname) =>
   pathname.startsWith('/photography') || pathname.startsWith('/about');
@@ -114,47 +113,28 @@ function PageTransition({ location, lenisRef, children }) {
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
 
-    const isDesktop = window.innerWidth > 1100;
-
-    if (isDesktop) {
-      gsap.set(page, {
-        y: '100vh',
-        scale: 0.8,
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        zIndex: 600,
-      });
-      gsap.to(overlay, {
-        y: '-50vh',
-        opacity: 0.8,
-        duration: CARD_DURATION,
-        ease: CARD_EASE,
-      });
-      gsap.to(page, {
-        y: '0vh',
-        scale: 1,
-        duration: CARD_DURATION,
-        ease: CARD_EASE,
-        onComplete: finishNow,
-      });
-    } else {
-      gsap.set(page, { opacity: 0 });
-      gsap.to(overlay, {
-        opacity: 0,
-        duration: FADE_DURATION,
-        onComplete: () => {
-          removeOverlay();
-          gsap.to(page, {
-            opacity: 1,
-            duration: FADE_DURATION,
-            ease: 'power2.out',
-            onComplete: finishNow,
-          });
-        },
-      });
-    }
+    gsap.set(page, {
+      y: '100vh',
+      scale: 0.8,
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      zIndex: 600,
+    });
+    gsap.to(overlay, {
+      y: '-50vh',
+      opacity: 0.8,
+      duration: CARD_DURATION,
+      ease: CARD_EASE,
+    });
+    gsap.to(page, {
+      y: '0vh',
+      scale: 1,
+      duration: CARD_DURATION,
+      ease: CARD_EASE,
+      onComplete: finishNow,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayedLocation]);
 

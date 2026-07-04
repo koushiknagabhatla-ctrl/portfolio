@@ -44,7 +44,7 @@
 
 .kaisei-hero__grid {
   position: relative;
-  z-index: 1;
+  z-index: 30;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -67,12 +67,12 @@
 }
 
 /* Below 600px the navbar links stack at the top-left — drop the crest
-   beneath them so they never collide. */
+   just beneath them, aligned to the same 20px left edge as the nav. */
 @media (max-width: 600px) {
   .kaisei-hero__crest {
-    top: 64px;
+    top: 52px;
     left: 20px;
-    height: 48px;
+    height: 44px;
   }
 }
 
@@ -327,7 +327,8 @@
   }
   .kaisei-hero {
     min-height: auto;
-    padding-top: 20px;
+    /* clears the absolutely-positioned crest pinned near the top edge */
+    padding-top: 76px;
     padding-bottom: 24px;
   }
   .kaisei-hero__watermark {
