@@ -51,13 +51,7 @@ const Navbar = () => {
 
   return (
     <header className={`navbar ${isHidden ? 'navbar-hidden' : ''} ${isDarkPage ? 'navbar-dark-page' : ''}`} ref={navRef}>
-      <div className="navbar__logo">
-        {location.pathname === '/' && (
-          <Link to="/" className="navbar__logo-link" aria-label="Home">
-            <img src="/porsche-logo.webp" alt="Porsche Crest" className="navbar__porsche-logo" width="90" height="50" />
-          </Link>
-        )}
-      </div>
+      <div className="navbar__logo"></div>
 
       <nav className="navbar__nav" aria-label="Main navigation">
         <ul className="navbar__list">

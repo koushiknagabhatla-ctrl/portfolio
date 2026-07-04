@@ -1,13 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Photography.css';
 import './Skiper.css';
 import photoDatabase from '../data/photoDatabase.json';
 import natureAudio from '../assets/solace.mp3';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Whitelist of valid category values — reject anything else
 const VALID_CATEGORIES = new Set(['all', 'people', 'bikes', 'nature']);
@@ -50,7 +46,6 @@ const Photography = () => {
   const isValidCategory = VALID_CATEGORIES.has(activeCategory);
   
   const containerRef = useRef(null);
-  const titleRef = useRef(null);
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
@@ -173,23 +168,6 @@ const Photography = () => {
     columns[shortest].push({ ...image, index });
     columnHeights[shortest] += image.height / image.width;
   });
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const titleChars = titleRef.current.querySelectorAll('.char-reveal');
-      if (titleChars.length) {
-        gsap.fromTo(titleChars,
-          { y: 50, rotateX: -90, opacity: 0 },
-          {
-            y: 0, rotateX: 0, opacity: 1,
-            duration: 1, stagger: 0.03, ease: 'power4.out',
-            delay: 0.2
-          }
-        );
-      }
-    }, containerRef);
-    return () => ctx.revert();
-  }, [activeCategory]); 
 
   const handleIslandClick = () => {
     if (!hasStarted) {
@@ -363,16 +341,8 @@ const Photography = () => {
           Back to Directory
         </Link>
 
-        <h1 className="section-title text-dark" ref={titleRef} style={{ perspective: '600px', marginTop: '30px' }}>
-          {activeCategory.toUpperCase().split('').map((char, cIndex) => (
-            <span
-              key={cIndex}
-              className="char-reveal"
-              style={{ display: 'inline-block' }}
-            >
-              {char}
-            </span>
-          ))}
+        <h1 className="section-title text-dark" style={{ marginTop: '30px' }}>
+          {activeCategory.toUpperCase()}
         </h1>
 
         <div className="masonry-flex" role="list" aria-label="Photography grid">

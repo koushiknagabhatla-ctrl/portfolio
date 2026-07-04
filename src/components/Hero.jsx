@@ -48,25 +48,6 @@ const Hero = () => {
         );
       }
 
-      // 3. Smooth Fade-up for Story & Approach items
-      const fadeItems = gsap.utils.toArray('.kaisei-profile__item, .kaisei-approach__item');
-      fadeItems.forEach((item) => {
-        gsap.fromTo(
-          item,
-          { y: 50, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 88%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        );
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -74,6 +55,14 @@ const Hero = () => {
 
   return (
     <div className="kaisei-home-wrapper" ref={sectionRef}>
+      <img
+        src="/porsche-logo.webp"
+        alt="Porsche crest"
+        className="kaisei-hero__crest"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+      />
       {/* 2. MAIN HERO SECTION */}
       <section className="kaisei-hero">
         <div className="kaisei-hero__watermark">

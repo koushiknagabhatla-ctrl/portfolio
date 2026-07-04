@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 import Preloader from './components/Preloader';
 import GrainOverlay from './components/GrainOverlay';
+import PageTransition from './components/PageTransition';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,7 +67,14 @@ function AppContent() {
       lenisRef.current.scrollTo(0, { immediate: true });
     }
     window.scrollTo(0, 0);
-    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 100);
+    const refreshTimer = setTimeout(() => {
+      // While a page transition is running the route container is fixed and
+      // transformed — measuring now would cache wrong ScrollTrigger
+      // positions. PageTransition refreshes when the animation settles.
+      if (!document.documentElement.classList.contains('page-transitioning')) {
+        ScrollTrigger.refresh();
+      }
+    }, 100);
     return () => clearTimeout(refreshTimer);
   }, [location.pathname]);
 
@@ -87,8 +95,6 @@ function AppContent() {
     return null;
   }
 
-  const showFooter = normalizedPath === '/';
-
   return (
     <div className="app" style={{ backgroundColor: isPhotographyPage ? '#000000' : undefined, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {loading && (
@@ -102,17 +108,26 @@ function AppContent() {
       <a href="#main-content" className="skip-link">Skip to content</a>
       {!isPhotographyPage && !isAboutPage && <GrainOverlay />}
       <Navbar />
-      <main id="main-content" style={{ backgroundColor: isPhotographyPage ? '#000000' : undefined, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/works" element={<Navigate to="/" replace />} />
-          <Route path="/photography" element={<PhotographyDirectory />} />
-          <Route path="/photography/:category" element={<Photography />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      {showFooter && <Footer />}
+      <PageTransition location={location} lenisRef={lenisRef}>
+        {(displayedLocation) => {
+          const displayedIsPhotography = displayedLocation.pathname.startsWith('/photography');
+          return (
+            <>
+              <main id="main-content" style={{ backgroundColor: displayedIsPhotography ? '#000000' : undefined, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <Routes location={displayedLocation}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/works" element={<Navigate to="/" replace />} />
+                  <Route path="/photography" element={<PhotographyDirectory />} />
+                  <Route path="/photography/:category" element={<Photography />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+              {displayedLocation.pathname === '/' && <Footer />}
+            </>
+          );
+        }}
+      </PageTransition>
     </div>
   );
 }

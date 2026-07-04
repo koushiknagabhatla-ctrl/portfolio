@@ -1,36 +1,9 @@
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Footer.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Footer = () => {
-  const footerRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.kaisei-footer__title',
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: 'power4.out',
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: 'top 85%'
-          }
-        }
-      );
-    }, footerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <footer className="kaisei-footer" ref={footerRef} role="contentinfo">
+    <footer className="kaisei-footer" role="contentinfo">
       <div className="kaisei-container kaisei-footer__wrapper">
         <div className="kaisei-footer__head">
           <div className="kaisei-footer__col">

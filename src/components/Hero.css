@@ -6,6 +6,7 @@
   width: 100%;
   overflow-x: hidden;
   padding-top: 80px;
+  position: relative;
 }
 
 .kaisei-container {
@@ -50,6 +51,29 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
+}
+
+/* Pinned near the preloader logo's top-left spot (nudged slightly higher),
+   so the morph reads as the logo settling into its corner while the panel
+   lifts away. */
+.kaisei-hero__crest {
+  position: absolute;
+  top: clamp(14px, 2.2vh, 28px);
+  left: clamp(24px, 5vw, 50px);
+  height: clamp(48px, 5vw, 76px);
+  width: auto;
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* Below 600px the navbar links stack at the top-left — drop the crest
+   beneath them so they never collide. */
+@media (max-width: 600px) {
+  .kaisei-hero__crest {
+    top: 64px;
+    left: 20px;
+    height: 48px;
+  }
 }
 
 .kaisei-hero__title {

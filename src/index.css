@@ -89,14 +89,6 @@ button:focus-visible {
   width: 0;
 }
 
-/* Animated Character Reveals */
-.char-reveal {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(80px) rotateX(-90deg);
-  transform-origin: center bottom;
-}
-
 /* Skip to content for screen readers */
 .skip-link {
   position: absolute;
@@ -121,10 +113,5 @@ button:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .char-reveal {
-    opacity: 1;
-    transform: none;
   }
 }

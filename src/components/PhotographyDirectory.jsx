@@ -1,6 +1,4 @@
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import gsap from 'gsap';
 import './PhotographyDirectory.css';
 
 const categories = [
@@ -11,26 +9,8 @@ const categories = [
 ];
 
 const PhotographyDirectory = () => {
-  const containerRef = useRef(null);
-  
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.directory-header', 
-        { opacity: 0, y: -20 }, 
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
-      );
-      
-      gsap.fromTo('.directory-list-item',
-        { opacity: 0, x: -30 },
-        { opacity: 1, x: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.3 }
-      );
-    }, containerRef);
-    
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div className="photography-directory" ref={containerRef}>
+    <div className="photography-directory">
       <div className="directory-header">
         <h1 className="directory-title">My Photography</h1>
         <p className="directory-subtitle">Gear → Sony A6600, 50mm 1.8 OSS Lens</p>

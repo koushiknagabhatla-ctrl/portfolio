@@ -13,42 +13,47 @@ const AboutPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const texts = gsap.utils.toArray('.aww-reveal');
-      texts.forEach(text => {
-        gsap.fromTo(text, 
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1, 
-            y: 0,
-            duration: 1.5,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: text,
-              start: "top 85%",
-            }
-          }
-        );
-      });
-
       // Image Parallax Effect (smooth slight moving on scroll)
       const imageWrappers = gsap.utils.toArray('.aww-image-wrapper');
       imageWrappers.forEach(wrapper => {
         const img = wrapper.querySelector('.aww-image');
-        if (img) {
-          gsap.fromTo(img, 
-            { yPercent: -10 },
+        if (!img) return;
+
+        // The hero sits at the top of the page, already in view at scroll 0.
+        // Its parallax must start exactly at the image's natural position
+        // (yPercent 0 at progress 0) — a -10 start would render the photo
+        // shifted up on mount and snap down on the first ScrollTrigger
+        // refresh after a page transition.
+        if (wrapper.closest('.hero-section')) {
+          gsap.fromTo(img,
+            { yPercent: 0 },
             {
               yPercent: 10,
               ease: "none",
               scrollTrigger: {
                 trigger: wrapper,
-                start: "top bottom",
+                start: "top top",
                 end: "bottom top",
                 scrub: true
               }
             }
           );
+          return;
         }
+
+        gsap.fromTo(img,
+          { yPercent: -10 },
+          {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrapper,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true
+            }
+          }
+        );
       });
     }, containerRef);
 
@@ -63,7 +68,7 @@ const AboutPage = () => {
           <img className="aww-image" src={heroBg} alt="Koushik Nagabhatla — Beyond the Code" loading="eager" decoding="async" fetchPriority="high" width="1920" height="1080" />
           <div className="aww-hero-gradient"></div>
         </div>
-        <h1 className="aww-massive-title mix-blend aww-reveal">Beyond<br/>the Code.</h1>
+        <h1 className="aww-massive-title mix-blend">Beyond<br/>the Code.</h1>
         <div className="kaisei-scroll aww-hero-scroll" aria-label="Scroll">
           <span className="kaisei-scroll__text">Scroll</span>
           <span className="kaisei-scroll__text kaisei-scroll__text--clone" aria-hidden="true">Scroll</span>
@@ -74,10 +79,10 @@ const AboutPage = () => {
         <div className="aww-grid">
           <div className="aww-col empty-col"></div>
           <div className="aww-col text-col">
-            <p className="aww-poetic aww-reveal">
+            <p className="aww-poetic">
               Most days, you'll find me behind a screen. 
             </p>
-            <p className="aww-poetic aww-reveal">
+            <p className="aww-poetic">
               Writing code. Debugging logic. Building systems from absolute scratch. I love the silence of the process, the architecture of thought. It's a world where absolute chaos is engineered into perfect order.
             </p>
           </div>
@@ -107,10 +112,10 @@ const AboutPage = () => {
 
           </div>
           <div className="aww-col text-col middle-align">
-            <p className="aww-poetic aww-reveal">
+            <p className="aww-poetic">
               But the moment I close my laptop, I need the exact opposite. 
             </p>
-            <p className="aww-poetic aww-reveal">
+            <p className="aww-poetic">
               I need the roar of a bike engine. I need the cold wind hitting my chest. I need the absolute, undeniable freedom of the open road, where the only algorithm is the throttle and the horizon.
             </p>
           </div>
@@ -121,16 +126,16 @@ const AboutPage = () => {
         <div className="aww-image-wrapper full-bleed cinematic-height">
           <img className="aww-image" src="/about/ultra_6.webp" alt="Bike ride perspective" loading="lazy" decoding="async" width="1920" height="900" />
         </div>
-        <h2 className="aww-massive-title centered mix-blend aww-reveal">The Horizon.</h2>
+        <h2 className="aww-massive-title centered mix-blend">The Horizon.</h2>
       </section>
 
       <section className="aww-section text-section margin-top-massive" aria-label="Photography and travel">
         <div className="aww-grid">
           <div className="aww-col text-col">
-            <p className="aww-poetic aww-reveal">
+            <p className="aww-poetic">
               I love to travel because it strips away the noise. It reminds me that the world is massive, chaotic, and unimaginably beautiful.
             </p>
-            <p className="aww-poetic aww-reveal">
+            <p className="aww-poetic">
               Photography isn't just a hobby for me. It's how I freeze those fleeting seconds. It's how I remember the places, the light, and the shadows that made me feel alive.
             </p>
           </div>
@@ -166,7 +171,7 @@ const AboutPage = () => {
         <div className="aww-image-wrapper full-bleed" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img className="aww-image" src={outroBg} alt="Conclusion — looking forward" loading="lazy" decoding="async" width="1920" height="1080" />
           <div className="aww-hero-gradient"></div>
-          <h2 className="aww-massive-title centered mix-blend aww-reveal" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', lineHeight: '1.1', width: '90%', paddingBottom: '0.2em' }}>Let's build<br/>something beautiful.</h2>
+          <h2 className="aww-massive-title centered mix-blend" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', lineHeight: '1.1', width: '90%', paddingBottom: '0.2em' }}>Let's build<br/>something beautiful.</h2>
         </div>
       </section>
 

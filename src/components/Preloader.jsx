@@ -7,6 +7,7 @@ function Preloader({ onComplete }) {
     () => (window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 100 : 0)
   );
   const containerRef = useRef(null);
+  const logoRef = useRef(null);
   const counterValRef = useRef({ val: 0 });
 
   useEffect(() => {
@@ -25,6 +26,7 @@ function Preloader({ onComplete }) {
     }
 
     let isFinished = false;
+    let morphStarted = false;
     const startTime = Date.now();
     const minDisplayTime = 900; // Minimum duration in ms for a cinematic feel
     const counterVal = counterValRef.current;
@@ -79,6 +81,59 @@ function Preloader({ onComplete }) {
       });
     };
 
+    // FLIP morph: instead of riding up with the panel, the preloader logo
+    // detaches into a fixed clone and flies/scales into the hero crest slot
+    // (shared-element morph, à la PowerPoint Morph). Falls back to the plain
+    // slide-up when the hero crest isn't on the page (non-home first loads).
+    // Returns true when the morph started, so the caller can keep scroll
+    // locked until the clone lands on the in-flow crest.
+    const morphLogoToHeroCrest = () => {
+      const logoEl = logoRef.current;
+      const crest = document.querySelector('.kaisei-hero__crest');
+      if (!logoEl || !crest) return false;
+
+      const from = logoEl.getBoundingClientRect();
+      const to = crest.getBoundingClientRect();
+      if (!from.width || !from.height || !to.width || !to.height) return false;
+
+      // currentSrc: the <picture> serves the webp — a naive clone of the <img>
+      // would point at the png fallback and could flash while it fetches.
+      const clone = document.createElement('img');
+      clone.src = logoEl.currentSrc || logoEl.src;
+      clone.alt = '';
+      clone.setAttribute('aria-hidden', 'true');
+      Object.assign(clone.style, {
+        position: 'fixed',
+        top: `${from.top}px`,
+        left: `${from.left}px`,
+        width: `${from.width}px`,
+        height: `${from.height}px`,
+        margin: '0',
+        zIndex: '1000000',
+        pointerEvents: 'none',
+        willChange: 'transform',
+        transformOrigin: 'top left',
+      });
+      document.body.appendChild(clone);
+      logoEl.style.visibility = 'hidden';
+      crest.style.visibility = 'hidden';
+
+      gsap.to(clone, {
+        x: to.left - from.left,
+        y: to.top - from.top,
+        scaleX: to.width / from.width,
+        scaleY: to.height / from.height,
+        duration: 1.1,
+        ease: 'power4.inOut',
+        onComplete: () => {
+          crest.style.visibility = '';
+          clone.remove();
+          document.body.style.overflow = '';
+        },
+      });
+      return true;
+    };
+
     const finishPreloader = () => {
       if (isFinished) return;
       isFinished = true;
@@ -91,12 +146,15 @@ function Preloader({ onComplete }) {
           setCounter(Math.min(100, Math.floor(counterVal.val)));
         },
         onComplete: () => {
+          // The crest is in normal document flow — hold the scroll lock until
+          // the clone lands, or an early scroll would strand it mid-flight.
+          morphStarted = morphLogoToHeroCrest();
           gsap.to(containerRef.current, {
             yPercent: -100,
             duration: 0.85,
             ease: 'power4.inOut',
             onComplete: () => {
-              document.body.style.overflow = '';
+              if (!morphStarted) document.body.style.overflow = '';
               if (onComplete) onComplete();
             }
           });
@@ -122,7 +180,9 @@ function Preloader({ onComplete }) {
     return () => {
       clearInterval(interval);
       gsap.killTweensOf(counterVal);
-      document.body.style.overflow = '';
+      // When the morph is running, its onComplete owns the scroll unlock —
+      // this cleanup fires on unmount at 0.85s, before the clone lands.
+      if (!morphStarted) document.body.style.overflow = '';
     };
   }, [onComplete]);
 
@@ -131,7 +191,7 @@ function Preloader({ onComplete }) {
       <div className="preloader-logo-wrapper">
         <picture>
           <source srcSet="/porsche-logo.webp" type="image/webp" />
-          <img src="/porsche-logo.png" alt="Porsche" className="preloader-logo" fetchPriority="high" decoding="sync" />
+          <img src="/porsche-logo.png" alt="Porsche" className="preloader-logo" ref={logoRef} fetchPriority="high" decoding="sync" />
         </picture>
       </div>
       <div className="preloader-counter">
