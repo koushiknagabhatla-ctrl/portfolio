@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Whitelist of valid category values — reject anything else
 const VALID_CATEGORIES = new Set(['all', 'people', 'bikes', 'nature']);
 
-const ProgressiveImage = ({ src, alt, isEager }) => {
+const ProgressiveImage = ({ src, alt, width, height, isEager }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const imgRef = useRef(null);
 
@@ -21,16 +21,18 @@ const ProgressiveImage = ({ src, alt, isEager }) => {
       setIsLoaded(true);
     }
   }, [src]);
-  
+
   return (
     <>
       {isEager && (
         <link rel="preload" as="image" href={src} fetchPriority="high" />
       )}
-      <img 
+      <img
         ref={imgRef}
-        src={src} 
+        src={src}
         alt={alt}
+        width={width}
+        height={height}
         loading={isEager ? 'eager' : 'lazy'}
         decoding="async"
         fetchPriority={isEager ? 'high' : 'auto'}
@@ -152,7 +154,7 @@ const Photography = () => {
     };
   }, [isPlaying, activeCategory]);
 
-  const filteredImages = activeCategory === 'all' 
+  const filteredImages = activeCategory === 'all'
     ? [
         ...(photoDatabase.people || []),
         ...(photoDatabase.bikes || []),
@@ -160,9 +162,17 @@ const Photography = () => {
       ]
     : photoDatabase[activeCategory] || [];
 
-  const col1 = filteredImages.filter((_, i) => i % 3 === 0);
-  const col2 = filteredImages.filter((_, i) => i % 3 === 1);
-  const col3 = filteredImages.filter((_, i) => i % 3 === 2);
+  // Height-balanced masonry: each image joins the currently shortest column,
+  // so all three columns end at roughly the same height
+  const columns = [[], [], []];
+  const columnHeights = [0, 0, 0];
+  filteredImages.forEach((image, index) => {
+    let shortest = 0;
+    if (columnHeights[1] < columnHeights[shortest]) shortest = 1;
+    if (columnHeights[2] < columnHeights[shortest]) shortest = 2;
+    columns[shortest].push({ ...image, index });
+    columnHeights[shortest] += image.height / image.width;
+  });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -303,14 +313,14 @@ const Photography = () => {
           {/* Collapsed View */}
           <div className="sk-collapsed">
             <div className={`sk-collapsed-art ${!isPlaying ? 'paused' : ''}`}>
-              <img src={filteredImages[0]} alt="Playing" style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
+              <img src={filteredImages[0]?.src} alt="Playing" style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
             </div>
           </div>
           
           {/* Expanded View */}
           <div className="sk-expanded">
             <div className="sk-art">
-              <img src={filteredImages[0]} alt="Album Art" className={isPlaying ? 'spinning' : ''} />
+              <img src={filteredImages[0]?.src} alt="Album Art" className={isPlaying ? 'spinning' : ''} />
             </div>
             
             <div className="sk-details">
@@ -366,60 +376,21 @@ const Photography = () => {
         </h1>
 
         <div className="masonry-flex" role="list" aria-label="Photography grid">
-          <div className="masonry-col">
-            {col1.map((srcPath, index) => {
-              const globalIndex = index * 3;
-              return (
-                <div 
-                  key={`col1-${index}`} 
-                  className="masonry-item"
-                  role="listitem"
-                >
-                  <ProgressiveImage 
-                    src={srcPath} 
-                    alt={`${activeCategory} photograph ${globalIndex + 1}`}
-                    isEager={globalIndex < 6}
+          {columns.map((column, colIndex) => (
+            <div className="masonry-col" key={colIndex}>
+              {column.map((image) => (
+                <div key={image.src} className="masonry-item" role="listitem">
+                  <ProgressiveImage
+                    src={image.src}
+                    alt={`${activeCategory} photograph ${image.index + 1}`}
+                    width={image.width}
+                    height={image.height}
+                    isEager={image.index < 6}
                   />
                 </div>
-              );
-            })}
-          </div>
-          <div className="masonry-col">
-            {col2.map((srcPath, index) => {
-              const globalIndex = index * 3 + 1;
-              return (
-                <div 
-                  key={`col2-${index}`} 
-                  className="masonry-item"
-                  role="listitem"
-                >
-                  <ProgressiveImage 
-                    src={srcPath} 
-                    alt={`${activeCategory} photograph ${globalIndex + 1}`}
-                    isEager={globalIndex < 6}
-                  />
-                </div>
-              );
-            })}
-          </div>
-          <div className="masonry-col">
-            {col3.map((srcPath, index) => {
-              const globalIndex = index * 3 + 2;
-              return (
-                <div 
-                  key={`col3-${index}`} 
-                  className="masonry-item"
-                  role="listitem"
-                >
-                  <ProgressiveImage 
-                    src={srcPath} 
-                    alt={`${activeCategory} photograph ${globalIndex + 1}`}
-                    isEager={globalIndex < 6}
-                  />
-                </div>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>

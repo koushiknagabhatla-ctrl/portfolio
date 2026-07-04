@@ -154,13 +154,10 @@ const AboutPage = () => {
 
       </section>
 
-      <section className="aww-section overlap-section margin-top-massive" aria-label="Overlapping photo grid">
+      <section className="aww-section overlap-section margin-top-massive" aria-label="Statue photograph">
         <div className="aww-overlap-grid">
-          <div className="aww-image-wrapper square overlap-left">
+          <div className="aww-image-wrapper square statue-solo">
             <img className="aww-image" src="/about/ultra_10.webp" alt="Statue" loading="lazy" decoding="async" width="800" height="800" />
-          </div>
-          <div className="aww-image-wrapper landscape overlap-right shift-down">
-            <img className="aww-image" src="/about/ultra_8.webp" alt="Horizontal Nature Photo" loading="lazy" decoding="async" width="1200" height="750" />
           </div>
         </div>
       </section>

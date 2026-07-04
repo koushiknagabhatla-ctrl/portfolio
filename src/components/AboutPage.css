@@ -123,19 +123,9 @@
   align-items: center;
 }
 
-/* Compound selectors so these beat .aww-image-wrapper's position: relative */
-.aww-image-wrapper.overlap-left {
-  position: absolute;
-  left: 15vw;
-  z-index: 2;
+/* Lone statue centered by the flex parent; !important beats .square's width */
+.aww-image-wrapper.statue-solo {
   width: 30vw !important;
-}
-
-.aww-image-wrapper.overlap-right {
-  position: absolute;
-  right: 15vw;
-  z-index: 1;
-  width: 25vw !important;
 }
 
 /* Positioning Modifiers */
@@ -209,10 +199,7 @@
     padding: 0 5vw;
   }
 
-  .aww-image-wrapper.overlap-left,
-  .aww-image-wrapper.overlap-right {
-    position: relative;
-    left: 0; right: 0;
+  .aww-image-wrapper.statue-solo {
     width: 100% !important;
   }
 

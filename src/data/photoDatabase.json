@@ -1,126 +1,598 @@
 {
   "people": [
-    "/photography/hq/people_hq_1.webp",
-    "/photography/hq/people_hq_2.webp",
-    "/photography/hq/people_hq_3.webp",
-    "/photography/hq/people_hq_4.webp",
-    "/photography/people_12.webp",
-    "/photography/people_23.webp",
-    "/photography/people_31.webp",
-    "/photography/people_32.webp",
-    "/photography/people_51.webp",
-    "/photography/people_86.webp",
-    "/photography/people_87.webp",
-    "/photography/people_93.webp",
-    "/photography/nature_95.webp",
-    "/photography/bikes_2.webp",
-    "/photography/bikes_7.webp",
-    "/photography/bikes_26.webp",
-    "/photography/bikes_11.webp",
-    "/photography/nature_39.webp"
+    {
+      "src": "/photography/hq/people_hq_1.webp",
+      "width": 2200,
+      "height": 3910
+    },
+    {
+      "src": "/photography/hq/people_hq_2.webp",
+      "width": 2200,
+      "height": 3911
+    },
+    {
+      "src": "/photography/hq/people_hq_3.webp",
+      "width": 2200,
+      "height": 3300
+    },
+    {
+      "src": "/photography/hq/people_hq_4.webp",
+      "width": 2200,
+      "height": 3300
+    },
+    {
+      "src": "/photography/people_12.webp",
+      "width": 800,
+      "height": 1201
+    },
+    {
+      "src": "/photography/people_23.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/people_31.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_32.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_51.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_86.webp",
+      "width": 800,
+      "height": 1200
+    },
+    {
+      "src": "/photography/people_87.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_93.webp",
+      "width": 800,
+      "height": 1004
+    },
+    {
+      "src": "/photography/nature_95.webp",
+      "width": 800,
+      "height": 1338
+    },
+    {
+      "src": "/photography/bikes_2.webp",
+      "width": 800,
+      "height": 1423
+    },
+    {
+      "src": "/photography/bikes_7.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_26.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_11.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/nature_39.webp",
+      "width": 800,
+      "height": 1055
+    }
   ],
   "bikes": [
-    "/photography/hq/bikes_hq_1.webp",
-    "/photography/hq/bikes_hq_2.webp",
-    "/photography/hq/bikes_hq_3.webp",
-    "/photography/hq/bikes_hq_4.webp",
-    "/photography/bikes_1.webp",
-    "/photography/bikes_2.webp",
-    "/photography/bikes_3.webp",
-    "/photography/bikes_7.webp",
-    "/photography/bikes_22.webp",
-    "/photography/bikes_24.webp",
-    "/photography/bikes_25.webp",
-    "/photography/bikes_26.webp",
-    "/photography/bikes_29.webp",
-    "/photography/bikes_30.webp",
-    "/photography/bikes_33.webp",
-    "/photography/bikes_34.webp",
-    "/photography/bikes_36.webp",
-    "/photography/bikes_37.webp",
-    "/photography/bikes_40.webp",
-    "/photography/bikes_41.webp",
-    "/photography/bikes_42.webp",
-    "/photography/bikes_43.webp",
-    "/photography/bikes_44.webp",
-    "/photography/bikes_45.webp",
-    "/photography/bikes_54.webp",
-    "/photography/bikes_55.webp",
-    "/photography/bikes_56.webp",
-    "/photography/bikes_57.webp",
-    "/photography/bikes_59.webp",
-    "/photography/bikes_60.webp",
-    "/photography/bikes_61.webp",
-    "/photography/bikes_62.webp",
-    "/photography/bikes_64.webp",
-    "/photography/bikes_65.webp",
-    "/photography/bikes_67.webp",
-    "/photography/bikes_68.webp",
-    "/photography/bikes_69.webp",
-    "/photography/bikes_70.webp",
-    "/photography/bikes_71.webp",
-    "/photography/bikes_72.webp",
-    "/photography/bikes_74.webp",
-    "/photography/bikes_75.webp",
-    "/photography/bikes_76.webp",
-    "/photography/bikes_78.webp",
-    "/photography/bikes_79.webp",
-    "/photography/bikes_81.webp",
-    "/photography/bikes_83.webp",
-    "/photography/bikes_88.webp",
-    "/photography/bikes_89.webp",
-    "/photography/bikes_90.webp",
-    "/photography/bikes_91.webp",
-    "/photography/bikes_92.webp",
-    "/photography/bikes_94.webp",
-    "/photography/bikes_96.webp",
-    "/photography/bikes_97.webp",
-    "/photography/bikes_98.webp",
-    "/photography/bikes_99.webp",
-    "/photography/bikes_101.webp",
-    "/photography/people_27.webp",
-    "/photography/people_28.webp",
-    "/photography/people_58.webp",
-    "/photography/people_73.webp",
-    "/photography/people_77.webp",
-    "/photography/nature_80.webp",
-    "/photography/bikes_11.webp"
+    {
+      "src": "/photography/hq/bikes_hq_1.webp",
+      "width": 1955,
+      "height": 2933
+    },
+    {
+      "src": "/photography/hq/bikes_hq_2.webp",
+      "width": 2200,
+      "height": 3300
+    },
+    {
+      "src": "/photography/hq/bikes_hq_3.webp",
+      "width": 2200,
+      "height": 3300
+    },
+    {
+      "src": "/photography/hq/bikes_hq_4.webp",
+      "width": 2200,
+      "height": 3300
+    },
+    {
+      "src": "/photography/bikes_1.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_2.webp",
+      "width": 800,
+      "height": 1423
+    },
+    {
+      "src": "/photography/bikes_3.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_7.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_22.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_24.webp",
+      "width": 800,
+      "height": 986
+    },
+    {
+      "src": "/photography/bikes_25.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_26.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_29.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_30.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_33.webp",
+      "width": 800,
+      "height": 1423
+    },
+    {
+      "src": "/photography/bikes_34.webp",
+      "width": 800,
+      "height": 1003
+    },
+    {
+      "src": "/photography/bikes_36.webp",
+      "width": 800,
+      "height": 1352
+    },
+    {
+      "src": "/photography/bikes_37.webp",
+      "width": 800,
+      "height": 1004
+    },
+    {
+      "src": "/photography/bikes_40.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_41.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_42.webp",
+      "width": 800,
+      "height": 1003
+    },
+    {
+      "src": "/photography/bikes_43.webp",
+      "width": 800,
+      "height": 1004
+    },
+    {
+      "src": "/photography/bikes_44.webp",
+      "width": 800,
+      "height": 1003
+    },
+    {
+      "src": "/photography/bikes_45.webp",
+      "width": 800,
+      "height": 1004
+    },
+    {
+      "src": "/photography/bikes_54.webp",
+      "width": 800,
+      "height": 1423
+    },
+    {
+      "src": "/photography/bikes_55.webp",
+      "width": 800,
+      "height": 1334
+    },
+    {
+      "src": "/photography/bikes_56.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_57.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_59.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_60.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_61.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_62.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_64.webp",
+      "width": 800,
+      "height": 1295
+    },
+    {
+      "src": "/photography/bikes_65.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_67.webp",
+      "width": 800,
+      "height": 1424
+    },
+    {
+      "src": "/photography/bikes_68.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_69.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_70.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_71.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_72.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_74.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_75.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_76.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_78.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_79.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_81.webp",
+      "width": 800,
+      "height": 1200
+    },
+    {
+      "src": "/photography/bikes_83.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_88.webp",
+      "width": 800,
+      "height": 1337
+    },
+    {
+      "src": "/photography/bikes_89.webp",
+      "width": 800,
+      "height": 1004
+    },
+    {
+      "src": "/photography/bikes_90.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_91.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_92.webp",
+      "width": 800,
+      "height": 1003
+    },
+    {
+      "src": "/photography/bikes_94.webp",
+      "width": 800,
+      "height": 1004
+    },
+    {
+      "src": "/photography/bikes_96.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_97.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_98.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_99.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/bikes_101.webp",
+      "width": 800,
+      "height": 1423
+    },
+    {
+      "src": "/photography/people_27.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_28.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_58.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_73.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/people_77.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/nature_80.webp",
+      "width": 800,
+      "height": 1423
+    },
+    {
+      "src": "/photography/bikes_11.webp",
+      "width": 800,
+      "height": 1422
+    }
   ],
   "nature": [
-    "/photography/hq/nature_hq_2.webp",
-    "/photography/hq/nature_hq_3.webp",
-    "/photography/hq/nature_hq_4.webp",
-    "/photography/nature_0.webp",
-    "/photography/nature_4.webp",
-    "/photography/nature_6.webp",
-    "/photography/nature_8.webp",
-    "/photography/nature_10.webp",
-    "/photography/nature_16.webp",
-    "/photography/nature_17.webp",
-    "/photography/nature_18.webp",
-    "/photography/nature_20.webp",
-    "/photography/nature_35.webp",
-    "/photography/nature_38.webp",
-    "/photography/nature_46.webp",
-    "/photography/nature_47.webp",
-    "/photography/nature_48.webp",
-    "/photography/nature_49.webp",
-    "/photography/nature_50.webp",
-    "/photography/nature_52.webp",
-    "/photography/nature_53.webp",
-    "/photography/nature_66.webp",
-    "/photography/nature_82.webp",
-    "/photography/nature_100.webp",
-    "/photography/people_5.webp",
-    "/photography/people_14.webp",
-    "/photography/people_15.webp",
-    "/photography/people_19.webp",
-    "/photography/people_84.webp",
-    "/photography/people_85.webp",
-    "/photography/bikes_9.webp",
-    "/photography/nature_13.webp",
-    "/photography/nature_21.webp",
-    "/photography/nature_39.webp",
-    "/photography/nature_63.webp"
+    {
+      "src": "/photography/hq/nature_hq_2.webp",
+      "width": 2200,
+      "height": 3300
+    },
+    {
+      "src": "/photography/hq/nature_hq_3.webp",
+      "width": 2200,
+      "height": 3300
+    },
+    {
+      "src": "/photography/hq/nature_hq_4.webp",
+      "width": 2200,
+      "height": 3300
+    },
+    {
+      "src": "/photography/nature_0.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/nature_4.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_6.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_8.webp",
+      "width": 800,
+      "height": 1423
+    },
+    {
+      "src": "/photography/nature_10.webp",
+      "width": 800,
+      "height": 1338
+    },
+    {
+      "src": "/photography/nature_16.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_17.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_18.webp",
+      "width": 800,
+      "height": 961
+    },
+    {
+      "src": "/photography/nature_20.webp",
+      "width": 800,
+      "height": 1004
+    },
+    {
+      "src": "/photography/nature_35.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_38.webp",
+      "width": 800,
+      "height": 1338
+    },
+    {
+      "src": "/photography/nature_46.webp",
+      "width": 800,
+      "height": 1421
+    },
+    {
+      "src": "/photography/nature_47.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_48.webp",
+      "width": 800,
+      "height": 1063
+    },
+    {
+      "src": "/photography/nature_49.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_50.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_52.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_53.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_66.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_82.webp",
+      "width": 800,
+      "height": 1422
+    },
+    {
+      "src": "/photography/nature_100.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_5.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_14.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_15.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_19.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/people_84.webp",
+      "width": 800,
+      "height": 1423
+    },
+    {
+      "src": "/photography/people_85.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/bikes_9.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_13.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_21.webp",
+      "width": 800,
+      "height": 1067
+    },
+    {
+      "src": "/photography/nature_39.webp",
+      "width": 800,
+      "height": 1055
+    },
+    {
+      "src": "/photography/nature_63.webp",
+      "width": 800,
+      "height": 1337
+    }
   ]
 }
