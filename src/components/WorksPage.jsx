@@ -109,8 +109,8 @@ const WorksPage = () => {
       </div>
 
       <div className="awwwards-projects-list" role="list">
-        {projects.map((project, idx) => (
-          <article className="awwwards-item" key={idx} role="listitem">
+        {projects.map((project) => (
+          <article className="awwwards-item" key={project.id} role="listitem">
             <div className="awwwards-layout">
               <div className="awwwards-info">
                 <div className="info-top-row">

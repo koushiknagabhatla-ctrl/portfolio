@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Photography.css';
 import './Skiper.css';
-import photoDatabase from './photoDatabase.json';
+import photoDatabase from '../data/photoDatabase.json';
 import natureAudio from '../assets/solace.mp3';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -57,29 +57,28 @@ const Photography = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [prevCategory, setPrevCategory] = useState(activeCategory);
-  const [isLowPerformance, setIsLowPerformance] = useState(false);
   const touchStartY = useRef(0);
   const touchCurrentY = useRef(0);
 
-  // Derive state on category change to prevent cascading renders
+  // Adjust state during render on category change (React-sanctioned pattern);
+  // the audio element itself is reset in an effect since refs are off-limits here
   if (activeCategory !== prevCategory) {
     setPrevCategory(activeCategory);
     if (activeCategory !== 'nature') {
       setIsPlaying(false);
       setHasStarted(false);
       setExpandedState('closed');
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
     }
   }
 
   useEffect(() => {
-    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
-      setIsLowPerformance(true);
+    if (activeCategory !== 'nature' && audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
-    
+  }, [activeCategory]);
+
+  useEffect(() => {
     const handleViewportChange = () => {
       if (window.visualViewport) {
         document.documentElement.style.setProperty('--vvp-height', `${window.visualViewport.height}px`);
@@ -134,13 +133,11 @@ const Photography = () => {
     };
   }, []);
 
-  // Effect removed, logic moved to derived state above
-
   useEffect(() => {
     if (activeCategory === 'nature' && audioRef.current) {
       audioRef.current.volume = 1.0;
       if (isPlaying) {
-        audioRef.current.play().catch(e => console.warn("Audio play blocked by browser:", e));
+        audioRef.current.play().catch(() => {});
       } else {
         audioRef.current.pause();
       }
@@ -195,11 +192,9 @@ const Photography = () => {
         setExpandedState(current => current === 'pinned' ? 'closed' : current);
       }, 2000);
       
-      // iOS Audio Context Resume Guard
+      // iOS requires play() inside the user gesture; autoplay rejection is expected
       if (audioRef.current) {
-        audioRef.current.play().catch(e => {
-          console.warn("Audio resume blocked by browser:", e);
-        });
+        audioRef.current.play().catch(() => {});
       }
     } else {
       // Toggle pinned state
@@ -237,7 +232,7 @@ const Photography = () => {
 
   const handleProgressClick = (e) => {
     e.stopPropagation();
-    if (!audioRef.current) return;
+    if (!audioRef.current || !audioRef.current.duration) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
     const width = rect.width;
@@ -288,8 +283,8 @@ const Photography = () => {
       
       {/* SKIPER MEDIA PLAYBAR */}
       {activeCategory === 'nature' && (
-        <div 
-          className={`skiper-island ${islandState} ${isLowPerformance ? 'low-performance' : ''}`}
+        <div
+          className={`skiper-island ${islandState}`}
           onClick={handleIslandClick}
           onMouseEnter={handleIslandMouseEnter}
           onMouseLeave={handleIslandMouseLeave}

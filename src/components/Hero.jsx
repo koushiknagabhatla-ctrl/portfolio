@@ -111,7 +111,8 @@ const Hero = () => {
                 ref={imgRef}
                 width="500"
                 height="680"
-                loading="eager"
+                loading="lazy"
+                decoding="async"
               />
             </div>
 

@@ -61,17 +61,6 @@
   color: var(--accent-color, #e56a44);
 }
 
-.kaisei-footer__credit {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--text-color, #1a1a1a);
-}
-
-.kaisei-footer__credit span {
-  font-weight: 700;
-  color: var(--accent-color, #e56a44);
-}
-
 .kaisei-footer__bottom {
   margin-top: auto;
   overflow: hidden;

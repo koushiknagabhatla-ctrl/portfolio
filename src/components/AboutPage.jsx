@@ -5,8 +5,8 @@ import './AboutPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-import heroBg from '../assets/_DSC3834.webp';
-import outroBg from '../assets/DSC00793.webp';
+import heroBg from '../assets/about-hero.webp';
+import outroBg from '../assets/about-outro.webp';
 
 const AboutPage = () => {
   const containerRef = useRef(null);
@@ -60,11 +60,14 @@ const AboutPage = () => {
       
       <section className="aww-section hero-section" aria-label="About hero">
         <div className="aww-image-wrapper full-bleed">
-          <img className="aww-image" src={heroBg} alt="Koushik Nagabhatla — Beyond the Code" decoding="async" fetchPriority="high" width="1920" height="1080" />
+          <img className="aww-image" src={heroBg} alt="Koushik Nagabhatla — Beyond the Code" loading="eager" decoding="async" fetchPriority="high" width="1920" height="1080" />
           <div className="aww-hero-gradient"></div>
         </div>
         <h1 className="aww-massive-title mix-blend aww-reveal">Beyond<br/>the Code.</h1>
-
+        <div className="kaisei-scroll aww-hero-scroll" aria-label="Scroll">
+          <span className="kaisei-scroll__text">Scroll</span>
+          <span className="kaisei-scroll__text kaisei-scroll__text--clone" aria-hidden="true">Scroll</span>
+        </div>
       </section>
 
       <section className="aww-section text-section" aria-label="About introduction">

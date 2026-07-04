@@ -73,17 +73,6 @@
   width: 100%;
 }
 
-.aww-huge-serif {
-  font-size: clamp(3rem, 8vw, 8rem);
-  line-height: 1.1;
-  font-weight: 400;
-  margin: 0;
-  font-style: italic;
-}
-
-.indent { margin-left: 10vw; }
-.double-indent { margin-left: 20vw; }
-
 .aww-poetic {
   font-size: clamp(1.5rem, 3.5vw, 3rem);
   line-height: 1.4;
@@ -96,38 +85,16 @@
   color: #fff;
 }
 
-/* Metadata */
-.aww-meta {
+/* Scroll indicator (shared .kaisei-scroll animation, recolored for the dark hero) */
+.aww-hero-scroll {
   position: absolute;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
+  bottom: 4vh;
+  right: 5vw;
   z-index: 10;
 }
 
-.bottom-left {
-  bottom: 4vh;
-  left: 4vw;
-}
-
-.line-sep {
-  width: 50px;
-  height: 1px;
-  background-color: #fff;
-}
-
-.aww-caption {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  color: #888;
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+.aww-hero-scroll .kaisei-scroll__text {
+  color: #f7f7f2;
 }
 
 /* Grids */
@@ -156,24 +123,19 @@
   align-items: center;
 }
 
-.overlap-left {
+/* Compound selectors so these beat .aww-image-wrapper's position: relative */
+.aww-image-wrapper.overlap-left {
   position: absolute;
   left: 15vw;
   z-index: 2;
   width: 30vw !important;
 }
 
-.overlap-right {
+.aww-image-wrapper.overlap-right {
   position: absolute;
   right: 15vw;
   z-index: 1;
   width: 25vw !important;
-}
-
-.overlap-center {
-  position: absolute;
-  z-index: 3;
-  width: 40vw !important;
 }
 
 /* Positioning Modifiers */
@@ -189,9 +151,7 @@
 .shift-down-heavy { transform: translateY(30vh); }
 
 .right-align { margin-left: auto; margin-right: 0; }
-.right-align-caption { text-align: right; justify-content: flex-end; padding-right: 5vw; }
 .left-align { margin-left: 0; }
-.left-align-caption { padding-left: 5vw; }
 
 /* Images & Wrappers */
 .aww-image-wrapper {
@@ -202,7 +162,6 @@
 
 .aww-image-wrapper.full-bleed { width: 100vw; height: 100vh; }
 .aww-image-wrapper.cinematic-height { height: 85vh; }
-.aww-image-wrapper.half-height { height: 60vh; }
 .aww-image-wrapper.portrait { aspect-ratio: 4/5; width: 100%; }
 .aww-image-wrapper.portrait-thin { aspect-ratio: 3/4; width: 100%; }
 .aww-image-wrapper.landscape { aspect-ratio: 16/10; width: 100%; }
@@ -232,10 +191,6 @@
   z-index: 5;
 }
 
-.outro-content {
-  padding: 10vh 5vw;
-}
-
 /* Responsive */
 @media (max-width: 900px) {
   .aww-grid, .aww-grid.reverse, .aww-grid-triple {
@@ -254,7 +209,8 @@
     padding: 0 5vw;
   }
 
-  .overlap-left, .overlap-right, .overlap-center {
+  .aww-image-wrapper.overlap-left,
+  .aww-image-wrapper.overlap-right {
     position: relative;
     left: 0; right: 0;
     width: 100% !important;
@@ -265,6 +221,5 @@
     width: 95vw;
   }
 
-  .indent, .double-indent { margin-left: 0; }
   .right-align, .left-align { margin: 0 auto; width: 100%; }
 }

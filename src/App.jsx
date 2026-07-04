@@ -12,7 +12,7 @@ import PhotographyDirectory from './components/PhotographyDirectory';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 import Preloader from './components/Preloader';
-import './index.css';
+import GrainOverlay from './components/GrainOverlay';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,13 +43,7 @@ function AppContent() {
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
       touchMultiplier: 2,
-      infinite: false,
     });
     lenisRef.current = lenis;
 
@@ -72,7 +66,8 @@ function AppContent() {
       lenisRef.current.scrollTo(0, { immediate: true });
     }
     window.scrollTo(0, 0);
-    setTimeout(() => ScrollTrigger.refresh(), 100);
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 100);
+    return () => clearTimeout(refreshTimer);
   }, [location.pathname]);
 
   const isPhotographyPage = normalizedPath.startsWith('/photography');
@@ -86,19 +81,12 @@ function AppContent() {
       document.body.style.backgroundColor = '';
       document.documentElement.style.backgroundColor = '';
     }
-
-    if (isPhotographyPage || isAboutPage) {
-      document.body.classList.add('no-grain');
-    } else {
-      document.body.classList.remove('no-grain');
-    }
-  }, [isPhotographyPage, isAboutPage]);
+  }, [isPhotographyPage]);
 
   if (isDirtyUrl) {
     return null;
   }
 
-  // Task 1 & 3: Footer is removed from About and Photography pages. It ONLY displays on the Home page.
   const showFooter = normalizedPath === '/';
 
   return (
@@ -112,6 +100,7 @@ function AppContent() {
         />
       )}
       <a href="#main-content" className="skip-link">Skip to content</a>
+      {!isPhotographyPage && !isAboutPage && <GrainOverlay />}
       <Navbar />
       <main id="main-content" style={{ backgroundColor: isPhotographyPage ? '#000000' : undefined, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Routes>

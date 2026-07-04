@@ -1,16 +1,50 @@
-# React + Vite
+# nrkportfolio.in
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio of **Koushik Nagabhatla** — developer & photographer. Cinematic single-page app with smooth scrolling, GSAP scroll animations, a photography gallery, and an audio "dynamic island" player.
 
-Currently, two official plugins are available:
+**Live:** https://nrkportfolio.in/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- [React 19](https://react.dev/) + [Vite](https://vite.dev/)
+- [React Router 7](https://reactrouter.com/) — client-side routing (SPA rewrite on Vercel)
+- [GSAP + ScrollTrigger](https://gsap.com/) — scroll-driven animations
+- [Lenis](https://lenis.darkroom.engineering/) — smooth scrolling
+- Deployed on [Vercel](https://vercel.com/) (see `vercel.json` for cache & security headers)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Structure
 
-## Expanding the ESLint configuration
+```
+index.html              Entry HTML: meta/SEO, critical CSS, font loading
+public/                 Static assets served as-is
+  about/                About-page gallery images
+  photography/          Gallery images (hq/ = high-quality hero shots)
+  fonts/                Self-hosted display font
+src/
+  main.jsx              React bootstrap
+  App.jsx               Router, Lenis setup, route-level layout
+  index.css             Design tokens, resets, global utilities
+  assets/               Bundled images/audio (hashed by Vite)
+  components/           One folder-level component + its CSS per feature
+  data/photoDatabase.json  Gallery image manifest by category
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Routes
+
+| Path | Page |
+|------|------|
+| `/` | Hero + selected works |
+| `/about` | Editorial photo story |
+| `/photography` | Category directory |
+| `/photography/:category` | Masonry gallery (`all`, `people`, `bikes`, `nature`) |
+| `/works` | Redirects to `/` |
+
+## Development
+
+```bash
+npm install
+npm run dev       # local dev server
+npm run lint      # eslint
+npm run build     # production build to dist/
+npm run preview   # serve the production build locally
+```

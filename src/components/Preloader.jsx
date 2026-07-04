@@ -3,7 +3,9 @@ import gsap from 'gsap';
 import './Preloader.css';
 
 function Preloader({ onComplete }) {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(
+    () => (window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 100 : 0)
+  );
   const containerRef = useRef(null);
   const counterValRef = useRef({ val: 0 });
 
@@ -12,17 +14,20 @@ function Preloader({ onComplete }) {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
-      setCounter(100);
       const timer = setTimeout(() => {
         document.body.style.overflow = '';
         if (onComplete) onComplete();
       }, 300);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        document.body.style.overflow = '';
+      };
     }
 
     let isFinished = false;
     const startTime = Date.now();
     const minDisplayTime = 900; // Minimum duration in ms for a cinematic feel
+    const counterVal = counterValRef.current;
 
     // Function to calculate real asset loading percentage across any active page
     const updateRealProgress = () => {
@@ -64,12 +69,12 @@ function Preloader({ onComplete }) {
 
     const animateTo = (target) => {
       if (isFinished) return;
-      gsap.to(counterValRef.current, {
+      gsap.to(counterVal, {
         val: target,
         duration: 0.4,
         ease: 'power2.out',
         onUpdate: () => {
-          setCounter(Math.min(100, Math.floor(counterValRef.current.val)));
+          setCounter(Math.min(100, Math.floor(counterVal.val)));
         }
       });
     };
@@ -78,12 +83,12 @@ function Preloader({ onComplete }) {
       if (isFinished) return;
       isFinished = true;
 
-      gsap.to(counterValRef.current, {
+      gsap.to(counterVal, {
         val: 100,
         duration: 0.5,
         ease: 'power3.out',
         onUpdate: () => {
-          setCounter(Math.min(100, Math.floor(counterValRef.current.val)));
+          setCounter(Math.min(100, Math.floor(counterVal.val)));
         },
         onComplete: () => {
           gsap.to(containerRef.current, {
@@ -116,6 +121,7 @@ function Preloader({ onComplete }) {
 
     return () => {
       clearInterval(interval);
+      gsap.killTweensOf(counterVal);
       document.body.style.overflow = '';
     };
   }, [onComplete]);

@@ -121,104 +121,11 @@
   }
 }
 
-/* 3. HERO BOTTOM METADATA BAR */
-.kaisei-hero__bottom {
-  margin-top: clamp(60px, 10vh, 100px);
-  border-top: dashed 1px var(--accent-color, #e56a44);
-  padding: clamp(24px, 4vh, 40px) 0;
-}
-
-.kaisei-hero__bottom-grid {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 32px;
-}
-
-.kaisei-meta__box {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .kaisei-meta__label {
   font-size: clamp(0.7rem, 0.8vw, 0.8rem);
   font-weight: 600;
   color: var(--accent-color, #e56a44);
   letter-spacing: -0.02em;
-}
-
-.kaisei-meta__val {
-  font-size: clamp(0.9rem, 1vw, 1rem);
-  font-weight: 600;
-  color: var(--text-color, #1a1a1a);
-}
-
-.kaisei-index__list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.kaisei-index__list li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: clamp(0.9rem, 1vw, 0.98rem);
-  font-weight: 600;
-}
-
-.kaisei-num {
-  color: var(--accent-color, #e56a44);
-  font-variant-numeric: tabular-nums;
-  font-size: 0.8rem;
-}
-
-.kaisei-index__list a {
-  text-decoration: none;
-  color: inherit;
-  transition: color 0.3s ease;
-}
-
-.kaisei-index__list a:hover {
-  color: var(--accent-color, #e56a44);
-}
-
-/* Next Button Action */
-.kaisei-next__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  text-decoration: none;
-  color: var(--text-color, #1a1a1a);
-  font-weight: 600;
-  font-size: clamp(0.9rem, 1vw, 1rem);
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.kaisei-next__btn:hover {
-  color: var(--accent-color, #e56a44);
-  transform: translateY(3px);
-}
-
-.kaisei-circle {
-  width: clamp(40px, 4vw, 50px);
-  height: clamp(40px, 4vw, 50px);
-  border-radius: 50%;
-  border: 1px solid var(--accent-color, #e56a44);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.kaisei-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--accent-color, #e56a44);
 }
 
 /* 4. STORYTELLING EDITORIAL SECTION */
@@ -263,12 +170,6 @@
 
 .kaisei-story__img-wrapper:hover .kaisei-story__img {
   transform: scale(1.04);
-}
-
-.kaisei-story__img-caption {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--accent-color, #e56a44);
 }
 
 .kaisei-story__stat-col {
@@ -416,11 +317,6 @@
   .kaisei-hero__footer-row {
     margin-top: 36px;
     align-items: flex-end;
-  }
-  .kaisei-hero__bottom-grid {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 28px;
   }
   .kaisei-story {
     padding: 36px 0 60px 0;
