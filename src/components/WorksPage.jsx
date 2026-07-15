@@ -3,6 +3,7 @@ import './WorksPage.css';
 import img1 from '../assets/projects/project1.webp';
 import img2 from '../assets/projects/project2.webp';
 import img3 from '../assets/projects/project3.webp';
+import img4 from '../assets/projects/project4.webp';
 
 const projects = [
   {
@@ -40,6 +41,18 @@ const projects = [
     imageWidth: 1200,
     imageHeight: 597,
     url: 'https://www.skjal.in/'
+  },
+  {
+    id: '04',
+    name: 'BG REMOVER',
+    category: 'AI BACKGROUND REMOVAL',
+    desc: 'AI-powered background removal tool that isolates subjects with clean, precise edges across portraits, products, and automotive shots. Model trained on multiple datasets including rembg 2.0 and published to Hugging Face.',
+    stack: 'React · Vite · Hugging Face',
+    role: 'Design & Development',
+    image: img4,
+    imageWidth: 1200,
+    imageHeight: 596,
+    url: 'https://bgrem.site/'
   }
 ];
 
