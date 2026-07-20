@@ -256,6 +256,29 @@
   color: var(--text-color, #1a1a1a);
 }
 
+.kaisei-profile__works {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kaisei-profile__works li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.kaisei-profile__works li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-color, #e56a44);
+}
+
 /* 5. APPROACH & PHILOSOPHY */
 .kaisei-approach {
   margin-top: clamp(80px, 12vh, 140px);

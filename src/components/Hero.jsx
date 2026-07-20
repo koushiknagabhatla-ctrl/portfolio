@@ -71,7 +71,7 @@ const Hero = () => {
         <div className="kaisei-container kaisei-hero__grid">
           <h1 className="kaisei-hero__title" ref={titleRef}>
             I&apos;M<br />
-            FRONT-END &amp; IOT<br />
+            FULL-STACK<br />
             DEVELOPER &amp; ENGINEER
           </h1>
 
@@ -120,24 +120,30 @@ const Hero = () => {
               <div className="kaisei-profile__item">
                 <span className="kaisei-meta__label">[Profile]</span>
                 <p className="kaisei-profile__text">
-                  Fourth-year B.Tech Computer Science student at D.N.R College of Engineering & Technology with deep hands-on experience in modern web technologies and software engineering. Passionate about building scalable full-stack applications and high-fidelity UI/UX from scratch.
+                  Final-year B.Tech Computer Science student building full-stack products with React, Python, and FastAPI. Shipped four production apps — from an AI background-removal model to a real-time flight-booking platform — and single-handedly designed, deployed, and SEO-optimized an IoT startup's corporate website end to end.
                 </p>
               </div>
 
               <div className="kaisei-profile__item">
                 <span className="kaisei-meta__label">[Tech Stack]</span>
                 <p className="kaisei-profile__text">
-                  React, JavaScript, Vite, Node.js, HTML5, CSS3, Supabase, ESP32 / Industrial IoT, Figma
+                  React, JavaScript, Python, FastAPI, Node.js, MySQL, Supabase, Linux, Cisco Packet Tracer, Git, Figma
                 </p>
               </div>
 
               <div className="kaisei-profile__item">
                 <span className="kaisei-meta__label">[Featured Works]</span>
-                <p className="kaisei-profile__text">
-                  TRAVELWISE — Full-Stack Flight Booking & Real-Time Tracking<br />
-                  PIXEL FORGE AI — AI Image Platform powered by Gemini API<br />
-                  SK JALRAKSHAK — Corporate Platform for IIT Delhi IoT Startup
-                </p>
+                <ul className="kaisei-profile__text kaisei-profile__works">
+                  <li>TRAVELWISE — Full-Stack Flight Booking &amp; Real-Time Tracking</li>
+                  <li>PIXEL FORGE AI — AI Image Platform powered by Gemini API</li>
+                  <li>BG REMOVER — AI Background Removal, Trained &amp; Deployed on Hugging Face</li>
+                  <li>SK JALRAKSHAK — Corporate Platform for an IIT Delhi-Incubated Startup</li>
+                </ul>
+              </div>
+
+              <div className="kaisei-profile__item">
+                <span className="kaisei-meta__label">[Currently]</span>
+                <p className="kaisei-profile__text">Pursuing CCNA certification &amp; shipping new projects.</p>
               </div>
 
               <div className="kaisei-profile__item">
@@ -167,7 +173,7 @@ const Hero = () => {
               <div className="kaisei-approach__item">
                 <h3 className="kaisei-approach__item-title">Precision</h3>
                 <p className="kaisei-approach__item-desc">
-                  From pixel-perfect UI rendering and buttery 60 FPS animations to low-latency IoT hardware loops, I dedicate immense care to every detail, ensuring scalable and reliable engineering.
+                  From pixel-perfect UI rendering and buttery 60 FPS animations to fast, reliable APIs, I dedicate immense care to every detail, ensuring scalable and reliable engineering.
                 </p>
               </div>
 
