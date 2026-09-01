@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './AboutPage.css';
+import { IMG_V } from '../imgVersion.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -92,13 +93,13 @@ const AboutPage = () => {
       <section className="aww-section gallery-section" aria-label="Portrait gallery">
         <div className="aww-grid-triple">
           <div className="aww-image-wrapper portrait-thin">
-            <img className="aww-image" src="/about/ultra_2.webp" alt="Portrait photograph 1" loading="lazy" decoding="async" width="800" height="1067" />
+            <img className="aww-image" src={`/about/ultra_2.webp${IMG_V}`} srcSet={`/about/ultra_2.webp${IMG_V} 800w, /about/2x/ultra_2.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 1" loading="lazy" decoding="async" width="800" height="1067" />
           </div>
           <div className="aww-image-wrapper portrait shift-down-slight">
-            <img className="aww-image" src="/about/ultra_3.webp" alt="Portrait photograph 2" loading="lazy" decoding="async" width="800" height="1000" />
+            <img className="aww-image" src={`/about/ultra_3.webp${IMG_V}`} srcSet={`/about/ultra_3.webp${IMG_V} 800w, /about/2x/ultra_3.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 2" loading="lazy" decoding="async" width="800" height="1000" />
           </div>
           <div className="aww-image-wrapper portrait-thin shift-down-heavy">
-            <img className="aww-image" src="/about/ultra_4.webp" alt="Portrait photograph 3" loading="lazy" decoding="async" width="800" height="1067" />
+            <img className="aww-image" src={`/about/ultra_4.webp${IMG_V}`} srcSet={`/about/ultra_4.webp${IMG_V} 800w, /about/2x/ultra_4.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 3" loading="lazy" decoding="async" width="800" height="1067" />
           </div>
         </div>
       </section>
@@ -107,7 +108,7 @@ const AboutPage = () => {
         <div className="aww-grid reverse">
           <div className="aww-col img-col">
             <div className="aww-image-wrapper portrait">
-              <img className="aww-image" src="/about/ultra_5.webp" alt="The open highway" loading="lazy" decoding="async" width="800" height="1000" />
+              <img className="aww-image" src={`/about/ultra_5.webp${IMG_V}`} srcSet={`/about/ultra_5.webp${IMG_V} 800w, /about/2x/ultra_5.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 45vw" alt="The open highway" loading="lazy" decoding="async" width="800" height="1000" />
             </div>
 
           </div>
@@ -124,7 +125,7 @@ const AboutPage = () => {
 
       <section className="aww-section full-bleed-section" aria-label="Cinematic landscape">
         <div className="aww-image-wrapper full-bleed cinematic-height">
-          <img className="aww-image" src="/about/ultra_6.webp" alt="Bike ride perspective" loading="lazy" decoding="async" width="1920" height="900" />
+          <img className="aww-image" src={`/about/ultra_6.webp${IMG_V}`} srcSet={`/about/ultra_6.webp${IMG_V} 800w, /about/2x/ultra_6.webp${IMG_V} 1600w`} sizes="100vw" alt="Bike ride perspective" loading="lazy" decoding="async" width="1920" height="900" />
         </div>
         <h2 className="aww-massive-title centered mix-blend">The Horizon.</h2>
       </section>
@@ -141,7 +142,7 @@ const AboutPage = () => {
           </div>
           <div className="aww-col img-col shift-down">
              <div className="aww-image-wrapper landscape">
-               <img className="aww-image" src="/about/ultra_7.webp" alt="Travel landscape" loading="lazy" decoding="async" width="1200" height="750" />
+               <img className="aww-image" src={`/about/ultra_7.webp${IMG_V}`} srcSet={`/about/ultra_7.webp${IMG_V} 800w, /about/2x/ultra_7.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 45vw" alt="Travel landscape" loading="lazy" decoding="async" width="1200" height="750" />
              </div>
           </div>
         </div>
@@ -149,12 +150,12 @@ const AboutPage = () => {
 
       <section className="aww-section dual-panoramic" aria-label="Nature panoramic photos">
         <div className="aww-image-wrapper panoramic right-align">
-          <img className="aww-image" src="/about/ultra_8.webp" alt="Raw wilderness panoramic" loading="lazy" decoding="async" width="1600" height="686" />
+          <img className="aww-image" src={`/about/ultra_8.webp${IMG_V}`} srcSet={`/about/ultra_8.webp${IMG_V} 800w, /about/2x/ultra_8.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 95vw, 85vw" alt="Raw wilderness panoramic" loading="lazy" decoding="async" width="1600" height="686" />
         </div>
 
 
         <div className="aww-image-wrapper panoramic left-align shift-down-medium">
-          <img className="aww-image" src="/about/ultra_9.webp" alt="Scale and perspective" loading="lazy" decoding="async" width="1600" height="686" />
+          <img className="aww-image" src={`/about/ultra_9.webp${IMG_V}`} srcSet={`/about/ultra_9.webp${IMG_V} 800w, /about/2x/ultra_9.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 95vw, 85vw" alt="Scale and perspective" loading="lazy" decoding="async" width="1600" height="686" />
         </div>
 
       </section>
@@ -162,7 +163,7 @@ const AboutPage = () => {
       <section className="aww-section overlap-section margin-top-massive" aria-label="Statue photograph">
         <div className="aww-overlap-grid">
           <div className="aww-image-wrapper square statue-solo">
-            <img className="aww-image" src="/about/ultra_10.webp" alt="Statue" loading="lazy" decoding="async" width="800" height="800" />
+            <img className="aww-image" src={`/about/ultra_10.webp${IMG_V}`} srcSet={`/about/ultra_10.webp${IMG_V} 800w, /about/2x/ultra_10.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Statue" loading="lazy" decoding="async" width="800" height="800" />
           </div>
         </div>
       </section>

@@ -31,13 +31,19 @@ function Preloader({ onComplete }) {
     const minDisplayTime = 900; // Minimum duration in ms for a cinematic feel
     const counterVal = counterValRef.current;
 
+    // Lazy images below the fold never report complete until they scroll into
+    // view, so gating the reveal on them parked every gallery visit on the 4s
+    // safety timeout. Only eager, above-the-fold images should hold the curtain.
+    const gatingImages = () =>
+      Array.from(document.images).filter(
+        img => !img.src.includes('data:image') && img.loading !== 'lazy'
+      );
+
     // Function to calculate real asset loading percentage across any active page
     const updateRealProgress = () => {
       if (isFinished) return;
 
-      const allImages = Array.from(document.images);
-      // Filter out tiny tracking pixels or hidden images if any, keep real page assets
-      const relevantImages = allImages.filter(img => !img.src.includes('data:image'));
+      const relevantImages = gatingImages();
       
       if (relevantImages.length === 0) {
         // If no images on current page yet, progress steadily
@@ -166,8 +172,7 @@ function Preloader({ onComplete }) {
     const interval = setInterval(() => {
       updateRealProgress();
       if (!isFinished && Date.now() - startTime >= minDisplayTime) {
-        const allImages = Array.from(document.images).filter(img => !img.src.includes('data:image'));
-        const allLoaded = allImages.every(img => img.complete);
+        const allLoaded = gatingImages().every(img => img.complete);
         if (allLoaded || Date.now() - startTime >= 4000) { // Safety max timeout 4s
           finishPreloader();
         }

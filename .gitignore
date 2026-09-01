@@ -36,3 +36,8 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Ruflo local secrets and runtime data
+.claude-flow/data/
+.claude-flow/logs/
+.claude-flow/sessions/

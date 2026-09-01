@@ -4,13 +4,24 @@ import './Photography.css';
 import './Skiper.css';
 import photoDatabase from '../data/photoDatabase.json';
 import natureAudio from '../assets/solace.mp3';
+import { IMG_V } from '../imgVersion.js';
 
 // Whitelist of valid category values — reject anything else
 const VALID_CATEGORIES = new Set(['all', 'people', 'bikes', 'nature']);
 
+// Every file under public/photography has a 1200w twin in a sibling 2x/ dir
+// (see scripts/build-images.mjs). Widths must match what that script emits.
+const srcSetFor = (src) =>
+  `${src}${IMG_V} 800w, ${src.replace(/\/([^/]+)$/, '/2x/$1')}${IMG_V} 1200w`;
+
+// Three columns inside a 1250px container minus padding and gaps; one full-bleed
+// column under 768px.
+const GRID_SIZES = '(max-width: 768px) calc(100vw - 32px), 390px';
+
 const ProgressiveImage = ({ src, alt, width, height, isEager }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const imgRef = useRef(null);
+  const srcSet = srcSetFor(src);
 
   useEffect(() => {
     if (imgRef.current && imgRef.current.complete) {
@@ -21,11 +32,13 @@ const ProgressiveImage = ({ src, alt, width, height, isEager }) => {
   return (
     <>
       {isEager && (
-        <link rel="preload" as="image" href={src} fetchPriority="high" />
+        <link rel="preload" as="image" href={src + IMG_V} imageSrcSet={srcSet} imageSizes={GRID_SIZES} fetchPriority="high" />
       )}
       <img
         ref={imgRef}
-        src={src}
+        src={src + IMG_V}
+        srcSet={srcSet}
+        sizes={GRID_SIZES}
         alt={alt}
         width={width}
         height={height}
@@ -267,7 +280,10 @@ const Photography = () => {
 
   return (
     <section id="photography-gallery" className="section photography-section" ref={containerRef} aria-label={`${activeCategory} photography gallery`}>
-      <audio ref={audioRef} src={natureAudio} preload="auto" />
+      {/* preload="none": the track is 5.6MB and this element mounts on every
+          category, so "auto" downloaded it even on pages that can't play it.
+          play() runs inside a click, so the fetch still starts on demand. */}
+      <audio ref={audioRef} src={natureAudio} preload="none" />
       
       {/* SKIPER MEDIA PLAYBAR */}
       {activeCategory === 'nature' && (
@@ -291,14 +307,14 @@ const Photography = () => {
           {/* Collapsed View */}
           <div className="sk-collapsed">
             <div className={`sk-collapsed-art ${!isPlaying ? 'paused' : ''}`}>
-              <img src={filteredImages[0]?.src} alt="Playing" style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
+              <img src={filteredImages[0]?.src + IMG_V} alt="Playing" style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
             </div>
           </div>
           
           {/* Expanded View */}
           <div className="sk-expanded">
             <div className="sk-art">
-              <img src={filteredImages[0]?.src} alt="Album Art" className={isPlaying ? 'spinning' : ''} />
+              <img src={filteredImages[0]?.src + IMG_V} alt="Album Art" className={isPlaying ? 'spinning' : ''} />
             </div>
             
             <div className="sk-details">
