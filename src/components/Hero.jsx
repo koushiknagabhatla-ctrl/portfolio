@@ -11,11 +11,22 @@ const CONTENT = {
   network: {
     titleLines: ["I'M", 'NETWORK ENGINEER'],
     watermark: '通信網',
-    profileLabel: '[Profile]',
-    profile: 'B.Tech Computer Science student designing, configuring, and troubleshooting enterprise-grade networks. Hands-on across multi-switch and multi-router topologies — VLANs, 802.1Q trunking, inter-VLAN routing, OSPF, Rapid PVST+, EtherChannel, ACLs, and Layer-2 security on Cisco IOS. Strong in VLSM subnetting, packet-level analysis, and systematic fault isolation.',
-    stackLabel: '[Core Stack]',
-    stack: 'Cisco IOS, VLANs, 802.1Q, OSPF, STP/RPVST+, EtherChannel, ACLs, Port Security, DHCP Snooping, Dynamic ARP Inspection, BPDU Guard, NAT/PAT, Cisco ASA, Wireshark, Packet Tracer, Linux',
-    worksLabel: '[Featured Labs]',
+    profile: 'B.Tech Computer Science student graduating in 2027, with hands-on experience designing, configuring, and troubleshooting enterprise-grade networks. Comfortable across multi-switch and multi-router topologies — VLANs, 802.1Q trunking, inter-VLAN routing, OSPF, STP, EtherChannel, ACLs, and Layer-2 security on Cisco IOS. Strong in subnetting, packet analysis with Wireshark, and systematic fault isolation.',
+    experience: 'Network Engineer Intern — SK Jalrakshak Innovations (SKJAL), 2026. Configured access-layer switching for the office LAN and IoT deployments, deployed and verified static, default, and single-area OSPF routing between site routers, and hardened the access layer with Port Security, DHCP Snooping, Dynamic ARP Inspection, and BPDU Guard.',
+    stackGroups: [
+      {
+        label: '[Routing & Switching]',
+        items: 'Cisco IOS · VLANs · 802.1Q Trunking · Inter-VLAN Routing · STP/RPVST+ · EtherChannel · Static & Default Routing · OSPF'
+      },
+      {
+        label: '[Network Security]',
+        items: 'ACLs · SSH · Port Security · DHCP Snooping · Dynamic ARP Inspection · BPDU Guard · AAA Concepts'
+      },
+      {
+        label: '[Protocols & Tools]',
+        items: 'TCP/IP · OSI Model · IPv4/IPv6 · VLSM & Subnetting · ARP · ICMP · DHCP · DNS · NAT/PAT · Wireshark · Cisco Packet Tracer · Linux'
+      }
+    ],
     works: [
       'ENTERPRISE CAMPUS NETWORK — 3-Tier Hierarchical LAN, 19 Devices',
       'MULTI-ROUTER WAN & OSPF — Dual-Stack IPv4/IPv6 Routing Lab',
@@ -187,21 +198,30 @@ const Hero = ({ variant = 'network' }) => {
             <h2 className="kaisei-story__section-title">info</h2>
             <div className="kaisei-story__profile-grid">
               <div className="kaisei-profile__item">
-                <span className="kaisei-meta__label">{content.profileLabel}</span>
+                <span className="kaisei-meta__label">[Profile]</span>
                 <p className="kaisei-profile__text">
                   {content.profile}
                 </p>
               </div>
 
               <div className="kaisei-profile__item">
-                <span className="kaisei-meta__label">{content.stackLabel}</span>
+                <span className="kaisei-meta__label">[Experience]</span>
                 <p className="kaisei-profile__text">
-                  {content.stack}
+                  {content.experience}
                 </p>
               </div>
 
+              {content.stackGroups.map((group) => (
+                <div className="kaisei-profile__item" key={group.label}>
+                  <span className="kaisei-meta__label">{group.label}</span>
+                  <p className="kaisei-profile__text">
+                    {group.items}
+                  </p>
+                </div>
+              ))}
+
               <div className="kaisei-profile__item">
-                <span className="kaisei-meta__label">{content.worksLabel}</span>
+                <span className="kaisei-meta__label">[Featured Labs]</span>
                 <ul className="kaisei-profile__text kaisei-profile__works">
                   {content.works.map((work) => (
                     <li key={work}>{work}</li>

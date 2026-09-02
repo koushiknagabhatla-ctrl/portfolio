@@ -9,9 +9,20 @@ const Footer = () => {
           <div className="kaisei-footer__col">
             <p className="kaisei-footer__label">[Menu]</p>
             <ul className="kaisei-footer__list">
-              <li><a href="#works">Works</a></li>
+              <li><Link to="/">Home</Link></li>
               <li><Link to="/web-dev">Web Dev</Link></li>
+              <li><Link to="/about">About</Link></li>
               <li><Link to="/photography">Photography</Link></li>
+              <li>
+                <a
+                  href="/NAGABHATLA_RAMA_KOUSHIK_Resume.pdf"
+                  download="NAGABHATLA RAMA KOUSHIK - Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Resume
+                </a>
+              </li>
             </ul>
           </div>
 
