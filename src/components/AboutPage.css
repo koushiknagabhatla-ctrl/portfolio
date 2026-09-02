@@ -8,7 +8,6 @@
   overflow-x: hidden;
 }
 
-/* Base Sections */
 .aww-section {
   position: relative;
   width: 100%;
@@ -55,7 +54,6 @@
   margin-top: 15vh;
 }
 
-/* Typography */
 .aww-massive-title {
   font-size: clamp(4rem, 12vw, 12rem);
   line-height: 0.9;
@@ -85,7 +83,6 @@
   color: #fff;
 }
 
-/* Scroll indicator (shared .kaisei-scroll animation, recolored for the dark hero) */
 .aww-hero-scroll {
   position: absolute;
   bottom: 4vh;
@@ -97,7 +94,6 @@
   color: #f7f7f2;
 }
 
-/* Grids */
 .aww-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -123,12 +119,10 @@
   align-items: center;
 }
 
-/* Lone statue centered by the flex parent; !important beats .square's width */
 .aww-image-wrapper.statue-solo {
   width: 30vw !important;
 }
 
-/* Positioning Modifiers */
 .middle-align {
   display: flex;
   flex-direction: column;
@@ -143,7 +137,6 @@
 .right-align { margin-left: auto; margin-right: 0; }
 .left-align { margin-left: 0; }
 
-/* Images & Wrappers */
 .aww-image-wrapper {
   overflow: hidden;
   position: relative;
@@ -169,7 +162,6 @@
   will-change: transform;
 }
 
-/* Hero Gradient */
 .aww-hero-gradient {
   position: absolute;
   top: 0;
@@ -181,7 +173,6 @@
   z-index: 5;
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .aww-grid, .aww-grid.reverse, .aww-grid-triple {
     grid-template-columns: 1fr;

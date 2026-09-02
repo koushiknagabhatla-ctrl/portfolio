@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Hero.css';
@@ -7,15 +7,96 @@ import heroImg from '../assets/hero.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero = () => {
+const CONTENT = {
+  network: {
+    titleLines: ["I'M", 'NETWORK ENGINEER'],
+    watermark: '通信網',
+    profileLabel: '[Profile]',
+    profile: 'B.Tech Computer Science student designing, configuring, and troubleshooting enterprise-grade networks. Hands-on across multi-switch and multi-router topologies — VLANs, 802.1Q trunking, inter-VLAN routing, OSPF, Rapid PVST+, EtherChannel, ACLs, and Layer-2 security on Cisco IOS. Strong in VLSM subnetting, packet-level analysis, and systematic fault isolation.',
+    stackLabel: '[Core Stack]',
+    stack: 'Cisco IOS, VLANs, 802.1Q, OSPF, STP/RPVST+, EtherChannel, ACLs, Port Security, DHCP Snooping, Dynamic ARP Inspection, BPDU Guard, NAT/PAT, Cisco ASA, Wireshark, Packet Tracer, Linux',
+    worksLabel: '[Featured Labs]',
+    works: [
+      'ENTERPRISE CAMPUS NETWORK — 3-Tier Hierarchical LAN, 19 Devices',
+      'MULTI-ROUTER WAN & OSPF — Dual-Stack IPv4/IPv6 Routing Lab',
+      'SECURE LAN — Hardened Access Layer, ASA Perimeter & DMZ'
+    ],
+    currently: 'Pursuing CCNA certification & building new Packet Tracer labs.'
+  },
+  programming: {
+    titleLines: ['I ALSO DEVELOP', 'WEBSITES FOR FUN'],
+    watermark: '自己紹介',
+    profileLabel: '[Profile]',
+    profile: "Final-year B.Tech Computer Science student building full-stack products with React, Python, and FastAPI. Shipped four production apps — from an AI background-removal model to a real-time flight-booking platform — and single-handedly designed, deployed, and SEO-optimized an IoT startup's corporate website end to end.",
+    stackLabel: '[Tech Stack]',
+    stack: 'React, JavaScript, Python, FastAPI, Node.js, MySQL, Supabase, Linux, Cisco Packet Tracer, Git, Figma',
+    worksLabel: '[Featured Works]',
+    works: [
+      'TRAVELWISE — Full-Stack Flight Booking & Real-Time Tracking',
+      'PIXEL FORGE AI — AI Image Platform powered by Gemini API',
+      'BG REMOVER — AI Background Removal, Trained & Deployed on Hugging Face',
+      'SK JALRAKSHAK — Corporate Platform for an IIT Delhi-Incubated Startup'
+    ],
+    currently: 'Pursuing CCNA certification & shipping new projects.'
+  }
+};
+
+const Hero = ({ variant = 'network' }) => {
+  const content = CONTENT[variant] ?? CONTENT.network;
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const imgRef = useRef(null);
   const storyRef = useRef(null);
 
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const lines = gsap.utils.toArray('.kaisei-hero__line-inner');
+
+      gsap.set(lines, { yPercent: 118 });
+      gsap.set('.kaisei-hero__watermark', { opacity: 0, scale: 1.09 });
+      gsap.set('.kaisei-hero__footer-row', { opacity: 0, y: 26 });
+
+      const reveal = gsap.timeline({ paused: true })
+        .to(lines, {
+          yPercent: 0,
+          duration: 1.25,
+          ease: 'power4.out',
+          stagger: 0.11
+        }, 0)
+        .to('.kaisei-hero__watermark', {
+          opacity: 0.45,
+          scale: 1,
+          duration: 1.8,
+          ease: 'power3.out'
+        }, 0.1)
+        .to('.kaisei-hero__footer-row', {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: 'power3.out'
+        }, 0.55);
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        reveal.progress(1);
+        return;
+      }
+
+      const start = () => reveal.play();
+
+      if (document.querySelector('.preloader-container')) {
+        window.addEventListener('preloader:done', start, { once: true });
+      } else {
+        start();
+      }
+
+      return () => window.removeEventListener('preloader:done', start);
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Hero Title Parallax on Scroll
       if (titleRef.current) {
         gsap.to(titleRef.current, {
           yPercent: -30,
@@ -30,7 +111,20 @@ const Hero = () => {
         });
       }
 
-      // 2. Editorial Portrait Parallax (Image moves smoothly inside wrapper)
+      gsap.fromTo('.kaisei-story__img-wrapper',
+        { clipPath: 'inset(100% 0% 0% 0%)' },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 1.5,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: '.kaisei-story__img-wrapper',
+            start: 'top 88%',
+            once: true
+          }
+        }
+      );
+
       if (imgRef.current) {
         gsap.fromTo(
           imgRef.current,
@@ -63,16 +157,17 @@ const Hero = () => {
         fetchPriority="high"
         decoding="async"
       />
-      {/* 2. MAIN HERO SECTION */}
       <section className="kaisei-hero">
         <div className="kaisei-hero__watermark">
-          自己紹介
+          {content.watermark}
         </div>
         <div className="kaisei-container kaisei-hero__grid">
           <h1 className="kaisei-hero__title" ref={titleRef}>
-            I&apos;M<br />
-            FULL-STACK<br />
-            DEVELOPER &amp; ENGINEER
+            {content.titleLines.map((line) => (
+              <span className="kaisei-hero__line" key={line}>
+                <span className="kaisei-hero__line-inner">{line}</span>
+              </span>
+            ))}
           </h1>
 
           <div className="kaisei-hero__footer-row">
@@ -87,10 +182,8 @@ const Hero = () => {
         </div>
       </section>
 
-      {/* 4. STORYTELLING & IMAGE PLACEMENT EDITORIAL SECTION (Kaisei /about style) */}
       <section id="story" className="kaisei-story" ref={storyRef}>
         <div className="kaisei-container kaisei-story__grid">
-          {/* Asymmetrical Portrait Image Placement */}
           <div className="kaisei-story__img-col">
             <div className="kaisei-story__img-wrapper">
               <img
@@ -107,81 +200,45 @@ const Hero = () => {
 
           </div>
 
-          {/* Giant Tabular Number Display */}
           <div className="kaisei-story__stat-col">
             <span className="kaisei-story__stat-label">[Academic Year]</span>
             <div className="kaisei-story__stat-num">4<span className="kaisei-story__stat-unit">TH</span></div>
           </div>
 
-          {/* Detailed Authentic Story Profile */}
           <div className="kaisei-story__profile-col">
             <h2 className="kaisei-story__section-title">info</h2>
             <div className="kaisei-story__profile-grid">
               <div className="kaisei-profile__item">
-                <span className="kaisei-meta__label">[Profile]</span>
+                <span className="kaisei-meta__label">{content.profileLabel}</span>
                 <p className="kaisei-profile__text">
-                  Final-year B.Tech Computer Science student building full-stack products with React, Python, and FastAPI. Shipped four production apps — from an AI background-removal model to a real-time flight-booking platform — and single-handedly designed, deployed, and SEO-optimized an IoT startup's corporate website end to end.
+                  {content.profile}
                 </p>
               </div>
 
               <div className="kaisei-profile__item">
-                <span className="kaisei-meta__label">[Tech Stack]</span>
+                <span className="kaisei-meta__label">{content.stackLabel}</span>
                 <p className="kaisei-profile__text">
-                  React, JavaScript, Python, FastAPI, Node.js, MySQL, Supabase, Linux, Cisco Packet Tracer, Git, Figma
+                  {content.stack}
                 </p>
               </div>
 
               <div className="kaisei-profile__item">
-                <span className="kaisei-meta__label">[Featured Works]</span>
+                <span className="kaisei-meta__label">{content.worksLabel}</span>
                 <ul className="kaisei-profile__text kaisei-profile__works">
-                  <li>TRAVELWISE — Full-Stack Flight Booking &amp; Real-Time Tracking</li>
-                  <li>PIXEL FORGE AI — AI Image Platform powered by Gemini API</li>
-                  <li>BG REMOVER — AI Background Removal, Trained &amp; Deployed on Hugging Face</li>
-                  <li>SK JALRAKSHAK — Corporate Platform for an IIT Delhi-Incubated Startup</li>
+                  {content.works.map((work) => (
+                    <li key={work}>{work}</li>
+                  ))}
                 </ul>
               </div>
 
               <div className="kaisei-profile__item">
                 <span className="kaisei-meta__label">[Currently]</span>
-                <p className="kaisei-profile__text">Pursuing CCNA certification &amp; shipping new projects.</p>
+                <p className="kaisei-profile__text">{content.currently}</p>
               </div>
 
               <div className="kaisei-profile__item">
                 <span className="kaisei-meta__label">[Languages]</span>
                 <p className="kaisei-profile__text">English, Telugu, Hindi</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 5. APPROACH & PHILOSOPHY SECTION */}
-        <div className="kaisei-approach">
-          <div className="kaisei-container kaisei-approach__grid">
-            <div className="kaisei-approach__head">
-              <h2 className="kaisei-approach__title">approach</h2>
-              <p className="kaisei-approach__sub">Core values guiding my engineering & creative projects</p>
-            </div>
-
-            <div className="kaisei-approach__list">
-              <div className="kaisei-approach__item">
-                <h3 className="kaisei-approach__item-title">Communication</h3>
-                <p className="kaisei-approach__item-desc">
-                  I believe exceptional software begins with transparent dialogue. Whether defining architecture or refining user experience, I value clear communication to ensure every requirement is met with precision and purpose.
-                </p>
-              </div>
-
-              <div className="kaisei-approach__item">
-                <h3 className="kaisei-approach__item-title">Precision</h3>
-                <p className="kaisei-approach__item-desc">
-                  From pixel-perfect UI rendering and buttery 60 FPS animations to fast, reliable APIs, I dedicate immense care to every detail, ensuring scalable and reliable engineering.
-                </p>
-              </div>
-
-              <div className="kaisei-approach__item">
-                <h3 className="kaisei-approach__item-title">Exploration</h3>
-                <p className="kaisei-approach__item-desc">
-                  Every project presents a new frontier. Blending my background in software systems with visual photography allows me to approach problems with curiosity, artistic intuition, and modern technical rigor.
-                </p>
               </div>
             </div>
           </div>

@@ -5,21 +5,25 @@ import './PageTransition.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Timings replicated from the reference implementation (Taxi.js desktop
-// transition): new page rises from 100vh at scale 0.8 while the old page
-// drifts up -50vh and dims, both over 1.4s expo.inOut. Used on all viewport
-// sizes — the reference's mobile crossfade was too subtle to register.
 const CARD_DURATION = 1.4;
 const CARD_EASE = 'expo.inOut';
 
 const isDarkPath = (pathname) =>
   pathname.startsWith('/photography') || pathname.startsWith('/about');
 
+// The navbar floats above both pages during a transition, so its colour has to
+// follow whatever is actually behind it rather than the route being navigated
+// to. Published on <html> so the fixed navbar can read it from outside this
+// component's subtree.
+const syncDarkClass = (pathname) => {
+  document.documentElement.classList.toggle('dark-page', isDarkPath(pathname));
+};
+
 function PageTransition({ location, lenisRef, children }) {
   const [displayedLocation, setDisplayedLocation] = useState(location);
   const pageRef = useRef(null);
   const overlayRef = useRef(null);
-  const phaseRef = useRef('idle'); // 'idle' | 'capturing' | 'animating'
+  const phaseRef = useRef('idle');
 
   const removeOverlay = () => {
     if (overlayRef.current) {
@@ -36,6 +40,7 @@ function PageTransition({ location, lenisRef, children }) {
       gsap.set(page, { clearProps: 'all' });
     }
     removeOverlay();
+    syncDarkClass(location.pathname);
     document.documentElement.classList.remove('page-transitioning');
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
@@ -43,9 +48,6 @@ function PageTransition({ location, lenisRef, children }) {
       lenisRef.current.start();
       lenisRef.current.scrollTo(0, { immediate: true, lock: true, force: true });
     }
-    // Triggers created mid-transition measured a fixed, transformed page;
-    // recompute now that the page is back in normal flow, and once more
-    // after the next paint to catch any late layout settling.
     ScrollTrigger.refresh();
     requestAnimationFrame(() => ScrollTrigger.refresh());
     phaseRef.current = 'idle';
@@ -77,8 +79,6 @@ function PageTransition({ location, lenisRef, children }) {
     return true;
   };
 
-  // Phase 1 — real location changed: snapshot the outgoing page before React
-  // swaps the route, lock interaction, then let the new page render.
   useLayoutEffect(() => {
     if (location.key === displayedLocation.key) return;
 
@@ -88,6 +88,7 @@ function PageTransition({ location, lenisRef, children }) {
     if (phaseRef.current !== 'idle') finishNow();
 
     if (samePage || reduceMotion || !captureSnapshot()) {
+      syncDarkClass(location.pathname);
       // eslint-disable-next-line react-hooks/set-state-in-effect -- route swap must commit synchronously before paint
       setDisplayedLocation(location);
       return;
@@ -100,7 +101,6 @@ function PageTransition({ location, lenisRef, children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
-  // Phase 2 — new route committed (pre-paint): position it and animate.
   useLayoutEffect(() => {
     if (phaseRef.current !== 'capturing') return;
     const page = pageRef.current;
@@ -128,18 +128,27 @@ function PageTransition({ location, lenisRef, children }) {
       duration: CARD_DURATION,
       ease: CARD_EASE,
     });
-    gsap.to(page, {
+    // The incoming page rises from the bottom, so the strip behind the navbar
+    // is the outgoing page until late in the tween. Hand over at 60% and let
+    // the navbar's own 0.4s colour ease land just as the new page arrives.
+    const pageTween = gsap.to(page, {
       y: '0vh',
       scale: 1,
       duration: CARD_DURATION,
       ease: CARD_EASE,
+      onUpdate: () => {
+        if (pageTween.progress() > 0.6) syncDarkClass(displayedLocation.pathname);
+      },
       onComplete: finishNow,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayedLocation]);
 
-  // Safety: never leak the snapshot overlay or the interaction lock if this
-  // component unmounts mid-transition.
+  useLayoutEffect(() => {
+    syncDarkClass(displayedLocation.pathname);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useLayoutEffect(
     () => () => {
       if (overlayRef.current) {

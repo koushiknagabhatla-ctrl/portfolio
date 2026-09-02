@@ -6,16 +6,11 @@ import photoDatabase from '../data/photoDatabase.json';
 import natureAudio from '../assets/solace.mp3';
 import { IMG_V } from '../imgVersion.js';
 
-// Whitelist of valid category values — reject anything else
 const VALID_CATEGORIES = new Set(['all', 'people', 'bikes', 'nature']);
 
-// Every file under public/photography has a 1200w twin in a sibling 2x/ dir
-// (see scripts/build-images.mjs). Widths must match what that script emits.
 const srcSetFor = (src) =>
   `${src}${IMG_V} 800w, ${src.replace(/\/([^/]+)$/, '/2x/$1')}${IMG_V} 1200w`;
 
-// Three columns inside a 1250px container minus padding and gaps; one full-bleed
-// column under 768px.
 const GRID_SIZES = '(max-width: 768px) calc(100vw - 32px), 390px';
 
 const ProgressiveImage = ({ src, alt, width, height, isEager }) => {
@@ -62,7 +57,7 @@ const Photography = () => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
-  const [expandedState, setExpandedState] = useState('closed'); // 'closed', 'initial', 'hover', 'pinned'
+  const [expandedState, setExpandedState] = useState('closed');
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -70,8 +65,6 @@ const Photography = () => {
   const touchStartY = useRef(0);
   const touchCurrentY = useRef(0);
 
-  // Adjust state during render on category change (React-sanctioned pattern);
-  // the audio element itself is reset in an effect since refs are off-limits here
   if (activeCategory !== prevCategory) {
     setPrevCategory(activeCategory);
     if (activeCategory !== 'nature') {
@@ -112,7 +105,6 @@ const Photography = () => {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  // Sync actual audio progress
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -131,7 +123,7 @@ const Photography = () => {
       setIsPlaying(false);
       setProgress(0);
       setCurrentTime(0);
-      setExpandedState('closed'); // Collapse when song ends
+      setExpandedState('closed');
     };
 
     audio.addEventListener('timeupdate', updateProgress);
@@ -153,7 +145,6 @@ const Photography = () => {
       }
     }
     
-    // Cleanup on unmount
     const currentAudio = audioRef.current;
     return () => {
       if (currentAudio) {
@@ -170,8 +161,6 @@ const Photography = () => {
       ]
     : photoDatabase[activeCategory] || [];
 
-  // Height-balanced masonry: each image joins the currently shortest column,
-  // so all three columns end at roughly the same height
   const columns = [[], [], []];
   const columnHeights = [0, 0, 0];
   filteredImages.forEach((image, index) => {
@@ -188,17 +177,14 @@ const Photography = () => {
       setIsPlaying(true);
       setExpandedState('pinned');
       
-      // Auto-collapse after 2 seconds to create a seamless dynamic island effect
       setTimeout(() => {
         setExpandedState(current => current === 'pinned' ? 'closed' : current);
       }, 2000);
       
-      // iOS requires play() inside the user gesture; autoplay rejection is expected
       if (audioRef.current) {
         audioRef.current.play().catch(() => {});
       }
     } else {
-      // Toggle pinned state
       if (expandedState === 'pinned') {
         setExpandedState('closed');
       } else {
@@ -220,7 +206,7 @@ const Photography = () => {
   };
 
   const handlePlayPause = (e) => {
-    e.stopPropagation(); // Don't collapse the island
+    e.stopPropagation();
     setIsPlaying(!isPlaying);
   };
 
@@ -257,13 +243,12 @@ const Photography = () => {
   const handleTouchEnd = () => {
     if (expandedState === 'pinned') {
       const deltaY = touchCurrentY.current - touchStartY.current;
-      if (deltaY > 80) { // 80px swipe down threshold
+      if (deltaY > 80) {
         setExpandedState('closed');
       }
     }
   };
 
-  // Determine the island state class
   let islandState = 'prompt';
   if (hasStarted) {
     if (expandedState !== 'closed') {
@@ -273,19 +258,14 @@ const Photography = () => {
     }
   }
 
-  // Validate category after all hooks — redirect invalid categories
   if (!isValidCategory) {
     return <Navigate to="/photography" replace />;
   }
 
   return (
     <section id="photography-gallery" className="section photography-section" ref={containerRef} aria-label={`${activeCategory} photography gallery`}>
-      {/* preload="none": the track is 5.6MB and this element mounts on every
-          category, so "auto" downloaded it even on pages that can't play it.
-          play() runs inside a click, so the fetch still starts on demand. */}
       <audio ref={audioRef} src={natureAudio} preload="none" />
       
-      {/* SKIPER MEDIA PLAYBAR */}
       {activeCategory === 'nature' && (
         <div
           className={`skiper-island ${islandState}`}
@@ -298,20 +278,17 @@ const Photography = () => {
           role="region"
           aria-label="Media Player"
         >
-          {/* Prompt View */}
           <div className="sk-prompt">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
             <span>Enable audio for a masterpiece experience</span>
           </div>
 
-          {/* Collapsed View */}
           <div className="sk-collapsed">
             <div className={`sk-collapsed-art ${!isPlaying ? 'paused' : ''}`}>
               <img src={filteredImages[0]?.src + IMG_V} alt="Playing" style={{ animationPlayState: isPlaying ? 'running' : 'paused' }} />
             </div>
           </div>
           
-          {/* Expanded View */}
           <div className="sk-expanded">
             <div className="sk-art">
               <img src={filteredImages[0]?.src + IMG_V} alt="Album Art" className={isPlaying ? 'spinning' : ''} />

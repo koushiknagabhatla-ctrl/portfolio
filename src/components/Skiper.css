@@ -1,6 +1,3 @@
-/* ==========================================================================
-   SKIPER MEDIA PLAYBAR
-   ========================================================================== */
 
 .skiper-island {
   position: fixed;
@@ -14,11 +11,9 @@
   overflow: hidden;
   cursor: pointer;
   z-index: 9999;
-  /* Solid Black Styling */
   background: #000000;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  /* Premium Bouncy spring transition */
   transition: width 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
               background-color 0.4s ease,
               transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -39,7 +34,6 @@
   justify-content: center;
 }
 
-/* PROMPT VIEW */
 .sk-prompt {
   position: absolute;
   inset: 0;
@@ -86,7 +80,6 @@
   justify-content: flex-start;
 }
 
-/* COLLAPSED VIEW */
 .sk-collapsed {
   position: absolute;
   inset: 0;
@@ -118,7 +111,6 @@
   object-fit: cover;
 }
 
-/* EXPANDED VIEW */
 .sk-expanded {
   display: flex;
   align-items: center;

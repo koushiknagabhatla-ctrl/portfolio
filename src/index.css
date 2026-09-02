@@ -40,7 +40,6 @@ ul {
   list-style: none;
 }
 
-/* Lenis Smooth Scroll Styles */
 html.lenis, html.lenis body {
   height: auto;
 }
@@ -61,7 +60,6 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Utilities */
 .container {
   width: min(100%, 1400px);
   margin: 0 auto;
@@ -76,7 +74,6 @@ html.lenis, html.lenis body {
   justify-content: center;
 }
 
-/* Focus Styles for Accessibility */
 a:focus-visible,
 button:focus-visible {
   outline: 3px solid var(--text-color);
@@ -84,12 +81,10 @@ button:focus-visible {
   border-radius: 2px;
 }
 
-/* Hide scrollbar for cleaner look */
 ::-webkit-scrollbar {
   width: 0;
 }
 
-/* Skip to content for screen readers */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -106,7 +101,6 @@ button:focus-visible {
   top: 0;
 }
 
-/* Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

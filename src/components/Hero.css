@@ -1,4 +1,3 @@
-/* Kaisei Sadatoki Reference Theme Styles */
 .kaisei-home-wrapper {
   background-color: var(--bg-color, #fffdf1);
   color: var(--text-color, #1a1a1a);
@@ -15,14 +14,13 @@
   padding: 0 clamp(20px, 5vw, 80px);
 }
 
-/* 2. MAIN HERO SECTION */
 .kaisei-hero {
   position: relative;
   min-height: calc(98vh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: clamp(180px, 28vh, 280px);
+  padding-top: clamp(230px, 34vh, 340px);
   padding-bottom: clamp(16px, 2.5vh, 28px);
 }
 
@@ -53,9 +51,6 @@
   width: 100%;
 }
 
-/* Pinned near the preloader logo's top-left spot (nudged slightly higher),
-   so the morph reads as the logo settling into its corner while the panel
-   lifts away. */
 .kaisei-hero__crest {
   position: absolute;
   top: clamp(14px, 2.2vh, 28px);
@@ -66,8 +61,6 @@
   z-index: 2;
 }
 
-/* Below 600px the navbar links stack at the top-left — drop the crest
-   just beneath them, aligned to the same 20px left edge as the nav. */
 @media (max-width: 600px) {
   .kaisei-hero__crest {
     top: 52px;
@@ -85,6 +78,17 @@
   color: #e56a44;
   margin: 0;
   width: 100%;
+}
+
+.kaisei-hero__line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.09em;
+  margin-bottom: -0.09em;
+}
+
+.kaisei-hero__line-inner {
+  display: block;
 }
 
 .kaisei-hero__footer-row {
@@ -152,7 +156,6 @@
   letter-spacing: -0.02em;
 }
 
-/* 4. STORYTELLING EDITORIAL SECTION */
 .kaisei-story {
   padding: clamp(80px, 12vh, 160px) 0;
   border-top: dashed 1px var(--accent-color, #e56a44);
@@ -279,78 +282,12 @@
   background: var(--accent-color, #e56a44);
 }
 
-/* 5. APPROACH & PHILOSOPHY */
-.kaisei-approach {
-  margin-top: clamp(80px, 12vh, 140px);
-  padding: clamp(60px, 10vh, 100px) 0;
-  border-top: dashed 1px var(--accent-color, #e56a44);
-}
-
-.kaisei-approach__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 48px;
-}
-
-@media (min-width: 1024px) {
-  .kaisei-approach__grid {
-    grid-template-columns: 5fr 7fr;
-  }
-}
-
-.kaisei-approach__head {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.kaisei-approach__title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(3rem, 6vw, 6.5rem);
-  font-weight: 600;
-  color: var(--accent-color, #e56a44);
-  line-height: 0.9;
-}
-
-.kaisei-approach__sub {
-  font-size: clamp(1rem, 1.2vw, 1.2rem);
-  font-weight: 600;
-  color: var(--text-color, #1a1a1a);
-}
-
-.kaisei-approach__list {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(40px, 6vh, 70px);
-}
-
-.kaisei-approach__item {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.kaisei-approach__item-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(1.8rem, 2.5vw, 2.8rem);
-  font-weight: 600;
-  color: var(--text-color, #1a1a1a);
-}
-
-.kaisei-approach__item-desc {
-  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
-  line-height: 1.7;
-  color: var(--text-color, #1a1a1a);
-  opacity: 0.9;
-}
-
 @media (max-width: 768px) {
   .kaisei-home-wrapper {
     padding-top: 80px;
   }
   .kaisei-hero {
     min-height: auto;
-    /* clears the absolutely-positioned crest pinned near the top edge */
     padding-top: 76px;
     padding-bottom: 24px;
   }
@@ -359,7 +296,9 @@
   }
   .kaisei-hero__title {
     font-size: clamp(2.6rem, 11vw, 5rem);
-    line-height: 1.02;
+    /* Long headlines wrap to three or four rows on a phone, and at 1.02 the
+       display face's ascenders nearly touch the row above. */
+    line-height: 1.28;
     word-break: break-word;
   }
   .kaisei-hero__footer-row {
@@ -377,15 +316,5 @@
   }
   .kaisei-story__section-title {
     font-size: clamp(2rem, 8vw, 3rem);
-  }
-  .kaisei-approach {
-    margin-top: 40px;
-    padding: 40px 0;
-  }
-  .kaisei-approach__title {
-    font-size: clamp(2.2rem, 9vw, 4rem);
-  }
-  .kaisei-approach__item-title {
-    font-size: clamp(1.4rem, 6vw, 2rem);
   }
 }

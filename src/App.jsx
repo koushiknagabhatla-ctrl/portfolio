@@ -24,6 +24,13 @@ const Home = () => (
   </>
 );
 
+const Programming = () => (
+  <>
+    <Hero variant="programming" />
+    <WorksPage variant="programming" />
+  </>
+);
+
 function AppContent() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -68,9 +75,6 @@ function AppContent() {
     }
     window.scrollTo(0, 0);
     const refreshTimer = setTimeout(() => {
-      // While a page transition is running the route container is fixed and
-      // transformed — measuring now would cache wrong ScrollTrigger
-      // positions. PageTransition refreshes when the animation settles.
       if (!document.documentElement.classList.contains('page-transitioning')) {
         ScrollTrigger.refresh();
       }
@@ -116,6 +120,7 @@ function AppContent() {
               <main id="main-content" style={{ backgroundColor: displayedIsPhotography ? '#000000' : undefined, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                 <Routes location={displayedLocation}>
                   <Route path="/" element={<Home />} />
+                  <Route path="/programming" element={<Programming />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/works" element={<Navigate to="/" replace />} />
                   <Route path="/photography" element={<PhotographyDirectory />} />
@@ -123,7 +128,7 @@ function AppContent() {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
-              {displayedLocation.pathname === '/' && <Footer />}
+              {(displayedLocation.pathname === '/' || displayedLocation.pathname === '/programming') && <Footer />}
             </>
           );
         }}

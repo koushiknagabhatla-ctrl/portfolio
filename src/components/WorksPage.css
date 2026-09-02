@@ -43,7 +43,6 @@
   padding: 0 clamp(20px, 5vw, 80px);
 }
 
-/* Work item — sticky info left, parallax image right (Kaisei /work layout) */
 .work-item {
   display: grid;
   grid-template-columns: 1fr;
@@ -56,7 +55,6 @@
   margin-bottom: 0;
 }
 
-/* No fixed frame ratio — the screenshot defines its own height, zero crop */
 .work-item__img {
   grid-row: 1 / 2;
   display: block;

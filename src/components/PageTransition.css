@@ -1,7 +1,3 @@
-/* Animated route container. Must carry no transform/filter/will-change at
-   rest — a permanent containing block would break position:fixed children
-   (e.g. the photography media island). GSAP applies transforms only while
-   a transition is running and clears them afterwards. */
 .page-wrap {
   position: relative;
   display: flex;
@@ -15,8 +11,6 @@
   background-color: #000000;
 }
 
-/* Frozen snapshot of the outgoing page. Sits above normal flow, below the
-   incoming page card (z 600) and the navbar (z 1000). */
 .page-transition-snapshot {
   position: fixed;
   inset: 0;
@@ -26,8 +20,6 @@
   will-change: transform, opacity;
 }
 
-/* Interaction lock while transitioning — mirrors the reference site's
-   `.loading` class (cursor: progress + pointer-events: none). */
 html.page-transitioning {
   cursor: progress;
 }

@@ -49,7 +49,7 @@
     height: 80px;
   }
   .preloader-counter {
-    bottom: 85px; /* Ensures number is clearly visible above mobile browser bottom address bar */
+    bottom: 85px;
     right: 24px;
     font-size: 6.8rem;
   }

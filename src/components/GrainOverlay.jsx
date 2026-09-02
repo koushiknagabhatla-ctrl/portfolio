@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import './GrainOverlay.css';
 
-// Animated film-grain overlay: a persistent noise field where a fraction of
-// pixels churn to a new random alpha each frame, drawn via an offscreen buffer.
 const GrainOverlay = () => {
   const canvasRef = useRef(null);
 

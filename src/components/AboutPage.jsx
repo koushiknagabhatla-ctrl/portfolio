@@ -14,17 +14,11 @@ const AboutPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Image Parallax Effect (smooth slight moving on scroll)
       const imageWrappers = gsap.utils.toArray('.aww-image-wrapper');
       imageWrappers.forEach(wrapper => {
         const img = wrapper.querySelector('.aww-image');
         if (!img) return;
 
-        // The hero sits at the top of the page, already in view at scroll 0.
-        // Its parallax must start exactly at the image's natural position
-        // (yPercent 0 at progress 0) — a -10 start would render the photo
-        // shifted up on mount and snap down on the first ScrollTrigger
-        // refresh after a page transition.
         if (wrapper.closest('.hero-section')) {
           gsap.fromTo(img,
             { yPercent: 0 },
@@ -84,7 +78,7 @@ const AboutPage = () => {
               Most days, you'll find me behind a screen. 
             </p>
             <p className="aww-poetic">
-              Writing code. Debugging logic. Building systems from absolute scratch. I love the silence of the process, the architecture of thought. It's a world where absolute chaos is engineered into perfect order.
+              Designing networks. Tracing packets. Building topologies from absolute scratch, then attacking them to find out what actually holds. I love the silence of the process, the architecture of thought. It's a world where absolute chaos is engineered into perfect order.
             </p>
           </div>
         </div>
@@ -152,7 +146,6 @@ const AboutPage = () => {
         <div className="aww-image-wrapper panoramic right-align">
           <img className="aww-image" src={`/about/ultra_8.webp${IMG_V}`} srcSet={`/about/ultra_8.webp${IMG_V} 800w, /about/2x/ultra_8.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 95vw, 85vw" alt="Raw wilderness panoramic" loading="lazy" decoding="async" width="1600" height="686" />
         </div>
-
 
         <div className="aww-image-wrapper panoramic left-align shift-down-medium">
           <img className="aww-image" src={`/about/ultra_9.webp${IMG_V}`} srcSet={`/about/ultra_9.webp${IMG_V} 800w, /about/2x/ultra_9.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 95vw, 85vw" alt="Scale and perspective" loading="lazy" decoding="async" width="1600" height="686" />
