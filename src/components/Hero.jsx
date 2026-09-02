@@ -23,26 +23,15 @@ const CONTENT = {
     ],
     currently: 'Pursuing CCNA certification & building new Packet Tracer labs.'
   },
-  programming: {
+  webdev: {
     titleLines: ['I ALSO DEVELOP', 'WEBSITES FOR FUN'],
-    watermark: '自己紹介',
-    profileLabel: '[Profile]',
-    profile: "Final-year B.Tech Computer Science student building full-stack products with React, Python, and FastAPI. Shipped four production apps — from an AI background-removal model to a real-time flight-booking platform — and single-handedly designed, deployed, and SEO-optimized an IoT startup's corporate website end to end.",
-    stackLabel: '[Tech Stack]',
-    stack: 'React, JavaScript, Python, FastAPI, Node.js, MySQL, Supabase, Linux, Cisco Packet Tracer, Git, Figma',
-    worksLabel: '[Featured Works]',
-    works: [
-      'TRAVELWISE — Full-Stack Flight Booking & Real-Time Tracking',
-      'PIXEL FORGE AI — AI Image Platform powered by Gemini API',
-      'BG REMOVER — AI Background Removal, Trained & Deployed on Hugging Face',
-      'SK JALRAKSHAK — Corporate Platform for an IIT Delhi-Incubated Startup'
-    ],
-    currently: 'Pursuing CCNA certification & shipping new projects.'
+    watermark: '自己紹介'
   }
 };
 
 const Hero = ({ variant = 'network' }) => {
   const content = CONTENT[variant] ?? CONTENT.network;
+  const hasStory = Boolean(content.profile);
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const imgRef = useRef(null);
@@ -111,20 +100,6 @@ const Hero = ({ variant = 'network' }) => {
         });
       }
 
-      gsap.fromTo('.kaisei-story__img-wrapper',
-        { clipPath: 'inset(100% 0% 0% 0%)' },
-        {
-          clipPath: 'inset(0% 0% 0% 0%)',
-          duration: 1.5,
-          ease: 'power4.out',
-          scrollTrigger: {
-            trigger: '.kaisei-story__img-wrapper',
-            start: 'top 88%',
-            once: true
-          }
-        }
-      );
-
       if (imgRef.current) {
         gsap.fromTo(
           imgRef.current,
@@ -171,9 +146,11 @@ const Hero = ({ variant = 'network' }) => {
           </h1>
 
           <div className="kaisei-hero__footer-row">
-            <p className="kaisei-hero__about-label">
-              About me
-            </p>
+            {hasStory && (
+              <p className="kaisei-hero__about-label">
+                About me
+              </p>
+            )}
             <div className="kaisei-scroll" aria-label="Scroll">
               <span className="kaisei-scroll__text">Scroll</span>
               <span className="kaisei-scroll__text kaisei-scroll__text--clone" aria-hidden="true">Scroll</span>
@@ -182,6 +159,7 @@ const Hero = ({ variant = 'network' }) => {
         </div>
       </section>
 
+      {hasStory && (
       <section id="story" className="kaisei-story" ref={storyRef}>
         <div className="kaisei-container kaisei-story__grid">
           <div className="kaisei-story__img-col">
@@ -244,6 +222,7 @@ const Hero = ({ variant = 'network' }) => {
           </div>
         </div>
       </section>
+      )}
     </div>
   );
 };

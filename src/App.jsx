@@ -24,10 +24,10 @@ const Home = () => (
   </>
 );
 
-const Programming = () => (
+const WebDev = () => (
   <>
-    <Hero variant="programming" />
-    <WorksPage variant="programming" />
+    <Hero variant="webdev" />
+    <WorksPage variant="webdev" />
   </>
 );
 
@@ -120,7 +120,8 @@ function AppContent() {
               <main id="main-content" style={{ backgroundColor: displayedIsPhotography ? '#000000' : undefined, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                 <Routes location={displayedLocation}>
                   <Route path="/" element={<Home />} />
-                  <Route path="/programming" element={<Programming />} />
+                  <Route path="/web-dev" element={<WebDev />} />
+                  <Route path="/programming" element={<Navigate to="/web-dev" replace />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/works" element={<Navigate to="/" replace />} />
                   <Route path="/photography" element={<PhotographyDirectory />} />
@@ -128,7 +129,7 @@ function AppContent() {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
-              {(displayedLocation.pathname === '/' || displayedLocation.pathname === '/programming') && <Footer />}
+              {(displayedLocation.pathname === '/' || displayedLocation.pathname === '/web-dev') && <Footer />}
             </>
           );
         }}

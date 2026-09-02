@@ -104,9 +104,9 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="navbar__item">
-            <Link to="/programming" className={`navbar__link ${isActive('/programming') ? 'active' : ''}`}>
+            <Link to="/web-dev" className={`navbar__link ${isActive('/web-dev') ? 'active' : ''}`}>
               <span className="navbar__bracket">[</span>
-              <span className="navbar__link-text">Programming</span>
+              <span className="navbar__link-text">Web Dev</span>
               <span className="navbar__bracket">]</span>
             </Link>
           </li>

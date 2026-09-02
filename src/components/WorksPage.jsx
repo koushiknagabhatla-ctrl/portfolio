@@ -15,7 +15,17 @@ const WORKS = {
     cta: 'View on GitHub',
     projects: [
       {
-        id: '01',
+        name: 'SECURE LAN',
+        category: 'LAYER-2 SECURITY & DMZ',
+        desc: 'Segmented campus LAN with a hardened access layer — Port Security, DHCP Snooping, Dynamic ARP Inspection, and BPDU Guard — sitting behind an ASA perimeter firewall with a published DMZ and an OSPF branch site. 28 devices and 23 documented tests split between reachability that must work and controls that must block.',
+        stack: 'Cisco ASA · DAI · DHCP Snooping · Wireshark',
+        role: 'Design, Hardening & Packet Analysis',
+        image: net3,
+        imageWidth: 1200,
+        imageHeight: 675,
+        url: 'https://github.com/koushiknagabhatla-ctrl/Secure-LAN-CPT'
+      },
+      {
         name: 'ENTERPRISE CAMPUS NETWORK',
         category: '3-TIER CAMPUS LAN DESIGN',
         desc: 'Three-tier hierarchical campus built around departmental VLANs, 802.1Q trunking, SVI inter-VLAN routing, DHCP relay, Rapid PVST+, EtherChannel, and single-area OSPF reaching a branch site over a WAN. 19 devices, 21 links — every designed path validated with ping and traceroute, and three real build faults isolated and documented.',
@@ -27,7 +37,6 @@ const WORKS = {
         url: 'https://github.com/koushiknagabhatla-ctrl/enterprise-project-cpt'
       },
       {
-        id: '02',
         name: 'MULTI-ROUTER WAN & OSPF',
         category: 'WAN ROUTING LAB',
         desc: 'Multi-router WAN topology running dual-stack IPv4/IPv6 addressing alongside static routes, default routes, and single-area OSPF. Neighbour adjacencies, routing-table contents, and end-to-end reachability verified hop by hop, with Layer-2 and Layer-3 faults traced from wrong gateways and interface problems through to misconfigured routing.',
@@ -37,28 +46,26 @@ const WORKS = {
         imageWidth: 1200,
         imageHeight: 675,
         url: 'https://github.com/koushiknagabhatla-ctrl/multi-router-wan-and-ospf'
-      },
-      {
-        id: '03',
-        name: 'SECURE LAN',
-        category: 'LAYER-2 SECURITY & DMZ',
-        desc: 'Segmented campus LAN with a hardened access layer — Port Security, DHCP Snooping, Dynamic ARP Inspection, and BPDU Guard — sitting behind an ASA perimeter firewall with a published DMZ and an OSPF branch site. 28 devices and 23 documented tests split between reachability that must work and controls that must block.',
-        stack: 'Cisco ASA · DAI · DHCP Snooping · Wireshark',
-        role: 'Design, Hardening & Packet Analysis',
-        image: net3,
-        imageWidth: 1200,
-        imageHeight: 675,
-        url: 'https://github.com/koushiknagabhatla-ctrl/Secure-LAN-CPT'
       }
     ]
   },
-  programming: {
+  webdev: {
     title: 'SELECTED WORKS',
     subtitle: 'A curated collection of digital platforms & engineering achievements.',
     cta: 'Launch Website',
     projects: [
       {
-        id: '01',
+        name: 'BG REMOVER',
+        category: 'AI BACKGROUND REMOVAL',
+        desc: 'AI-powered background removal tool that isolates subjects with clean, precise edges across portraits, products, and automotive shots. Model trained on multiple datasets including rembg 2.0 and published to Hugging Face.',
+        stack: 'React · Vite · Hugging Face',
+        role: 'Design & Development',
+        image: img4,
+        imageWidth: 1200,
+        imageHeight: 596,
+        url: 'https://bgrem.site/'
+      },
+      {
         name: 'TRAVELWISE',
         category: 'FLIGHT BOOKING PLATFORM',
         desc: 'Full-stack Indian flight booking platform featuring real-time flight tracking, live fare comparison, and Supabase authentication. Engineered with React, FastAPI, and Supabase.',
@@ -70,7 +77,6 @@ const WORKS = {
         url: 'https://travelwisetheta.vercel.app/'
       },
       {
-        id: '02',
         name: 'PIXEL FORGE AI',
         category: 'AI IMAGE PLATFORM',
         desc: 'AI image engineering platform powered by React/Vite and a serverless FastAPI Python backend. Integrates the Google Gemini API for intelligent image processing and enhancement.',
@@ -82,7 +88,6 @@ const WORKS = {
         url: 'https://pixelforgeaisix.vercel.app/'
       },
       {
-        id: '03',
         name: 'SK JALRAKSHAK',
         category: 'IIT DELHI INCUBATED STARTUP',
         desc: 'Corporate website independently engineered from scratch for an IIT Delhi-incubated IoT startup. Built complete UI/UX, domain & DNS configuration, Vercel deployment, and on-page SEO.',
@@ -92,18 +97,6 @@ const WORKS = {
         imageWidth: 1200,
         imageHeight: 597,
         url: 'https://www.skjal.in/'
-      },
-      {
-        id: '04',
-        name: 'BG REMOVER',
-        category: 'AI BACKGROUND REMOVAL',
-        desc: 'AI-powered background removal tool that isolates subjects with clean, precise edges across portraits, products, and automotive shots. Model trained on multiple datasets including rembg 2.0 and published to Hugging Face.',
-        stack: 'React · Vite · Hugging Face',
-        role: 'Design & Development',
-        image: img4,
-        imageWidth: 1200,
-        imageHeight: 596,
-        url: 'https://bgrem.site/'
       }
     ]
   }
@@ -120,10 +113,12 @@ const WorksPage = ({ variant = 'network' }) => {
       </div>
 
       <div className="awwwards-projects-list" role="list">
-        {projects.map((project) => (
-          <article className="work-item" key={project.id} role="listitem">
+        {projects.map((project, i) => (
+          <article className="work-item" key={project.name} role="listitem">
             <div className="work-item__info">
-              <span className="work-item__category">{project.id} // {project.category}</span>
+              <span className="work-item__category">
+                {String(i + 1).padStart(2, '0')} // {project.category}
+              </span>
               <h3 className="work-item__title">{project.name}</h3>
               <p className="work-item__desc">{project.desc}</p>
 

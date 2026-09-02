@@ -60,10 +60,10 @@ const AboutPage = () => {
       
       <section className="aww-section hero-section" aria-label="About hero">
         <div className="aww-image-wrapper full-bleed">
-          <img className="aww-image" src={heroBg} alt="Koushik Nagabhatla — Beyond the Code" loading="eager" decoding="async" fetchPriority="high" width="1920" height="1080" />
+          <img className="aww-image" src={heroBg} alt="Koushik Nagabhatla — Behind The Engineering" loading="eager" decoding="async" fetchPriority="high" width="1920" height="1080" />
           <div className="aww-hero-gradient"></div>
         </div>
-        <h1 className="aww-massive-title mix-blend">Beyond<br/>the Code.</h1>
+        <h1 className="aww-massive-title mix-blend">Behind<br/>The Engineering.</h1>
         <div className="kaisei-scroll aww-hero-scroll" aria-label="Scroll">
           <span className="kaisei-scroll__text">Scroll</span>
           <span className="kaisei-scroll__text kaisei-scroll__text--clone" aria-hidden="true">Scroll</span>

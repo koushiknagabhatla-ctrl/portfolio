@@ -10,7 +10,7 @@ const Footer = () => {
             <p className="kaisei-footer__label">[Menu]</p>
             <ul className="kaisei-footer__list">
               <li><a href="#works">Works</a></li>
-              <li><Link to="/programming">Programming</Link></li>
+              <li><Link to="/web-dev">Web Dev</Link></li>
               <li><Link to="/photography">Photography</Link></li>
             </ul>
           </div>
