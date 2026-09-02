@@ -142,6 +142,8 @@ const Hero = ({ variant = 'network' }) => {
         loading="eager"
         fetchPriority="high"
         decoding="async"
+        width="240"
+        height="135"
       />
       <section className="kaisei-hero">
         <div className="kaisei-hero__watermark">
@@ -180,8 +182,8 @@ const Hero = ({ variant = 'network' }) => {
                 alt="Koushik Nagabhatla Portrait"
                 className="kaisei-story__img"
                 ref={imgRef}
-                width="500"
-                height="680"
+                width="1000"
+                height="1500"
                 loading="lazy"
                 decoding="async"
               />

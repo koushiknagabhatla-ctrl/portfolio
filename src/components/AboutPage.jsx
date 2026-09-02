@@ -60,7 +60,7 @@ const AboutPage = () => {
       
       <section className="aww-section hero-section" aria-label="About hero">
         <div className="aww-image-wrapper full-bleed">
-          <img className="aww-image" src={heroBg} alt="Koushik Nagabhatla — Behind The Engineering" loading="eager" decoding="async" fetchPriority="high" width="1920" height="1080" />
+          <img className="aww-image" src={heroBg} alt="Koushik Nagabhatla — Behind The Engineering" loading="eager" decoding="async" fetchPriority="high" width="1920" height="3413" />
           <div className="aww-hero-gradient"></div>
         </div>
         <h1 className="aww-massive-title mix-blend">Behind<br/>The Engineering.</h1>
@@ -87,13 +87,13 @@ const AboutPage = () => {
       <section className="aww-section gallery-section" aria-label="Portrait gallery">
         <div className="aww-grid-triple">
           <div className="aww-image-wrapper portrait-thin">
-            <img className="aww-image" src={`/about/ultra_2.webp${IMG_V}`} srcSet={`/about/ultra_2.webp${IMG_V} 800w, /about/2x/ultra_2.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 1" loading="lazy" decoding="async" width="800" height="1067" />
+            <img className="aww-image" src={`/about/ultra_2.webp${IMG_V}`} srcSet={`/about/ultra_2.webp${IMG_V} 800w, /about/2x/ultra_2.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 1" loading="lazy" decoding="async" width="800" height="1422" />
           </div>
           <div className="aww-image-wrapper portrait shift-down-slight">
-            <img className="aww-image" src={`/about/ultra_3.webp${IMG_V}`} srcSet={`/about/ultra_3.webp${IMG_V} 800w, /about/2x/ultra_3.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 2" loading="lazy" decoding="async" width="800" height="1000" />
+            <img className="aww-image" src={`/about/ultra_3.webp${IMG_V}`} srcSet={`/about/ultra_3.webp${IMG_V} 800w, /about/2x/ultra_3.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 2" loading="lazy" decoding="async" width="800" height="1422" />
           </div>
           <div className="aww-image-wrapper portrait-thin shift-down-heavy">
-            <img className="aww-image" src={`/about/ultra_4.webp${IMG_V}`} srcSet={`/about/ultra_4.webp${IMG_V} 800w, /about/2x/ultra_4.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 3" loading="lazy" decoding="async" width="800" height="1067" />
+            <img className="aww-image" src={`/about/ultra_4.webp${IMG_V}`} srcSet={`/about/ultra_4.webp${IMG_V} 800w, /about/2x/ultra_4.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Portrait photograph 3" loading="lazy" decoding="async" width="800" height="1066" />
           </div>
         </div>
       </section>
@@ -102,7 +102,7 @@ const AboutPage = () => {
         <div className="aww-grid reverse">
           <div className="aww-col img-col">
             <div className="aww-image-wrapper portrait">
-              <img className="aww-image" src={`/about/ultra_5.webp${IMG_V}`} srcSet={`/about/ultra_5.webp${IMG_V} 800w, /about/2x/ultra_5.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 45vw" alt="The open highway" loading="lazy" decoding="async" width="800" height="1000" />
+              <img className="aww-image" src={`/about/ultra_5.webp${IMG_V}`} srcSet={`/about/ultra_5.webp${IMG_V} 800w, /about/2x/ultra_5.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 45vw" alt="The open highway" loading="lazy" decoding="async" width="800" height="1422" />
             </div>
 
           </div>
@@ -119,7 +119,7 @@ const AboutPage = () => {
 
       <section className="aww-section full-bleed-section" aria-label="Cinematic landscape">
         <div className="aww-image-wrapper full-bleed cinematic-height">
-          <img className="aww-image" src={`/about/ultra_6.webp${IMG_V}`} srcSet={`/about/ultra_6.webp${IMG_V} 800w, /about/2x/ultra_6.webp${IMG_V} 1600w`} sizes="100vw" alt="Bike ride perspective" loading="lazy" decoding="async" width="1920" height="900" />
+          <img className="aww-image" src={`/about/ultra_6.webp${IMG_V}`} srcSet={`/about/ultra_6.webp${IMG_V} 800w, /about/2x/ultra_6.webp${IMG_V} 1600w`} sizes="100vw" alt="Bike ride perspective" loading="lazy" decoding="async" width="800" height="1067" />
         </div>
         <h2 className="aww-massive-title centered mix-blend">The Horizon.</h2>
       </section>
@@ -136,7 +136,7 @@ const AboutPage = () => {
           </div>
           <div className="aww-col img-col shift-down">
              <div className="aww-image-wrapper landscape">
-               <img className="aww-image" src={`/about/ultra_7.webp${IMG_V}`} srcSet={`/about/ultra_7.webp${IMG_V} 800w, /about/2x/ultra_7.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 45vw" alt="Travel landscape" loading="lazy" decoding="async" width="1200" height="750" />
+               <img className="aww-image" src={`/about/ultra_7.webp${IMG_V}`} srcSet={`/about/ultra_7.webp${IMG_V} 800w, /about/2x/ultra_7.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 45vw" alt="Travel landscape" loading="lazy" decoding="async" width="800" height="1066" />
              </div>
           </div>
         </div>
@@ -144,11 +144,11 @@ const AboutPage = () => {
 
       <section className="aww-section dual-panoramic" aria-label="Nature panoramic photos">
         <div className="aww-image-wrapper panoramic right-align">
-          <img className="aww-image" src={`/about/ultra_8.webp${IMG_V}`} srcSet={`/about/ultra_8.webp${IMG_V} 800w, /about/2x/ultra_8.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 95vw, 85vw" alt="Raw wilderness panoramic" loading="lazy" decoding="async" width="1600" height="686" />
+          <img className="aww-image" src={`/about/ultra_8.webp${IMG_V}`} srcSet={`/about/ultra_8.webp${IMG_V} 800w, /about/2x/ultra_8.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 95vw, 85vw" alt="Raw wilderness panoramic" loading="lazy" decoding="async" width="800" height="1422" />
         </div>
 
         <div className="aww-image-wrapper panoramic left-align shift-down-medium">
-          <img className="aww-image" src={`/about/ultra_9.webp${IMG_V}`} srcSet={`/about/ultra_9.webp${IMG_V} 800w, /about/2x/ultra_9.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 95vw, 85vw" alt="Scale and perspective" loading="lazy" decoding="async" width="1600" height="686" />
+          <img className="aww-image" src={`/about/ultra_9.webp${IMG_V}`} srcSet={`/about/ultra_9.webp${IMG_V} 800w, /about/2x/ultra_9.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 95vw, 85vw" alt="Scale and perspective" loading="lazy" decoding="async" width="800" height="1422" />
         </div>
 
       </section>
@@ -156,14 +156,14 @@ const AboutPage = () => {
       <section className="aww-section overlap-section margin-top-massive" aria-label="Statue photograph">
         <div className="aww-overlap-grid">
           <div className="aww-image-wrapper square statue-solo">
-            <img className="aww-image" src={`/about/ultra_10.webp${IMG_V}`} srcSet={`/about/ultra_10.webp${IMG_V} 800w, /about/2x/ultra_10.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Statue" loading="lazy" decoding="async" width="800" height="800" />
+            <img className="aww-image" src={`/about/ultra_10.webp${IMG_V}`} srcSet={`/about/ultra_10.webp${IMG_V} 800w, /about/2x/ultra_10.webp${IMG_V} 1600w`} sizes="(max-width: 900px) 100vw, 30vw" alt="Statue" loading="lazy" decoding="async" width="800" height="1066" />
           </div>
         </div>
       </section>
 
       <section className="aww-section outro-section margin-top-massive" aria-label="Closing message">
         <div className="aww-image-wrapper full-bleed" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <img className="aww-image" src={outroBg} alt="Conclusion — looking forward" loading="lazy" decoding="async" width="1920" height="1080" />
+          <img className="aww-image" src={outroBg} alt="Conclusion — looking forward" loading="lazy" decoding="async" width="1920" height="803" />
           <div className="aww-hero-gradient"></div>
           <h2 className="aww-massive-title centered mix-blend" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', lineHeight: '1.1', width: '90%', paddingBottom: '0.2em' }}>Let's build<br/>something beautiful.</h2>
         </div>

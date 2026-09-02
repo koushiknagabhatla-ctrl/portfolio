@@ -178,7 +178,7 @@ function Preloader({ onComplete }) {
       <div className="preloader-logo-wrapper">
         <picture>
           <source srcSet="/porsche-logo.webp" type="image/webp" />
-          <img src="/porsche-logo.png" alt="Porsche" className="preloader-logo" ref={logoRef} fetchPriority="high" decoding="sync" />
+          <img src="/porsche-logo.png" alt="Porsche" className="preloader-logo" ref={logoRef} fetchPriority="high" decoding="sync" width="240" height="135" />
         </picture>
       </div>
       <div className="preloader-counter">
